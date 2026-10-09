@@ -71,7 +71,7 @@ document.querySelectorAll('[data-image]').forEach(button => button.addEventListe
   if (!motion.matches) lightbox.animate([{ opacity: 0, scale: '.94' }, { opacity: 1, scale: '1' }], { duration: 260, easing: 'ease-out' });
 }));
 
-// Count each school fact once as it enters the viewport. Static HTML retains
+// Replay each school fact after it leaves and re-enters the viewport. HTML retains
 // the real values for no-JavaScript visitors and assistive technologies.
 const counters = [...document.querySelectorAll('[data-count]')];
 const counterFrames = new Map();
@@ -82,6 +82,7 @@ function finishCounter(counter) {
 }
 function animateCounter(counter) {
   if (motion.matches) { finishCounter(counter); return; }
+  finishCounter(counter);
   const target = Number(counter.dataset.count);
   const duration = 1400;
   let start;
@@ -97,16 +98,22 @@ function animateCounter(counter) {
   }
   counterFrames.set(counter, requestAnimationFrame(tick));
 }
-if ('IntersectionObserver' in window && !motion.matches) {
+if ('IntersectionObserver' in window) {
+  const activeFacts = new WeakSet();
   const counterObserver = new IntersectionObserver(entries => {
     entries.forEach(entry => {
-      if (!entry.isIntersecting) return;
-      entry.target.querySelectorAll('[data-count]').forEach(animateCounter);
-      counterObserver.unobserve(entry.target);
+      const fact = entry.target;
+      if (!entry.isIntersecting) {
+        activeFacts.delete(fact);
+        fact.querySelectorAll('[data-count]').forEach(finishCounter);
+      } else if (entry.intersectionRatio >= 0.35 && !activeFacts.has(fact)) {
+        activeFacts.add(fact);
+        fact.querySelectorAll('[data-count]').forEach(animateCounter);
+      }
     });
-  }, { threshold: 0.35 });
+  }, { threshold: [0, 0.35] });
   document.querySelectorAll('.facts > div').forEach(fact => counterObserver.observe(fact));
   motion.addEventListener('change', () => {
-    if (motion.matches) { counterObserver.disconnect(); counters.forEach(finishCounter); }
+    if (motion.matches) counters.forEach(finishCounter);
   });
 }
