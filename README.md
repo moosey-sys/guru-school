@@ -20,7 +20,7 @@ Run `npm run check` for the JavaScript syntax check.
 Original PDF photos were extracted, resized to a maximum of 1600 pixels, and encoded as WebP. The original school crest is preserved as PNG with transparency. `scripts/prepare_assets.py` reproduces these assets using PyMuPDF and Pillow installed in the parent `.venv`. Original source materials are untouched. Browser photo crops use CSS object-fit.
 
 ## Behaviour and accessibility
-Responsive navigation, campus filters, keyboard-accessible native photo dialog, scroll reveal, limited parallax and a moving text ribbon. Reduced-motion preferences disable animation. Semantic sections, skip link, visible focus states and meaningful image descriptions are included.
+Light/dark theme toggle with a saved preference and system-theme default. Button selection bounce, staggered gallery filtering, and photo-dialog entrance feedback. Responsive navigation, campus filters, keyboard-accessible native photo dialog, scroll reveal, limited parallax and a moving text ribbon. Reduced-motion preferences disable animation. Semantic sections, skip link, visible focus states and meaningful image descriptions are included.
 
 ## Contact and security
 Visit enquiries use the school's real email and telephone links. There is no form backend, collection of personal data, or fake booking confirmation. No API keys, secrets, authentication code, analytics or third-party JavaScript are shipped. Text updates use textContent. External map links use noopener and noreferrer. Fonts load from Google Fonts with local sans-serif fallbacks.

@@ -28,3 +28,45 @@ document.querySelectorAll('[data-image]').forEach(button => button.addEventListe
 lightbox.querySelector('.close-dialog').addEventListener('click', () => lightbox.close());
 lightbox.addEventListener('click', event => { if (event.target === lightbox) { const rect = lightbox.getBoundingClientRect(); if (event.clientX < rect.left || event.clientX > rect.right || event.clientY < rect.top || event.clientY > rect.bottom) lightbox.close(); } });
 document.querySelector('#year').textContent = new Date().getFullYear();
+
+const themeButton = document.querySelector('.theme-toggle');
+const systemTheme = matchMedia('(prefers-color-scheme: dark)');
+let explicitTheme = false;
+try { explicitTheme = ['light', 'dark'].includes(localStorage.getItem('guru-theme')); } catch { /* Use session choice if storage is unavailable. */ }
+function syncThemeButton() {
+  const dark = document.documentElement.dataset.theme === 'dark';
+  themeButton.setAttribute('aria-pressed', String(dark));
+  themeButton.setAttribute('aria-label', dark ? 'Switch to light mode' : 'Switch to dark mode');
+  themeButton.querySelector('.theme-icon').textContent = dark ? '☀' : '☾';
+  themeButton.querySelector('.theme-label').textContent = dark ? 'Light' : 'Dark';
+  document.querySelector('meta[name="theme-color"]').content = dark ? '#131a29' : '#2448a5';
+}
+syncThemeButton();
+themeButton.addEventListener('click', () => {
+  const theme = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
+  document.documentElement.dataset.theme = theme;
+  explicitTheme = true;
+  try { localStorage.setItem('guru-theme', theme); } catch { /* The toggle still works without persistent storage. */ }
+  syncThemeButton();
+});
+systemTheme.addEventListener('change', event => {
+  if (!explicitTheme) { document.documentElement.dataset.theme = event.matches ? 'dark' : 'light'; syncThemeButton(); }
+});
+// Native clicks include keyboard activation; do not delay navigation or actions.
+document.addEventListener('click', event => {
+  const target = event.target.closest('button, a, summary');
+  if (!target || motion.matches || typeof target.animate !== 'function') return;
+  target.animate([
+    { scale: '1' }, { scale: '0.95', offset: 0.3 }, { scale: '1.035', offset: 0.7 }, { scale: '1' }
+  ], { duration: 320, easing: 'cubic-bezier(.2,.8,.2,1)' });
+});
+document.querySelectorAll('[data-filter]').forEach(button => button.addEventListener('click', () => {
+  if (motion.matches) return;
+  document.querySelectorAll('.campus-card:not([hidden])').forEach((card, index) => {
+    card.animate([{ opacity: 0, translate: '0 16px' }, { opacity: 1, translate: '0 0' }], { duration: 320, delay: index * 60, fill: 'backwards', easing: 'ease-out' });
+  });
+}));
+lightbox.addEventListener('close', () => lightbox.getAnimations().forEach(animation => animation.cancel()));
+document.querySelectorAll('[data-image]').forEach(button => button.addEventListener('click', () => {
+  if (!motion.matches) lightbox.animate([{ opacity: 0, scale: '.94' }, { opacity: 1, scale: '1' }], { duration: 260, easing: 'ease-out' });
+}));
