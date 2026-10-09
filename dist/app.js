@@ -9,7 +9,7 @@ document.addEventListener('keydown', event => { if (event.key === 'Escape') clos
 const motion = window.matchMedia('(prefers-reduced-motion: reduce)');
 if ('IntersectionObserver' in window && !motion.matches) {
   const observer = new IntersectionObserver(entries => entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add('visible'); observer.unobserve(entry.target); } }), { threshold: 0.08 });
-  document.querySelectorAll('.about-grid, .programme, .life-gallery, .value-grid, .campus-grid, .team-grid, .community-details, .contact-box').forEach(element => { element.classList.add('reveal'); observer.observe(element); });
+  document.querySelectorAll('.about-grid, .programme, .life-gallery, .value-grid, .campus-grid, .community-details, .contact-box').forEach(element => { element.classList.add('reveal'); observer.observe(element); });
 }
 let queued = false;
 const layers = document.querySelectorAll('[data-parallax]');
