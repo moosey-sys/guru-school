@@ -57,3 +57,11 @@ html[lang="my"] h1{font-size:clamp(32px,3.8vw,57px)}html[lang="my"] h2{font-size
 @media(prefers-reduced-motion:reduce){.hero-art,.hero-art .photo-frame,.hero-art .little-label{transition:none}.hero-art .photo-frame{translate:0 0!important}}
 
 #contact{scroll-margin-top:125px}.contact-lines a{overflow-wrap:anywhere}.contact-lines a:hover{text-decoration:underline;text-underline-offset:4px}@media(min-width:1101px){nav{gap:18px}}
+
+/* Keep both hero captions fully readable on narrow screens. */
+@media(max-width:760px){
+ .hero-art .photo-caption{white-space:normal;overflow-wrap:normal;text-wrap:balance;font-size:12px;line-height:1.65;letter-spacing:0;padding:12px 14px}
+ .hero-art .little-label{display:block;width:100%;max-width:100%;white-space:normal;text-wrap:balance;line-height:1.65;font-size:14px;margin:12px auto 0;transform:none;padding:12px 14px}
+ html[lang="my"] .hero-art .photo-caption{font-size:12px;line-height:1.8}
+ .hero-art .photo-frame{translate:0 0!important}
+}
