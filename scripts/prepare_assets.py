@@ -10,6 +10,13 @@ assets={'hero':(21,6),'discovery':(21,3),'sports':(21,2),'classroom':(12,3),'pri
 for name,(page,index) in assets.items():
  xref=pdf[page-1].get_images(full=True)[index][0]
  im=Image.open(io.BytesIO(pdf.extract_image(xref)['image'])).convert('RGB')
+ if name == 'ceo':
+  # Reconstruct the PDF transparency mask on white instead of discarding it.
+  image_info=pdf[page-1].get_images(full=True)[index]
+  if image_info[1]:
+   rgba_pix=pymupdf.Pixmap(pymupdf.Pixmap(pdf,xref),pymupdf.Pixmap(pdf,image_info[1]))
+   rgba=Image.open(io.BytesIO(rgba_pix.tobytes('png'))).convert('RGBA')
+   im=Image.new('RGB',rgba.size,'white');im.paste(rgba,mask=rgba.getchannel('A'))
  im=ImageOps.exif_transpose(im);im.thumbnail((1600,1600))
  im.save(out/f'{name}.webp','WEBP',quality=85,method=6)
 # Preserve the school crest's original transparent background.
