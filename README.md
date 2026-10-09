@@ -1,0 +1,48 @@
+# Guru International School
+
+[View live website](https://guru-school.vercel.app)
+
+![School website preview](preview.png)
+
+A school website showcase featuring neo-brutalist design, scroll animations, English/Myanmar switching, light/dark themes, and a 27-image gallery.
+
+A responsive, static school website using the supplied school profile. Source lives in `dist/index.html`, `dist/styles.css`, and `dist/app.js`. No framework or runtime dependencies are needed.
+
+## Preview
+Run `npm run dev` from this directory, then open http://localhost:5173.
+Run `npm run check` for JavaScript syntax and security checks. Node.js is required for checks; Python 3 is required for local preview.
+
+## Content breakdown
+- School story, establishment, vision, mission and values: profile pages 3–5, 7–8.
+- Leadership: pages 6–10.
+- Address and contact information: pages 11 and 24.
+- Facilities and campus imagery: pages 12–13.
+- Early years and primary programmes, ages 2–11: pages 14–17.
+- Registration status: page 18; pending accreditation is explicitly described as pending.
+- Enrichment, teaching, student life and parent engagement: pages 19–22.
+- Class size and student–teacher ratio: page 23; shown as profile figures rather than current availability.
+
+## Assets
+Original PDF photos were extracted, resized to a maximum of 1600 pixels, and encoded as WebP. The original school crest is preserved as PNG with transparency. `scripts/prepare_assets.py` reproduces these assets using PyMuPDF and Pillow installed in the parent `.venv`. Original source materials are untouched. Browser photo crops use CSS object-fit.
+
+## Behaviour and accessibility
+Light/dark theme toggle with a saved preference and system-theme default. Button selection bounce, staggered gallery filtering, and photo-dialog entrance feedback. Responsive navigation, campus filters, keyboard-accessible native photo dialog, scroll reveal, limited parallax and a moving text ribbon. Reduced-motion preferences disable animation. Semantic sections, skip link, visible focus states and meaningful image descriptions are included.
+
+## Contact and security
+Visit enquiries use the school's real email and telephone links. There is no form backend, collection of personal data, or fake booking confirmation. No API keys, secrets, authentication code, analytics or third-party JavaScript are shipped. Text updates use textContent. External map links use noopener and noreferrer. Fonts load from Google Fonts with local sans-serif fallbacks.
+
+For a custom production host, configure HTTPS and response headers such as Content-Security-Policy, X-Content-Type-Options, Referrer-Policy and Permissions-Policy. This static site is a maintainable foundation; booking submissions would require a separately secured backend.
+
+## Reference direction
+The supplied KBTC and Auston websites were considered for programme, campus, and enquiry navigation. The visual composition is original and uses Guru's existing blue/yellow identity with neo-brutalist borders and offset shadows.
+
+## Languages
+English and Myanmar are available through the header language tabs. The selection is stored locally. Translation strings live in `dist/translations.js`, with switching in `dist/language.js`. Official names, telephone numbers, emails, and counter digits remain recognizable across languages.
+
+## Vercel deployment
+From `guru-school`, run `npx vercel login`, then `npx vercel --prod`. Use the Other framework preset and `dist` as the output directory. `vercel.json` defines the static build check, output directory, and response security headers. No API keys or server are needed. The extraction scripts and Sites metadata are excluded from deployment.
+
+The full photo gallery contains 27 images from the school profile and five supplied JPGs, with bilingual captions, category filters and an enlarged photo viewer. Run `../.venv/bin/python scripts/prepare_gallery.py` to reproduce the gallery WebP assets; captions and categories are recorded in `scripts/gallery-manifest.json`.
+
+## Image ownership
+School branding and photographs belong to their respective owners and are included for this school website showcase. They are not licensed for unrelated reuse. The source PDF and original supplied JPGs are not included; the site runs using the prepared assets.

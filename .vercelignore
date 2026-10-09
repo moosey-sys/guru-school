@@ -1,0 +1,14 @@
+.git
+.openai
+.vercel
+scripts
+README.md
+*.tar.gz
+node_modules
+
+.env
+.env.*
+*.pem
+*.key
+*.pdf
+gallery-preview.png
