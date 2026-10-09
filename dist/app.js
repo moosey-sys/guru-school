@@ -70,3 +70,43 @@ lightbox.addEventListener('close', () => lightbox.getAnimations().forEach(animat
 document.querySelectorAll('[data-image]').forEach(button => button.addEventListener('click', () => {
   if (!motion.matches) lightbox.animate([{ opacity: 0, scale: '.94' }, { opacity: 1, scale: '1' }], { duration: 260, easing: 'ease-out' });
 }));
+
+// Count each school fact once as it enters the viewport. Static HTML retains
+// the real values for no-JavaScript visitors and assistive technologies.
+const counters = [...document.querySelectorAll('[data-count]')];
+const counterFrames = new Map();
+function finishCounter(counter) {
+  cancelAnimationFrame(counterFrames.get(counter));
+  counterFrames.delete(counter);
+  counter.textContent = counter.dataset.count;
+}
+function animateCounter(counter) {
+  if (motion.matches) { finishCounter(counter); return; }
+  const target = Number(counter.dataset.count);
+  const duration = 1400;
+  let start;
+  counter.textContent = '0';
+  function tick(time) {
+    if (motion.matches) { finishCounter(counter); return; }
+    start ??= time;
+    const progress = Math.min((time - start) / duration, 1);
+    const eased = 1 - Math.pow(1 - progress, 3);
+    counter.textContent = String(Math.round(target * eased));
+    if (progress < 1) counterFrames.set(counter, requestAnimationFrame(tick));
+    else finishCounter(counter);
+  }
+  counterFrames.set(counter, requestAnimationFrame(tick));
+}
+if ('IntersectionObserver' in window && !motion.matches) {
+  const counterObserver = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      entry.target.querySelectorAll('[data-count]').forEach(animateCounter);
+      counterObserver.unobserve(entry.target);
+    });
+  }, { threshold: 0.35 });
+  document.querySelectorAll('.facts > div').forEach(fact => counterObserver.observe(fact));
+  motion.addEventListener('change', () => {
+    if (motion.matches) { counterObserver.disconnect(); counters.forEach(finishCounter); }
+  });
+}
