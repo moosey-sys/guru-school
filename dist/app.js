@@ -1,8 +1,9 @@
 'use strict';
+const translate = text => window.guruTranslate ? window.guruTranslate(text) : text;
 const menuButton = document.querySelector('.menu-toggle');
 const nav = document.querySelector('#nav');
-function closeMenu() { nav.classList.remove('open'); menuButton.setAttribute('aria-expanded', 'false'); menuButton.setAttribute('aria-label', 'Open navigation'); }
-menuButton.addEventListener('click', () => { const open = nav.classList.toggle('open'); menuButton.setAttribute('aria-expanded', String(open)); menuButton.setAttribute('aria-label', open ? 'Close navigation' : 'Open navigation'); });
+function closeMenu() { nav.classList.remove('open'); menuButton.setAttribute('aria-expanded', 'false'); menuButton.setAttribute('aria-label', translate('Open navigation')); }
+menuButton.addEventListener('click', () => { const open = nav.classList.toggle('open'); menuButton.setAttribute('aria-expanded', String(open)); menuButton.setAttribute('aria-label', translate(open ? 'Close navigation' : 'Open navigation')); });
 nav.querySelectorAll('a').forEach(link => link.addEventListener('click', closeMenu));
 document.addEventListener('keydown', event => { if (event.key === 'Escape') closeMenu(); });
 const motion = window.matchMedia('(prefers-reduced-motion: reduce)');
@@ -36,9 +37,9 @@ try { explicitTheme = ['light', 'dark'].includes(localStorage.getItem('guru-them
 function syncThemeButton() {
   const dark = document.documentElement.dataset.theme === 'dark';
   themeButton.setAttribute('aria-pressed', String(dark));
-  themeButton.setAttribute('aria-label', dark ? 'Switch to light mode' : 'Switch to dark mode');
+  themeButton.setAttribute('aria-label', translate(dark ? 'Switch to light mode' : 'Switch to dark mode'));
   themeButton.querySelector('.theme-icon').textContent = dark ? '☀' : '☾';
-  themeButton.querySelector('.theme-label').textContent = dark ? 'Light' : 'Dark';
+  themeButton.querySelector('.theme-label').textContent = translate(dark ? 'Light' : 'Dark');
   document.querySelector('meta[name="theme-color"]').content = dark ? '#131a29' : '#2448a5';
 }
 syncThemeButton();
@@ -117,3 +118,6 @@ if ('IntersectionObserver' in window) {
     if (motion.matches) counters.forEach(finishCounter);
   });
 }
+
+document.addEventListener('guru-language-change', () => { syncThemeButton(); closeMenu(); if (lightbox.open) lightbox.close(); });
+closeMenu();

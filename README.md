@@ -29,3 +29,6 @@ For a custom production host, configure HTTPS and response headers such as Conte
 
 ## Reference direction
 The supplied KBTC and Auston websites were considered for programme, campus, and enquiry navigation. The visual composition is original and uses Guru's existing blue/yellow identity with neo-brutalist borders and offset shadows.
+
+## Languages
+English and Myanmar are available through the header language tabs. The selection is stored locally. Translation strings live in `dist/translations.js`, with switching in `dist/language.js`. Official names, telephone numbers, emails, and counter digits remain recognizable across languages.
