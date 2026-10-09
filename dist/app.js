@@ -175,3 +175,13 @@ document.querySelectorAll('[data-gallery-filter]').forEach(button => button.addE
 galleryMore.addEventListener('click', () => { galleryExpanded = !galleryExpanded; renderGallery(); });
 document.addEventListener('guru-language-change', renderGallery);
 renderGallery();
+
+const heroArt = document.querySelector('.hero-art');
+function toggleHeroPhoto() {
+  const selected = heroArt.classList.toggle('is-selected');
+  heroArt.setAttribute('aria-pressed', String(selected));
+}
+heroArt.addEventListener('click', toggleHeroPhoto);
+heroArt.addEventListener('keydown', event => {
+  if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); toggleHeroPhoto(); }
+});
