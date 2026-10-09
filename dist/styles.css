@@ -55,3 +55,5 @@ html[lang="my"] h1{font-size:clamp(32px,3.8vw,57px)}html[lang="my"] h2{font-size
 @media(hover:hover){.hero-art:hover .photo-frame{transform:rotate(0deg) translateY(-8px)}.hero-art:hover .little-label{transform:rotate(0deg) translateY(0px)}}
 @media(max-width:760px){.hero-art .photo-caption{font-size:11px;letter-spacing:.03em}.hero-art .little-label{font-size:13px;margin-top:10px;padding:12px 16px}}
 @media(prefers-reduced-motion:reduce){.hero-art,.hero-art .photo-frame,.hero-art .little-label{transition:none}.hero-art .photo-frame{translate:0 0!important}}
+
+#contact{scroll-margin-top:125px}.contact-lines a{overflow-wrap:anywhere}.contact-lines a:hover{text-decoration:underline;text-underline-offset:4px}@media(min-width:1101px){nav{gap:18px}}
