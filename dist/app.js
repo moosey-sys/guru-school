@@ -121,3 +121,33 @@ if ('IntersectionObserver' in window) {
 
 document.addEventListener('guru-language-change', () => { syncThemeButton(); closeMenu(); if (lightbox.open) lightbox.close(); });
 closeMenu();
+
+// Replay programme entrances after cards fully leave the viewport.
+if ('IntersectionObserver' in window) {
+  const activeProgrammes = new WeakSet();
+  const programmeAnimations = new Map();
+  const programmeObserver = new IntersectionObserver(entries => entries.forEach(entry => {
+    const card = entry.target;
+    if (!entry.isIntersecting) {
+      activeProgrammes.delete(card);
+      programmeAnimations.get(card)?.cancel();
+      programmeAnimations.delete(card);
+      return;
+    }
+    if (entry.intersectionRatio < 0.2 || activeProgrammes.has(card)) return;
+    activeProgrammes.add(card);
+    if (motion.matches) return;
+    const index = [...card.parentElement.children].indexOf(card);
+    const animation = card.animate([
+      { opacity: 0, translate: '0 44px', rotate: index === 1 ? '3deg' : '-3deg' },
+      { opacity: 1, translate: '0 -6px', rotate: '0deg', offset: .8 },
+      { opacity: 1, translate: '0 0', rotate: '0deg' }
+    ], { duration: 650, delay: index * 100, easing: 'cubic-bezier(.2,.8,.2,1)', fill: 'backwards' });
+    programmeAnimations.set(card, animation);
+    animation.onfinish = () => programmeAnimations.delete(card);
+  }), { threshold: [0, 0.2] });
+  document.querySelectorAll('.programme').forEach(card => programmeObserver.observe(card));
+  motion.addEventListener('change', () => {
+    if (motion.matches) { programmeAnimations.forEach(animation => animation.cancel()); programmeAnimations.clear(); }
+  });
+}

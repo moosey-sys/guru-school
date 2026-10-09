@@ -194,3 +194,14 @@ window.GURU_MYANMAR = {
   "Colourful indoor playground at Guru": "Guru ၏ အရောင်စုံအတွင်းကစားကွင်း",
   "Guru outdoor play and sports area": "Guru ၏ ပြင်ပကစားကွင်းနှင့် အားကစားနေရာ"
 };
+
+Object.assign(window.GURU_MYANMAR, {
+"CHIEF EXECUTIVE OFFICER":"အမှုဆောင်အရာရှိချုပ်",
+"Ms. Tin Tin Khaing":"ဒေါ်တင်တင်ခိုင်",
+"Chief Executive Officer of GURU International School.":"GURU နိုင်ငံတကာကျောင်း၏ အမှုဆောင်အရာရှိချုပ်။",
+"HR & OPERATIONS MANAGER":"လူ့စွမ်းအားအရင်းအမြစ်နှင့် လုပ်ငန်းလည်ပတ်မှု မန်နေဂျာ",
+"Mr. Htun Aung Kyaw":"ဦးထွန်းအောင်ကျော်",
+"HR and Operations Manager of GURU International School.":"GURU နိုင်ငံတကာကျောင်း၏ လူ့စွမ်းအားအရင်းအမြစ်နှင့် လုပ်ငန်းလည်ပတ်မှု မန်နေဂျာ။",
+"View on Google Maps ↗":"Google Maps တွင် ကြည့်ရန် ↗",
+"School location map from the Guru profile, near U Wisara Road in San Chaung":"ကျောင်းမိတ်ဆက်မှ တည်နေရာမြေပုံ၊ စမ်းချောင်းရှိ ဦးဝိစာရလမ်းအနီး"
+});
