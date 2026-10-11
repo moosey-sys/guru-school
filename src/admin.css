@@ -1241,7 +1241,7 @@ html[data-theme="dark"] .admin-shell {
   }
 }
 
-.admin-shell .request-delete { color: var(--text); border-color: #de6674; }
+.admin-shell .request-delete { color: var(--ink); border-color: #de6674; }
 .delete-confirmation { margin-top: 20px; padding: 16px; border: 2px solid #de6674; }
 .delete-confirmation p { margin-top: 0; }
 .delete-confirmation button + button { margin-left: 12px; }
