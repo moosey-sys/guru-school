@@ -2917,3 +2917,7 @@ html[data-theme="dark"] .footer-motto:hover, html[data-theme="dark"] .footer-mot
   35% { transform: translateY(-7px) rotate(-.35deg) scale(1.015); }
   70% { transform: translateY(-3px) rotate(.25deg) scale(1.01); }
 }
+
+/* Keep the full-length chairman source anchored inside its own crop window. */
+.team-grid .chairman-crop { position: relative; padding: 0; }
+.team-grid .chairman-crop .portrait-crop-source { top: 0; left: 50%; transform: translate(-50%, -17%); animation: none; }
