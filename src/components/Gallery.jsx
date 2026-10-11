@@ -1,5 +1,5 @@
 import { ResponsiveImage } from "./ResponsiveImage";
-import React, { useState } from "react";
+import React, { useState, useId } from "react";
 import { galleryPhotos } from "../content/gallery";
 import { usePreferences } from "../preferences";
 export function Gallery({
@@ -29,6 +29,8 @@ export function Gallery({
         ...photo,
         image: "/assets/" + photo.image,
         caption: t(photo.caption),
+        alt: t(photo.alt || photo.caption),
+        story: photo.story ? t(photo.story) : "",
         album: existingAlbums[photo.image] || "",
       })),
   ];
@@ -57,6 +59,11 @@ export function Gallery({
         <p className="eyebrow">{t("EXPLORE GURU IN PICTURES")}</p>
         <span>{t("School moments, celebrations and adventures.")}</span>
       </div>
+      <p className="gallery-intro">
+        {t(
+          "Every small step has a story. Explore proud milestones, moments of togetherness and the spaces where new discoveries begin.",
+        )}
+      </p>
       <div className="heading-row">
         <h2>
           {t("A closer look")}
@@ -112,22 +119,11 @@ export function Gallery({
       </p>
       <div className="full-gallery">
         {matching.slice(0, shown).map((photo) => (
-          <button
+          <GalleryCard
             key={photo.id || photo.image}
-            type="button"
-            className={photo.id ? "campus-card" : "full-gallery-card"}
-            data-gallery-category={photo.category}
-            onClick={() => openPhoto(photo)}
-          >
-            <ResponsiveImage
-              src={photo.image}
-              alt={photo.caption}
-              loading="lazy"
-              width={photo.width || 600}
-              height={photo.height || 450}
-            />
-            <span>{photo.caption} ↗︎</span>
-          </button>
+            photo={photo}
+            openPhoto={openPhoto}
+          />
         ))}
       </div>
       {matching.length > 8 && (
@@ -139,6 +135,38 @@ export function Gallery({
           {t(expanded ? "Show fewer photos" : "Show all photos")}
         </button>
       )}
+      <p className="gallery-visit-link">
+        <a className="text-link" href="/contact#visit">
+          {t("Picture your child here? Come meet Guru ↗︎")}
+        </a>
+      </p>
     </section>
+  );
+}
+
+function GalleryCard({ photo, openPhoto }) {
+  const id = useId();
+  return (
+    <button
+      type="button"
+      className={photo.id ? "campus-card" : "full-gallery-card"}
+      data-gallery-category={photo.category}
+      data-featured={photo.featured ? "true" : undefined}
+      aria-labelledby={`${id}-caption`}
+      aria-describedby={photo.story ? `${id}-story` : undefined}
+      onClick={() => openPhoto(photo)}
+    >
+      <ResponsiveImage
+        src={photo.image}
+        alt={photo.alt || photo.caption}
+        loading="lazy"
+        width={photo.width || 600}
+        height={photo.height || 450}
+      />
+      <span className="gallery-photo-copy">
+        <strong id={`${id}-caption`}>{photo.caption} ↗︎</strong>
+        {photo.story && <small id={`${id}-story`}>{photo.story}</small>}
+      </span>
+    </button>
   );
 }

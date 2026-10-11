@@ -367,14 +367,14 @@ export function PhotosEditor({
               <article className="card existing-photo" key={photo.image}>
                 <img
                   src={`/assets/${photo.image}`}
-                  alt={photo.caption}
+                  alt={t(photo.alt || photo.caption)}
                   loading="lazy"
                 />
                 <div>
                   <span className="badge">
                     {t(hidden ? "Hidden" : "Visible")}
                   </span>
-                  <h4>{photo.caption}</h4>
+                  <h4>{t(photo.caption)}</h4>
                   <label>
                     {t("Album (optional)")}
                     <input

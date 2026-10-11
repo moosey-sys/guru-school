@@ -35,9 +35,10 @@ export function Lightbox({ photo, close }) {
       </button>
       <img
         src={photo?.image || "/assets/hero.webp"}
-        alt={photo?.caption || ""}
+        alt={photo?.alt || photo?.caption || ""}
       />
       <p>{photo?.caption || ""}</p>
+      {photo?.story && <p className="lightbox-story">{photo.story}</p>}
     </dialog>
   );
 }

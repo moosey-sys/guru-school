@@ -365,17 +365,17 @@ export function Life() {
         <div className="gallery-stack">
           <button
             className="gallery-image"
-            data-image="/assets/sports.webp"
-            data-caption={t("Outdoor play and movement at Guru")}
+            data-image="/assets/guru-celebration-together.webp"
+            data-caption={t("Finding their voices, together.")}
           >
             <ResponsiveImage
-              src="/assets/sports.webp"
+              src="/assets/guru-celebration-together.webp"
               alt={t(
-                "Guru students taking part in outdoor movement activities",
+                "Guru children performing together in their school uniforms",
               )}
               loading="lazy"
             />
-            <span>{t("Room to play. Freedom to grow. ↗︎")}</span>
+            <span>{t("Shared moments. Growing confidence. ↗︎")}</span>
           </button>
           <div className="life-note">
             <span aria-hidden="true">{t("✷︎")}</span>
@@ -387,6 +387,11 @@ export function Life() {
             <p>
               {t(
                 "STEAM, arts, languages, and sports bring new ways to explore beyond everyday lessons.",
+              )}
+            </p>
+            <p>
+              {t(
+                "A shared performance or a graduation celebration can make a small milestone feel special. These moments are an invitation to celebrate effort, friendship and the joy of trying something new.",
               )}
             </p>
             <p>
@@ -503,68 +508,72 @@ export function Campus() {
         </div>
       </div>
       <div className="campus-grid">
-        <button
-          className="campus-card"
-          data-category="learn"
-          data-image="/assets/classroom.webp"
-          data-caption={t("Preschool classrooms")}
-          hidden={filter !== "all" && filter !== "learn"}
-        >
-          <ResponsiveImage
-            src="/assets/classroom.webp"
-            alt={t("A colourful preschool classroom with child-sized tables")}
-            loading="lazy"
-          />
-          <span>{t("Preschool classrooms ↗︎")}</span>
-        </button>
-        <button
-          className="campus-card"
-          data-category="learn"
-          data-image="/assets/primary.webp"
-          data-caption={t("Primary classrooms")}
-          hidden={filter !== "all" && filter !== "learn"}
-        >
-          <ResponsiveImage
-            src="/assets/primary.webp"
-            alt={t(
-              "Primary classroom with individual desks and bright windows",
-            )}
-            loading="lazy"
-          />
-          <span>{t("Primary classrooms ↗︎")}</span>
-        </button>
-        <button
-          className="campus-card"
-          data-category="play"
-          data-image="/assets/playground.webp"
-          data-caption={t("Indoor playground")}
-          hidden={filter !== "all" && filter !== "play"}
-        >
-          <ResponsiveImage
-            src="/assets/playground.webp"
-            alt={t("Colourful indoor playground at Guru")}
-            loading="lazy"
-          />
-          <span>{t("Indoor playground ↗︎")}</span>
-        </button>
-        <button
-          className="campus-card"
-          data-category="play"
-          data-image="/assets/outdoor.webp"
-          data-caption={t("Outdoor play and sports area")}
-          hidden={filter !== "all" && filter !== "play"}
-        >
-          <ResponsiveImage
-            src="/assets/outdoor.webp"
-            alt={t("Guru outdoor play and sports area")}
-            loading="lazy"
-          />
-          <span>{t("Outdoor adventures ↗︎")}</span>
-        </button>
+        {[
+          [
+            "guru-early-years-classroom.webp",
+            "Preschool classrooms",
+            "learn",
+            "A colourful early years classroom at Guru",
+          ],
+          [
+            "guru-early-years-learning-space.webp",
+            "Room for questions and discovery.",
+            "learn",
+            "Early years classroom with colourful tables and chairs",
+          ],
+          [
+            "primary.webp",
+            "Primary classrooms",
+            "learn",
+            "Primary classroom with individual desks and bright windows",
+          ],
+          [
+            "library.webp",
+            "A book opens a new adventure.",
+            "learn",
+            "Guru children exploring picture books together in the library",
+          ],
+          [
+            "playground.webp",
+            "Indoor playground",
+            "play",
+            "Colourful indoor playground at Guru",
+          ],
+          [
+            "outdoor.webp",
+            "Outdoor adventures",
+            "play",
+            "Guru outdoor play and sports area",
+          ],
+          [
+            "campus.webp",
+            "A warm welcome to Guru.",
+            "welcome",
+            "Guru school entrance decorated for a school celebration",
+          ],
+        ].map(([image, caption, category, alt]) => (
+          <button
+            key={image}
+            className="campus-card"
+            data-category={category}
+            data-image={"/assets/" + image}
+            data-caption={t(caption)}
+            hidden={filter !== "all" && filter !== category}
+          >
+            <ResponsiveImage
+              src={"/assets/" + image}
+              alt={t(alt)}
+              loading="lazy"
+              width={800}
+              height={600}
+            />
+            <span>{t(caption)} ↗︎</span>
+          </button>
+        ))}
       </div>
       <p className="campus-extra">
         {t(
-          "Also in our school: a library, PE playground and sports area, and a multipurpose hall.",
+          "Colourful classrooms, books to explore and spaces to play: come see how these everyday places could become part of your child’s next chapter. Our team can show you around and discuss programme options.",
         )}
       </p>
     </section>

@@ -1,161 +1,243 @@
 [
   {
+    "image": "guru-young-graduates.webp",
+    "caption": "Little milestones. Big possibilities.",
+    "category": "graduation",
+    "width": 1280,
+    "height": 853,
+    "story": "Every new step is worth celebrating. These school moments invite families to picture the discoveries still to come.",
+    "featured": true,
+    "alt": "Young graduates wearing black caps and blue and yellow gowns at Guru"
+  },
+  {
+    "image": "guru-graduation-proud-moment.webp",
+    "caption": "A moment to feel proud.",
+    "category": "graduation",
+    "width": 1280,
+    "height": 853,
+    "story": "A graduation cap marks a chapter of learning, friendships and growing independence. Come explore the next chapter with us.",
+    "alt": "A child in a graduation gown in front of school celebration photographs"
+  },
+  {
+    "image": "life-at-guru-latest.jpg",
+    "caption": "Together on stage. Together at Guru.",
+    "category": "events",
+    "width": 1280,
+    "height": 853,
+    "story": "School celebrations bring children together to share a performance and enjoy being part of a community.",
+    "alt": "Guru children performing together on stage in yellow and blue uniforms"
+  },
+  {
+    "image": "guru-celebration-together.webp",
+    "caption": "Finding their voices, together.",
+    "category": "events",
+    "width": 1280,
+    "height": 853,
+    "story": "Songs, movement and shared moments give children opportunities to express themselves and try something new.",
+    "alt": "Children in yellow and blue uniforms taking part in a school performance"
+  },
+  {
+    "image": "guru-graduation-together.webp",
+    "caption": "Small steps, shared celebrations.",
+    "category": "graduation",
+    "width": 1280,
+    "height": 853,
+    "story": "From classroom discoveries to celebrations with friends, there is a story behind every milestone.",
+    "alt": "Young graduates standing together with a teacher at a school celebration"
+  },
+  {
+    "image": "guru-early-years-classroom.webp",
+    "caption": "A colourful place to begin.",
+    "category": "campus",
+    "width": 800,
+    "height": 500,
+    "story": "Child-sized tables and bright seating create an inviting space to gather, explore and take those first learning steps.",
+    "alt": "Early years classroom with round colourful tables and child-sized chairs"
+  },
+  {
+    "image": "guru-early-years-learning-space.webp",
+    "caption": "Room for questions and discovery.",
+    "category": "campus",
+    "width": 800,
+    "height": 670,
+    "story": "Picture your child exploring a welcoming classroom. A school visit is the best way to see the space and discuss the right programme.",
+    "alt": "A bright early years classroom with colourful chairs, a screen and a whiteboard"
+  },
+  {
+    "image": "campus.webp",
+    "caption": "A warm welcome to Guru.",
+    "category": "campus",
+    "width": 800,
+    "height": 533,
+    "story": "Step inside and meet the people and spaces behind the school. Our team can help you explore what matters most for your child.",
+    "alt": "Guru school entrance decorated with blue and yellow balloons"
+  },
+  {
+    "image": "library.webp",
+    "caption": "A book opens a new adventure.",
+    "category": "learning",
+    "width": 640,
+    "height": 480,
+    "story": "Stories spark questions and imagination. Discover the books, spaces and shared experiences that make school life more colourful.",
+    "alt": "Guru children holding picture books in the school library"
+  },
+  {
     "image": "gallery-update-6222095624409125895.webp",
-    "caption": "School trip — exploring together",
+    "caption": "School trip \u2014 exploring together",
     "category": "trips",
     "width": 1280,
     "height": 960
   },
   {
     "image": "gallery-update-6222095624409125896.webp",
-    "caption": "School trip — group memories",
+    "caption": "School trip \u2014 group memories",
     "category": "trips",
     "width": 1280,
     "height": 960
   },
   {
     "image": "gallery-update-6222095624409125897.webp",
-    "caption": "Graduation — celebrating achievement",
+    "caption": "Graduation \u2014 celebrating achievement",
     "category": "graduation",
     "width": 1280,
     "height": 853
   },
   {
     "image": "gallery-update-6222095624409125898.webp",
-    "caption": "Graduation — our school community",
+    "caption": "Graduation \u2014 our school community",
     "category": "graduation",
     "width": 1280,
     "height": 853
   },
   {
     "image": "gallery-update-6222095624409125899.webp",
-    "caption": "Graduation — student performance",
+    "caption": "Graduation \u2014 student performance",
     "category": "graduation",
     "width": 1280,
     "height": 853
   },
   {
     "image": "gallery-update-6222095624409125900.webp",
-    "caption": "Graduation — on stage together",
+    "caption": "Graduation \u2014 on stage together",
     "category": "graduation",
     "width": 1280,
     "height": 853
   },
   {
     "image": "gallery-update-6222095624409125901.webp",
-    "caption": "Graduation — young graduates",
+    "caption": "Graduation \u2014 young graduates",
     "category": "graduation",
     "width": 1280,
     "height": 853
   },
   {
     "image": "gallery-update-6222095624409125902.webp",
-    "caption": "Graduation — proud moments",
+    "caption": "Graduation \u2014 proud moments",
     "category": "graduation",
     "width": 1280,
     "height": 853
   },
   {
     "image": "gallery-update-6222095624409125903.webp",
-    "caption": "Graduation — class celebration",
+    "caption": "Graduation \u2014 class celebration",
     "category": "graduation",
     "width": 1280,
     "height": 853
   },
   {
     "image": "gallery-update-6222095624409125904.webp",
-    "caption": "Graduation — certificate presentation",
+    "caption": "Graduation \u2014 certificate presentation",
     "category": "graduation",
     "width": 1280,
     "height": 853
   },
   {
     "image": "gallery-update-6222095624409125905.webp",
-    "caption": "Graduation — celebrating a milestone",
+    "caption": "Graduation \u2014 celebrating a milestone",
     "category": "graduation",
     "width": 1280,
     "height": 853
   },
   {
     "image": "gallery-update-6222095624409125906.webp",
-    "caption": "School trip — garden memories",
+    "caption": "School trip \u2014 garden memories",
     "category": "trips",
     "width": 1280,
     "height": 960
   },
   {
     "image": "gallery-update-6222095624409125907.webp",
-    "caption": "Graduation — walking together",
+    "caption": "Graduation \u2014 walking together",
     "category": "graduation",
     "width": 1280,
     "height": 853
   },
   {
     "image": "gallery-update-6222095624409125908.webp",
-    "caption": "School trip — learning outdoors",
+    "caption": "School trip \u2014 learning outdoors",
     "category": "trips",
     "width": 1280,
     "height": 960
   },
   {
     "image": "gallery-update-6222095624409125909.webp",
-    "caption": "School trip — aircraft discovery",
+    "caption": "School trip \u2014 aircraft discovery",
     "category": "trips",
     "width": 1280,
     "height": 960
   },
   {
     "image": "gallery-update-6222095624409125910.webp",
-    "caption": "School trip — space exploration",
+    "caption": "School trip \u2014 space exploration",
     "category": "trips",
     "width": 1280,
     "height": 960
   },
   {
     "image": "gallery-update-6222095624409125911.webp",
-    "caption": "School trip — museum visit",
+    "caption": "School trip \u2014 museum visit",
     "category": "trips",
     "width": 960,
     "height": 1280
   },
   {
     "image": "gallery-update-6222095624409125912.webp",
-    "caption": "School trip — museum group photo",
+    "caption": "School trip \u2014 museum group photo",
     "category": "trips",
     "width": 1280,
     "height": 960
   },
   {
     "image": "gallery-update-6222095624409125913.webp",
-    "caption": "School trip — a day of discovery",
+    "caption": "School trip \u2014 a day of discovery",
     "category": "trips",
     "width": 1280,
     "height": 960
   },
   {
     "image": "gallery-update-6222095624409125914.webp",
-    "caption": "School trip — Children’s Book Library",
+    "caption": "School trip \u2014 Children\u2019s Book Library",
     "category": "trips",
     "width": 1280,
     "height": 960
   },
   {
     "image": "gallery-update-6222095624409125915.webp",
-    "caption": "School trip — outdoor discoveries",
+    "caption": "School trip \u2014 outdoor discoveries",
     "category": "trips",
     "width": 1280,
     "height": 960
   },
   {
     "image": "gallery-update-6222095624409125916.webp",
-    "caption": "School trip — colourful adventures",
+    "caption": "School trip \u2014 colourful adventures",
     "category": "trips",
     "width": 1280,
     "height": 960
   },
   {
     "image": "gallery-update-6222095624409125917.webp",
-    "caption": "Swimming — learning and having fun",
+    "caption": "Swimming \u2014 learning and having fun",
     "category": "life",
     "width": 800,
     "height": 671
@@ -262,17 +344,17 @@
   },
   {
     "image": "gallery-p22-6.webp",
-    "caption": "Parent engagement — profile image",
+    "caption": "Parent engagement \u2014 profile image",
     "category": "community"
   },
   {
     "image": "gallery-p22-7.webp",
-    "caption": "Community conversations — profile image",
+    "caption": "Community conversations \u2014 profile image",
     "category": "community"
   },
   {
     "image": "gallery-folder-9260.webp",
-    "caption": "Primary classroom — supplied photo",
+    "caption": "Primary classroom \u2014 supplied photo",
     "category": "campus"
   },
   {
@@ -282,7 +364,7 @@
   },
   {
     "image": "gallery-folder-9262.webp",
-    "caption": "Guru entrance — supplied photo",
+    "caption": "Guru entrance \u2014 supplied photo",
     "category": "campus"
   },
   {
@@ -292,7 +374,7 @@
   },
   {
     "image": "gallery-folder-9264.webp",
-    "caption": "Classroom facilities — supplied photo",
+    "caption": "Classroom facilities \u2014 supplied photo",
     "category": "campus"
   }
 ]

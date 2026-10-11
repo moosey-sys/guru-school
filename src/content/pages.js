@@ -23,11 +23,11 @@ export const pages = [
     label: "Programmes",
     title: "Find their next adventure.",
     description:
-      "Explore Guru’s early years and primary programmes, then talk with our team about the right next step for your child.",
+      "A welcoming classroom is just the beginning. Explore Guru’s early years and primary programmes, and talk with our team about a place for your child to learn, connect and grow.",
     ids: ["programmes"],
-    image: "gallery-folder-9260.webp",
+    image: "guru-early-years-classroom.webp",
     updatedCover: true,
-    imageAlt: "Primary classroom",
+    imageAlt: "A colourful early years classroom at Guru",
   },
   {
     slug: "life",
@@ -67,9 +67,9 @@ export const pages = [
     label: "Gallery",
     title: "Explore Guru in pictures.",
     description:
-      "Browse school celebrations, learning spaces, graduation, trips and student activities.",
+      "See life at Guru through colourful classrooms, proud graduation moments and shared celebrations. Picture your child’s next chapter, then come meet our team.",
     ids: ["gallery"],
-    image: "gallery-update-6222095624409125897.webp",
+    image: "guru-young-graduates.webp",
   },
   {
     slug: "news",

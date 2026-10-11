@@ -62,7 +62,7 @@ describe("React public website", () => {
   it("keeps gallery categories, expansion, photo viewer and closure working", async () => {
     setup("/gallery");
     await screen.findByText("School announcement");
-    expect(screen.getByText("Showing 8 of 50 photos.")).toBeInTheDocument();
+    expect(screen.getByText("Showing 8 of 59 photos.")).toBeInTheDocument();
     fireEvent.click(screen.getByRole("button", { name: "Trips", exact: true }));
     expect(screen.getByText("Showing 8 of 12 photos.")).toBeInTheDocument();
     fireEvent.click(screen.getByRole("button", { name: "Show all photos" }));
@@ -280,7 +280,7 @@ it("excludes hidden existing photos from gallery counts, filters and image viewe
       <PublicApp path="/gallery" />
     </PreferencesProvider>,
   );
-  await screen.findByText("Showing 8 of 49 photos.");
+  await screen.findByText("Showing 8 of 58 photos.");
   fireEvent.click(screen.getByRole("button", { name: "Show all photos" }));
   expect(
     screen.queryByRole("button", {
@@ -299,12 +299,12 @@ it("separates graduation and trips and includes graduation in school events", as
   fireEvent.click(
     screen.getByRole("button", { name: "Graduation", exact: true }),
   );
-  expect(screen.getByText("Showing 8 of 10 photos.")).toBeInTheDocument();
+  expect(screen.getByText("Showing 8 of 13 photos.")).toBeInTheDocument();
   expect(
     screen.queryByRole("button", { name: /School trip — exploring together/ }),
   ).not.toBeInTheDocument();
   fireEvent.click(screen.getByRole("button", { name: "Events", exact: true }));
-  expect(screen.getByText("Showing 8 of 10 photos.")).toBeInTheDocument();
+  expect(screen.getByText("Showing 8 of 15 photos.")).toBeInTheDocument();
   fireEvent.click(
     screen.getByRole("button", { name: "Student life", exact: true }),
   );
@@ -353,11 +353,42 @@ it("filters published gallery photos by album without including hidden existing 
   ).toBeInTheDocument();
 });
 
-it('mobile navigation returns keyboard focus to its toggle on Escape',async()=>{
- setup('/');await screen.findByText('School announcement');
- const toggle=screen.getByRole('button',{name:'Open navigation',exact:true});
- fireEvent.click(toggle);screen.getByRole('link',{name:'Contact us',exact:true}).focus();
- fireEvent.keyDown(document,{key:'Escape'});
- expect(toggle).toHaveAttribute('aria-expanded','false');expect(toggle).toHaveFocus();
- expect(document.getElementById('main')).toHaveAttribute('tabindex','-1');
+it("mobile navigation returns keyboard focus to its toggle on Escape", async () => {
+  setup("/");
+  await screen.findByText("School announcement");
+  const toggle = screen.getByRole("button", {
+    name: "Open navigation",
+    exact: true,
+  });
+  fireEvent.click(toggle);
+  screen.getByRole("link", { name: "Contact us", exact: true }).focus();
+  fireEvent.keyDown(document, { key: "Escape" });
+  expect(toggle).toHaveAttribute("aria-expanded", "false");
+  expect(toggle).toHaveFocus();
+  expect(document.getElementById("main")).toHaveAttribute("tabindex", "-1");
+});
+
+it("opens a new school moment with its story and shows the classroom photos in their category", async () => {
+  setup("/gallery");
+  await screen.findByText("School announcement");
+  fireEvent.click(
+    screen.getByRole("button", {
+      name: /Little milestones. Big possibilities./,
+    }),
+  );
+  expect(screen.getByRole("dialog")).toHaveTextContent(
+    "Every new step is worth celebrating.",
+  );
+  expect(screen.getByRole("dialog").querySelector("img")).toHaveAttribute(
+    "src",
+    "/assets/guru-young-graduates.webp",
+  );
+  fireEvent.click(screen.getByRole("button", { name: "Close photo viewer" }));
+  fireEvent.click(screen.getByRole("button", { name: "Campus", exact: true }));
+  expect(
+    screen.getByRole("button", { name: /A colourful place to begin/ }),
+  ).toBeInTheDocument();
+  expect(
+    screen.getByRole("button", { name: /Room for questions and discovery/ }),
+  ).toBeInTheDocument();
 });

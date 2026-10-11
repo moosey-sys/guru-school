@@ -104,6 +104,18 @@
   "/assets/gallery-update-6222095624409125917.webp": {
     "srcSet": "/assets/responsive-gallery-update-6222095624409125917-400.webp 400w, /assets/responsive-gallery-update-6222095624409125917-800.webp 800w"
   },
+  "/assets/guru-celebration-together.webp": {
+    "srcSet": "/assets/responsive-guru-celebration-together-400.webp 400w, /assets/responsive-guru-celebration-together-800.webp 800w, /assets/responsive-guru-celebration-together-1200.webp 1200w"
+  },
+  "/assets/guru-graduation-proud-moment.webp": {
+    "srcSet": "/assets/responsive-guru-graduation-proud-moment-400.webp 400w, /assets/responsive-guru-graduation-proud-moment-800.webp 800w, /assets/responsive-guru-graduation-proud-moment-1200.webp 1200w"
+  },
+  "/assets/guru-graduation-together.webp": {
+    "srcSet": "/assets/responsive-guru-graduation-together-400.webp 400w, /assets/responsive-guru-graduation-together-800.webp 800w, /assets/responsive-guru-graduation-together-1200.webp 1200w"
+  },
+  "/assets/guru-young-graduates.webp": {
+    "srcSet": "/assets/responsive-guru-young-graduates-400.webp 400w, /assets/responsive-guru-young-graduates-800.webp 800w, /assets/responsive-guru-young-graduates-1200.webp 1200w"
+  },
   "/assets/life-at-guru-latest.jpg": {
     "srcSet": "/assets/responsive-life-at-guru-latest-400.webp 400w, /assets/responsive-life-at-guru-latest-800.webp 800w, /assets/responsive-life-at-guru-latest-1200.webp 1200w"
   },

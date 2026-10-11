@@ -622,4 +622,79 @@ export default {
   "Remove time": "အချိန်ကို ဖယ်ရှားရန်",
   "Parent acknowledgement email failed. The enquiry is saved here.":
     "မိဘထံ အတည်ပြုအီးမေးလ် မပို့နိုင်ပါ။ စုံစမ်းမေးမြန်းမှုကို ဤနေရာတွင် သိမ်းထားပါသည်။",
+  "Little milestones. Big possibilities.":
+    "ခြေလှမ်းငယ်များ။ အခွင့်အလမ်းကြီးများ။",
+  "A moment to feel proud.": "ဂုဏ်ယူရသော အခိုက်အတန့်။",
+  "Together on stage. Together at Guru.":
+    "စင်မြင့်ပေါ်တွင် အတူတကွ။ Guru တွင် အတူတကွ။",
+  "Finding their voices, together.":
+    "မိမိကိုယ်ကို ဖော်ပြတတ်ရန် အတူတကွ လေ့လာခြင်း။",
+  "Small steps, shared celebrations.":
+    "ခြေလှမ်းငယ်များကို အတူတကွ ဂုဏ်ပြုခြင်း။",
+  "A colourful place to begin.": "အရောင်အသွေးစုံလင်သော သင်ယူမှုအစ။",
+  "Room for questions and discovery.":
+    "မေးခွန်းများနှင့် ရှာဖွေတွေ့ရှိမှုများအတွက် နေရာ။",
+  "A warm welcome to Guru.": "Guru မှ နွေးထွေးစွာ ကြိုဆိုပါသည်။",
+  "A book opens a new adventure.":
+    "စာအုပ်တစ်အုပ်မှ စူးစမ်းလေ့လာမှုခရီးသစ် စတင်သည်။",
+  "Every new step is worth celebrating. These school moments invite families to picture the discoveries still to come.":
+    "ခြေလှမ်းသစ်တိုင်းသည် ဂုဏ်ပြုထိုက်ပါသည်။ ဤကျောင်းအမှတ်တရများမှ သင့်ကလေး၏ ရှေ့ဆက်လေ့လာမှုခရီးကို စိတ်ကူးကြည့်နိုင်ပါသည်။",
+  "A graduation cap marks a chapter of learning, friendships and growing independence. Come explore the next chapter with us.":
+    "ဘွဲ့ဦးထုပ်သည် သင်ယူမှု၊ မိတ်ဆွေများနှင့် ကိုယ်ပိုင်ရပ်တည်တတ်မှုတို့၏ အမှတ်တရ ဖြစ်ပါသည်။ နောက်တစ်ဆင့်ကို ကျွန်ုပ်တို့နှင့်အတူ လေ့လာပါ။",
+  "School celebrations bring children together to share a performance and enjoy being part of a community.":
+    "ကျောင်းပွဲများတွင် ကလေးများ အတူတကွ ဖျော်ဖြေပြီး ကျောင်းအသိုင်းအဝိုင်း၏ တစ်စိတ်တစ်ပိုင်းအဖြစ် ပျော်ရွှင်စွာ ပါဝင်ကြပါသည်။",
+  "Songs, movement and shared moments give children opportunities to express themselves and try something new.":
+    "သီချင်း၊ လှုပ်ရှားမှုနှင့် အတူတကွ ပါဝင်မှုတို့မှ ကလေးများသည် မိမိကိုယ်ကို ဖော်ပြရန်နှင့် အသစ်အဆန်းများ စမ်းသပ်ရန် အခွင့်အရေး ရရှိပါသည်။",
+  "From classroom discoveries to celebrations with friends, there is a story behind every milestone.":
+    "စာသင်ခန်းတွင် ရှာဖွေတွေ့ရှိမှုများမှ မိတ်ဆွေများနှင့် အတူတကွ ဂုဏ်ပြုမှုများအထိ ခြေလှမ်းတိုင်းတွင် အမှတ်တရများ ရှိပါသည်။",
+  "Child-sized tables and bright seating create an inviting space to gather, explore and take those first learning steps.":
+    "ကလေးများအတွက် သင့်လျော်သော စားပွဲနှင့် အရောင်အသွေးစုံသော ထိုင်ခုံများက အတူတကွ စုဝေးလေ့လာရန်နှင့် သင်ယူမှုအစပြုရန် ကြိုဆိုသောနေရာကို ဖန်တီးပေးပါသည်။",
+  "Picture your child exploring a welcoming classroom. A school visit is the best way to see the space and discuss the right programme.":
+    "သင့်ကလေး ဤနွေးထွေးသော စာသင်ခန်းတွင် လေ့လာနေမည့်ပုံကို စိတ်ကူးကြည့်ပါ။ ကျောင်းသို့ လာရောက်လည်ပတ်၍ နေရာများကို ကြည့်ရှုပြီး သင့်လျော်သော ပညာရေးအစီအစဉ်ကို ဆွေးနွေးနိုင်ပါသည်။",
+  "Step inside and meet the people and spaces behind the school. Our team can help you explore what matters most for your child.":
+    "ကျောင်းသို့ ဝင်ရောက်ပြီး ကျွန်ုပ်တို့အဖွဲ့နှင့် သင်ယူမှုနေရာများကို လေ့လာပါ။ သင့်ကလေးအတွက် အရေးကြီးသော အချက်များကို ကျွန်ုပ်တို့အဖွဲ့နှင့် ဆွေးနွေးနိုင်ပါသည်။",
+  "Stories spark questions and imagination. Discover the books, spaces and shared experiences that make school life more colourful.":
+    "ပုံပြင်များသည် မေးခွန်းများနှင့် စိတ်ကူးစိတ်သန်းများကို နှိုးဆွပေးပါသည်။ ကျောင်းဘဝကို ပိုမိုစုံလင်စေသော စာအုပ်များ၊ နေရာများနှင့် အတူတကွ လေ့လာမှုများကို ရှာဖွေပါ။",
+  "Every small step has a story. Explore proud milestones, moments of togetherness and the spaces where new discoveries begin.":
+    "ခြေလှမ်းငယ်တိုင်းတွင် အမှတ်တရ ရှိပါသည်။ ဂုဏ်ယူရသော ခြေလှမ်းများ၊ အတူတကွ ပျော်ရွှင်မှုများနှင့် သင်ယူမှုစတင်ရာ နေရာများကို လေ့လာပါ။",
+  "Picture your child here? Come meet Guru ↗︎":
+    "သင့်ကလေးကို ဤနေရာတွင် စိတ်ကူးကြည့်မိပါသလား။ Guru သို့ လာရောက်လေ့လာပါ ↗︎",
+  "A colourful early years classroom at Guru":
+    "Guru ရှိ အရောင်အသွေးစုံလင်သော မူကြိုစာသင်ခန်း",
+  "Early years classroom with colourful tables and chairs":
+    "အရောင်အသွေးစုံလင်သော စားပွဲနှင့် ထိုင်ခုံများပါသော မူကြိုစာသင်ခန်း",
+  "Guru children exploring picture books together in the library":
+    "စာကြည့်တိုက်တွင် ရုပ်ပုံစာအုပ်များကို အတူတကွ လေ့လာနေသော Guru ကလေးများ",
+  "Guru school entrance decorated for a school celebration":
+    "ကျောင်းပွဲအတွက် အလှဆင်ထားသော Guru ကျောင်းဝင်ပေါက်",
+  "Guru children performing together in their school uniforms":
+    "ကျောင်းဝတ်စုံများဖြင့် အတူတကွ ဖျော်ဖြေနေသော Guru ကလေးများ",
+  "Shared moments. Growing confidence. ↗︎":
+    "အတူတကွ ပျော်ရွှင်မှုများမှ ယုံကြည်မှု တိုးတက်လာခြင်း။ ↗︎",
+  "A shared performance or a graduation celebration can make a small milestone feel special. These moments are an invitation to celebrate effort, friendship and the joy of trying something new.":
+    "အတူတကွ ဖျော်ဖြေခြင်းနှင့် ဘွဲ့နှင်းသဘင်ပွဲများက ခြေလှမ်းငယ်များကို ထူးခြားစေပါသည်။ ဤအခိုက်အတန့်များတွင် ကြိုးစားအားထုတ်မှု၊ မိတ်ဆွေဖြစ်မှုနှင့် အသစ်အဆန်းများ စမ်းသပ်ရသည့် ပျော်ရွှင်မှုတို့ကို ဂုဏ်ပြုနိုင်ပါသည်။",
+  "Colourful classrooms, books to explore and spaces to play: come see how these everyday places could become part of your child’s next chapter. Our team can show you around and discuss programme options.":
+    "အရောင်အသွေးစုံလင်သော စာသင်ခန်းများ၊ လေ့လာရန် စာအုပ်များနှင့် ကစားရန် နေရာများသည် သင့်ကလေး၏ သင်ယူမှုခရီးသစ်တွင် မည်သို့ပါဝင်နိုင်မည်ကို လာရောက်ကြည့်ရှုပါ။ ကျွန်ုပ်တို့အဖွဲ့က ကျောင်းနေရာများကို ပြသပြီး ပညာရေးအစီအစဉ်များကို ဆွေးနွေးပေးပါမည်။",
+  "Young graduates wearing black caps and blue and yellow gowns at Guru":
+    "Guru တွင် အနက်ရောင်ဘွဲ့ဦးထုပ်နှင့် အပြာ၊ အဝါ ဘွဲ့ဝတ်စုံများ ဝတ်ဆင်ထားသော ကလေးများ",
+  "A child in a graduation gown in front of school celebration photographs":
+    "ကျောင်းပွဲဓာတ်ပုံများရှေ့တွင် ဘွဲ့ဝတ်စုံဖြင့် ရပ်နေသော ကလေးတစ်ဦး",
+  "Guru children performing together on stage in yellow and blue uniforms":
+    "အဝါနှင့် အပြာ ကျောင်းဝတ်စုံများဖြင့် စင်မြင့်ပေါ်တွင် အတူတကွ ဖျော်ဖြေနေသော Guru ကလေးများ",
+  "Children in yellow and blue uniforms taking part in a school performance":
+    "အဝါနှင့် အပြာ ဝတ်စုံများဖြင့် ကျောင်းဖျော်ဖြေပွဲတွင် ပါဝင်နေသော ကလေးများ",
+  "Young graduates standing together with a teacher at a school celebration":
+    "ကျောင်းပွဲတွင် ဆရာမနှင့်အတူ ရပ်နေသော ဘွဲ့ဝတ်စုံဖြင့် ကလေးများ",
+  "Early years classroom with round colourful tables and child-sized chairs":
+    "ဝိုင်းသော အရောင်အသွေးစုံ စားပွဲများနှင့် ကလေးများအတွက် ထိုင်ခုံများပါသော မူကြိုစာသင်ခန်း",
+  "A bright early years classroom with colourful chairs, a screen and a whiteboard":
+    "အရောင်အသွေးစုံသော ထိုင်ခုံများ၊ ဖန်သားပြင်နှင့် whiteboard ပါသော တောက်ပသည့် မူကြိုစာသင်ခန်း",
+  "Guru school entrance decorated with blue and yellow balloons":
+    "အပြာနှင့် အဝါ ပူဖောင်းများဖြင့် အလှဆင်ထားသော Guru ကျောင်းဝင်ပေါက်",
+  "Guru children holding picture books in the school library":
+    "ကျောင်းစာကြည့်တိုက်တွင် ရုပ်ပုံစာအုပ်များ ကိုင်ထားသော Guru ကလေးများ",
+  "See life at Guru through colourful classrooms, proud graduation moments and shared celebrations. Picture your child’s next chapter, then come meet our team.":
+    "အရောင်အသွေးစုံလင်သော စာသင်ခန်းများ၊ ဂုဏ်ယူရသော ဘွဲ့နှင်းသဘင်အမှတ်တရများနှင့် အတူတကွ ပျော်ရွှင်မှုများမှ Guru ကျောင်းဘဝကို လေ့လာပါ။ သင့်ကလေး၏ သင်ယူမှုခရီးသစ်ကို စိတ်ကူးကြည့်ပြီး ကျွန်ုပ်တို့အဖွဲ့နှင့် လာရောက်တွေ့ဆုံပါ။",
+  "A welcoming classroom is just the beginning. Explore Guru’s early years and primary programmes, and talk with our team about a place for your child to learn, connect and grow.":
+    "နွေးထွေးသော စာသင်ခန်းသည် သင်ယူမှုခရီး၏ အစ ဖြစ်ပါသည်။ Guru ၏ မူကြိုနှင့် မူလတန်း ပညာရေးအစီအစဉ်များကို လေ့လာပြီး သင့်ကလေး သင်ယူ၊ ပေါင်းသင်းကာ တိုးတက်နိုင်မည့် နေရာအကြောင်း ကျွန်ုပ်တို့အဖွဲ့နှင့် ဆွေးနွေးပါ။",
 };
