@@ -1,1 +1,15 @@
-{"name":"guru-international-school","version":"1.0.0","private":true,"scripts":{"dev":"python3 -m http.server 5173 --directory dist","check":"node --check dist/app.js && node --check dist/theme.js && node --check dist/language.js && node --check dist/translations.js"}}
+{
+  "name": "guru-international-school",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "node --env-file=.env --env-file=.env.local scripts/dev-server.js",
+    "check": "node scripts/check.mjs && node security-check.mjs",
+    "test": "node --test tests/*.test.js"
+  },
+  "dependencies": {
+    "@vercel/blob": "^2.8.1",
+    "nodemailer": "^10.1.0",
+    "sharp": "^0.35.5"
+  }
+}

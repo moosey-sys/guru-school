@@ -38,7 +38,7 @@ function syncThemeButton() {
   const dark = document.documentElement.dataset.theme === 'dark';
   themeButton.setAttribute('aria-pressed', String(dark));
   themeButton.setAttribute('aria-label', translate(dark ? 'Switch to light mode' : 'Switch to dark mode'));
-  themeButton.querySelector('.theme-icon').textContent = dark ? '☀' : '☾';
+  themeButton.querySelector('.theme-icon').textContent = dark ? '☀︎' : '☾︎';
   themeButton.querySelector('.theme-label').textContent = translate(dark ? 'Light' : 'Dark');
   document.querySelector('meta[name="theme-color"]').content = dark ? '#131a29' : '#2448a5';
 }
@@ -151,3 +151,43 @@ if ('IntersectionObserver' in window) {
     if (motion.matches) { programmeAnimations.forEach(animation => animation.cancel()); programmeAnimations.clear(); }
   });
 }
+
+// Browse all supplied photographs with independent filters and expansion.
+const galleryCards = [...document.querySelectorAll('[data-gallery-category]')];
+const galleryMore = document.querySelector('.gallery-more');
+let galleryCategory = 'all';
+let galleryExpanded = false;
+function renderGallery() {
+  const matching = galleryCards.filter(card => galleryCategory === 'all' || card.dataset.galleryCategory === galleryCategory);
+  galleryCards.forEach(card => { const index = matching.indexOf(card); card.hidden = index < 0 || (!galleryExpanded && index >= 8); });
+  galleryMore.hidden = matching.length <= 8;
+  galleryMore.setAttribute('aria-expanded', String(galleryExpanded));
+  galleryMore.textContent = translate(galleryExpanded ? 'Show fewer photos' : 'Show all photos');
+  const shown = galleryExpanded ? matching.length : Math.min(8, matching.length);
+  document.querySelector('.gallery-status').textContent = document.documentElement.lang === 'my' ? `ဓာတ်ပုံ ${matching.length} ပုံမှ ${shown} ပုံကို ပြထားပါသည်။` : `Showing ${shown} of ${matching.length} photos.`;
+}
+document.querySelectorAll('[data-gallery-filter]').forEach(button => button.addEventListener('click', () => {
+  galleryCategory = button.dataset.galleryFilter;
+  galleryExpanded = false;
+  document.querySelectorAll('[data-gallery-filter]').forEach(item => { const active = item === button; item.classList.toggle('active', active); item.setAttribute('aria-pressed', String(active)); });
+  renderGallery();
+}));
+galleryMore.addEventListener('click', () => { galleryExpanded = !galleryExpanded; renderGallery(); });
+document.addEventListener('guru-language-change', renderGallery);
+renderGallery();
+
+const heroArt = document.querySelector('.hero-art');
+function toggleHeroPhoto() {
+  const selected = heroArt.classList.toggle('is-selected');
+  heroArt.setAttribute('aria-pressed', String(selected));
+}
+heroArt.addEventListener('click', toggleHeroPhoto);
+heroArt.addEventListener('keydown', event => {
+  if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); toggleHeroPhoto(); }
+});
+
+// Keep uploaded photos inside the same filters and expansion controls.
+document.addEventListener('guru-gallery-update', () => {
+  galleryCards.splice(0, galleryCards.length, ...document.querySelectorAll('[data-gallery-category]'));
+  renderGallery();
+});

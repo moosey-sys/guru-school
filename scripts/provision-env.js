@@ -1,0 +1,3 @@
+const fs=require('node:fs'),{spawnSync}=require('node:child_process');
+const env=fs.readFileSync('.env','utf8').split('\n').filter(line=>/^[A-Z_]+=/.test(line));
+for(const line of env){const split=line.indexOf('='),name=line.slice(0,split),value=line.slice(split+1);if(!['ADMIN_USERNAME','ADMIN_PASSWORD_HASH','SESSION_SECRET'].includes(name))continue;const result=spawnSync('vercel',['env','add',name,'production','--scope','team_78As8rtBE014iFrOwihU4C8N'],{input:value,encoding:'utf8'});if(result.status!==0){console.error(`Unable to configure ${name}; check Vercel project settings.`);process.exit(1);}console.log(`Configured ${name}; value hidden.`);}
