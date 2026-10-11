@@ -2994,3 +2994,22 @@ html[data-theme="dark"] .footer-motto:hover, html[data-theme="dark"] .footer-mot
 @media(max-width: 600px) { .school-footer { grid-template-columns: 1fr; } .footer-invitation { padding: 24px; } .school-footer .footer-bottom { align-items: flex-start; } .school-footer .footer-links { gap: 16px; } }
 .school-footer nav { position: static; inset: auto; padding: 0; background: transparent; border: 0; display: flex; }
 .school-footer .footer-links { flex-direction: row; align-items: center; }
+
+/* A modest readability increase across the public website. */
+body { font-size: 18px; }
+#nav a { font-size: 15px; }
+.button, button, input, select, textarea { font-size: 16px; }
+.eyebrow { font-size: 12px; }
+.large-copy { font-size: 19px; }
+.explore-card p:not(.eyebrow) { font-size: 16px; line-height: 1.7; }
+.team-grid article p:last-child { font-size: 15px; line-height: 1.7; }
+.team-grid article h3 { font-size: 22px; }
+.gallery-status, .full-gallery-card > span { font-size: 15px; }
+.school-footer .footer-motto, .school-footer .footer-links { font-size: 14px; }
+.footer-explore, .footer-connect { font-size: 15px; }
+.footer-social, .school-footer .footer-bottom { font-size: 13px; }
+@media (max-width: 760px) {
+  body { font-size: 17px; }
+  .button, button, input, select, textarea { font-size: 16px; }
+  .team-grid article h3 { font-size: 21px; }
+}
