@@ -204,7 +204,11 @@ function News({ content }) {
   const { language, t } = usePreferences();
   const published =
     content?.news
-      .filter((item) => item.published)
+      .filter(
+        (item) =>
+          item.published &&
+          (!item.publishAt || Date.parse(item.publishAt) <= Date.now()),
+      )
       .slice()
       .sort((a, b) => b.date.localeCompare(a.date)) || [];
   if (!published.length)
@@ -448,6 +452,7 @@ export default function PublicApp({ path = "/" }) {
               <Gallery
                 photos={content?.photos}
                 hiddenGallery={content?.hiddenGallery}
+                existingAlbums={content?.existingAlbums}
                 openPhoto={setPhoto}
               />
             ) : page.slug === "news" ? (

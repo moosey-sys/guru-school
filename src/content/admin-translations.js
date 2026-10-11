@@ -218,4 +218,103 @@ export default {
     "ပြောင်းလဲမှု သိမ်းပြီးပါပြီ။ အခြေအနေပြောင်းခြင်းက အီးမေးလ်မပို့ပါ။ မိသားစုထံ ဆက်သွယ်၍ အတည်ပြုပါ။",
   "Content saved. Published updates are now live.":
     "အကြောင်းအရာ သိမ်းပြီးပါပြီ။ ဖော်ပြရန်ရွေးထားသည်များ ဝက်ဘ်ဆိုက်တွင် ပေါ်လာပါပြီ။",
+  "Visit calendar": "ကျောင်းလည်ပတ်မှု ပြက္ခဒိန်",
+  "Security & backups": "လုံခြုံရေးနှင့် အရန်သိမ်းဆည်းမှု",
+  "Create visit times in Myanmar time. Each time accepts one family; requests require your confirmation.":
+    "မြန်မာစံတော်ချိန်ဖြင့် ကျောင်းလည်ပတ်ချိန်များ သတ်မှတ်ပါ။ အချိန်တစ်ခုတွင် မိသားစုတစ်စုသာ လက်ခံပြီး ကျောင်းမှ အတည်ပြုရန် လိုပါသည်။",
+  "Add an available visit time": "ကျောင်းလည်ပတ်နိုင်သည့် အချိန် ထည့်ရန်",
+  "Visit date": "ကျောင်းလည်ပတ်ရက်",
+  "Visit time (Myanmar time)": "ကျောင်းလည်ပတ်ချိန် (မြန်မာစံတော်ချိန်)",
+  "Add visit time": "ကျောင်းလည်ပတ်ချိန် ထည့်ရန်",
+  "Available and reserved times":
+    "လက်ခံနိုင်သောနှင့် ကြိုတင်တောင်းဆိုထားသော အချိန်များ",
+  "No visit times yet. Families can still request a preferred date.":
+    "ကျောင်းလည်ပတ်ချိန် မသတ်မှတ်ရသေးပါ။ မိသားစုများက လိုချင်သောရက်ကို တောင်းဆိုနိုင်ပါသည်။",
+  Available: "လက်ခံနိုင်သည်",
+  "Reserved or past": "ကြိုတင်တောင်းဆိုထားသည် သို့မဟုတ် အချိန်ကျော်သွားပြီ",
+  "Close time": "အချိန်ကို ပိတ်ရန်",
+  "Open time": "အချိန်ကို ဖွင့်ရန်",
+  "Confirm or reschedule a family in Enquiries & visits. Load more enquiries there to include older requests.":
+    "စုံစမ်းမေးမြန်းမှုနှင့် ကျောင်းလည်ပတ်မှု ကဏ္ဍတွင် အတည်ပြုခြင်း သို့မဟုတ် အချိန်ပြောင်းခြင်း လုပ်ဆောင်ပါ။ ယခင်တောင်းဆိုမှုများအတွက် ထပ်မံရယူရန် နှိပ်ပါ။",
+  "Visit scheduled": "ကျောင်းလည်ပတ်ချိန် အတည်ပြုပြီး",
+  "Awaiting confirmation": "အတည်ပြုချက် စောင့်နေသည်",
+  "Private snapshots protect your announcements, news, gallery captions, albums and visibility settings.":
+    "ကြေညာချက်၊ သတင်း၊ ဓာတ်ပုံစာသား၊ အယ်လ်ဘမ်နှင့် ဖော်ပြမှုသတ်မှတ်ချက်များကို သီးသန့် အရန်သိမ်းဆည်းထားနိုင်ပါသည်။",
+  "Create backup": "အရန်သိမ်းရန်",
+  "Two-step sign-in": "အဆင့်နှစ်ဆင့် အကောင့်ဝင်ခြင်း",
+  "Your session was verified with an email code. New sign-ins require your password and a one-time code from the school admin inbox.":
+    "သင့်အကောင့်ဝင်မှုကို အီးမေးလ်ကုဒ်ဖြင့် အတည်ပြုပြီးပါပြီ။ နောက်တစ်ကြိမ်ဝင်ရာတွင် စကားဝှက်နှင့် ကျောင်းအီးမေးလ်ပုံးမှ တစ်ကြိမ်သုံးကုဒ် လိုအပ်ပါသည်။",
+  "New production sign-ins require your password and a one-time code from the school admin inbox.":
+    "ဝက်ဘ်ဆိုက်အကောင့်ဝင်ရာတွင် စကားဝှက်နှင့် ကျောင်းအီးမေးလ်ပုံးမှ တစ်ကြိမ်သုံးကုဒ် လိုအပ်ပါသည်။",
+  "Website content backups": "ဝက်ဘ်ဆိုက်အကြောင်းအရာ အရန်သိမ်းဆည်းမှု",
+  "A snapshot is saved before every content change. Uploaded images stay in private storage so previous galleries can be restored. Restoring content does not change enquiries, visitor statistics or visit times.":
+    "အကြောင်းအရာပြောင်းလဲမှုတိုင်း မတိုင်မီ အရန်သိမ်းပါသည်။ တင်ထားသောဓာတ်ပုံများကို သီးသန့်သိမ်းထားသဖြင့် ယခင်ဓာတ်ပုံကဏ္ဍကို ပြန်ယူနိုင်ပါသည်။ ပြန်ယူခြင်းက စုံစမ်းမေးမြန်းမှု၊ ဝင်ရောက်မှုစာရင်း သို့မဟုတ် ကျောင်းလည်ပတ်ချိန်များကို မပြောင်းလဲပါ။",
+  "No backups yet. Create your first backup above.":
+    "အရန်သိမ်းထားမှု မရှိသေးပါ။ အပေါ်မှ ပထမဆုံးအရန်သိမ်းပါ။",
+  "news items": "သတင်းများ",
+  "uploaded photos": "တင်ထားသော ဓာတ်ပုံများ",
+  "Restore this backup": "ဤအရန်မှ ပြန်ယူရန်",
+  "Load older backups": "ယခင်အရန်များ ထပ်ရယူရန်",
+  "Restore the selected website content? A backup of your current content will be saved first.":
+    "ရွေးထားသောအကြောင်းအရာကို ပြန်ယူမည်လား။ လက်ရှိအကြောင်းအရာကို အရင် အရန်သိမ်းပါမည်။",
+  "Confirm restore": "ပြန်ယူရန် အတည်ပြုပါ",
+  "Enter the six-digit code sent to the school admin inbox. It expires in 10 minutes.":
+    "ကျောင်းအီးမေးလ်ပုံးသို့ ပို့ထားသော ဂဏန်းခြောက်လုံးကုဒ်ကို ထည့်ပါ။ ၁၀ မိနစ်အတွင်းသာ အသုံးပြုနိုင်ပါသည်။",
+  "Sign-in code": "အကောင့်ဝင်ကုဒ်",
+  "Start sign-in again": "အကောင့်ဝင်မှု ပြန်စရန်",
+  Contacted: "ဆက်သွယ်ပြီး",
+  Programme: "ပညာရေးအစီအစဉ်",
+  "Follow-up date": "ထပ်မံဆက်သွယ်ရမည့်ရက်",
+  "Confirm or reschedule visit time":
+    "ကျောင်းလည်ပတ်ချိန် အတည်ပြုရန် သို့မဟုတ် ပြောင်းရန်",
+  "Keep preferred date": "တောင်းဆိုထားသောရက်ကို ထားရန်",
+  "Email visit confirmation when saving":
+    "သိမ်းသည့်အခါ ကျောင်းလည်ပတ်မှု အတည်ပြုအီးမေးလ် ပို့ရန်",
+  "Search enquiries": "စုံစမ်းမေးမြန်းမှု ရှာဖွေရန်",
+  "Name, email, phone or message": "အမည်၊ အီးမေးလ်၊ ဖုန်း သို့မဟုတ် စာသား",
+  "All programmes": "ပညာရေးအစီအစဉ်အားလုံး",
+  "Not sure yet": "မရွေးချယ်ရသေးပါ",
+  "Received from": "စတင်လက်ခံရရှိသည့်ရက်",
+  "Received until": "နောက်ဆုံးလက်ခံရရှိသည့်ရက်",
+  "Search all enquiries": "စုံစမ်းမေးမြန်းမှုအားလုံး ရှာဖွေရန်",
+  "Clear filters": "စစ်ထုတ်ချက်များ ဖယ်ရှားရန်",
+  "Search all enquiries to include older messages.":
+    "ယခင်စာများပါ ရှာရန် စုံစမ်းမေးမြန်းမှုအားလုံး ရှာဖွေပါ။",
+  "Publish at (Myanmar time, optional)":
+    "ဖော်ပြမည့်အချိန် (မြန်မာစံတော်ချိန်၊ မဖြစ်မနေမဟုတ်)",
+  "Scheduled: appears automatically at the selected time.":
+    "အချိန်သတ်မှတ်ပြီး၊ ရွေးထားသောအချိန်တွင် အလိုအလျောက် ဖော်ပြပါမည်။",
+  "Published on the website.": "ဝက်ဘ်ဆိုက်တွင် ဖော်ပြထားပါသည်။",
+  "Draft: hidden from the website.": "မူကြမ်း၊ ဝက်ဘ်ဆိုက်တွင် မဖော်ပြထားပါ။",
+  "Album (optional)": "ဓာတ်ပုံအယ်လ်ဘမ် (မဖြစ်မနေမဟုတ်)",
+  "For example: Graduation 2026": "ဥပမာ၊ ၂၀၂၆ ဘွဲ့နှင်းသဘင်",
+  "Save album assignments": "အယ်လ်ဘမ်သတ်မှတ်ချက်များ သိမ်းရန်",
+  "Programme of interest (optional)":
+    "စိတ်ဝင်စားသော ပညာရေးအစီအစဉ် (မဖြစ်မနေမဟုတ်)",
+  "Choose a programme": "ပညာရေးအစီအစဉ် ရွေးချယ်ပါ",
+  "Available visit times (Myanmar time)":
+    "လက်ခံနိုင်သော ကျောင်းလည်ပတ်ချိန်များ (မြန်မာစံတော်ချိန်)",
+  "Request another date": "အခြားရက် တောင်းဆိုရန်",
+  "Visit times could not be loaded. You can request a preferred date below.":
+    "ကျောင်းလည်ပတ်ချိန်များ မရယူနိုင်ပါ။ အောက်တွင် လိုချင်သောရက်ကို တောင်းဆိုနိုင်ပါသည်။",
+  "This visit time is no longer available. Please choose another time or request a preferred date.":
+    "ဤကျောင်းလည်ပတ်ချိန်ကို လက်ခံမရတော့ပါ။ အခြားအချိန် ရွေးချယ်ပါ သို့မဟုတ် လိုချင်သောရက် တောင်းဆိုပါ။",
+  "Browse an album": "ဓာတ်ပုံအယ်လ်ဘမ် ကြည့်ရန်",
+  "All albums": "အယ်လ်ဘမ်အားလုံး",
+  "Website content restored.": "ဝက်ဘ်ဆိုက်အကြောင်းအရာ ပြန်ယူပြီးပါပြီ။",
+  "Gallery albums saved.": "ဓာတ်ပုံအယ်လ်ဘမ်များ သိမ်းပြီးပါပြီ။",
+  "Visit email accepted for delivery.":
+    "ကျောင်းလည်ပတ်မှု အီးမေးလ်ကို ပို့ရန် လက်ခံပြီးပါပြီ။",
+  "Visit saved, but the email could not be sent. Please contact the family.":
+    "ကျောင်းလည်ပတ်မှု သိမ်းပြီးသော်လည်း အီးမေးလ် မပို့နိုင်ပါ။ မိသားစုထံ ဆက်သွယ်ပါ။",
+  "A sign-in code was sent to the school admin inbox.":
+    "ကျောင်းအီးမေးလ်ပုံးသို့ အကောင့်ဝင်ကုဒ် ပို့ပြီးပါပြီ။",
+  "Calendar month": "ပြက္ခဒိန်လ",
+  "All dates": "ရက်အားလုံး",
+  "Early years": "မူကြိုအဆင့်",
+  "Lower primary": "မူလတန်း အောက်အဆင့်",
+  "Upper primary": "မူလတန်း အထက်အဆင့်",
+  "Remove time": "အချိန်ကို ဖယ်ရှားရန်",
+  "Parent acknowledgement email failed. The enquiry is saved here.":
+    "မိဘထံ အတည်ပြုအီးမေးလ် မပို့နိုင်ပါ။ စုံစမ်းမေးမြန်းမှုကို ဤနေရာတွင် သိမ်းထားပါသည်။",
 };

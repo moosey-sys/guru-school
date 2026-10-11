@@ -1,10 +1,13 @@
 import { usePreferences } from "../preferences";
-import React, { useState } from "react";
-function RequestCard({ item, save, remove, busy }) {
+import React, { useState, useEffect } from "react";
+function RequestCard({ item, save, remove, busy, slots }) {
   const { t, language } = usePreferences();
   const [confirmDelete, setConfirmDelete] = useState(false);
   const [notes, setNotes] = useState(item.notes || "");
   const [status, setStatus] = useState(item.status);
+  const [followUp, setFollowUp] = useState(item.followUp || "");
+  const [slotId, setSlotId] = useState(item.slotId || "");
+  const [notify, setNotify] = useState(false);
   return (
     <article className="card">
       <div className="request-heading">
@@ -15,8 +18,8 @@ function RequestCard({ item, save, remove, busy }) {
             {t(
               {
                 new: "New",
-                "in-progress": "In progress",
-                confirmed: "Confirmed",
+                "in-progress": "Contacted",
+                confirmed: "Visit scheduled",
                 closed: "Closed",
               }[item.status] || item.status,
             )}
@@ -37,15 +40,31 @@ function RequestCard({ item, save, remove, busy }) {
           )}
         </span>
       </div>
+      {item.programme && (
+        <p>
+          {t("Programme")}: {t(item.programme)}
+        </p>
+      )}
+      {item.followUp && (
+        <p>
+          {t("Follow-up date")}: {item.followUp}
+        </p>
+      )}
       {item.date && (
         <p>
-          {t("Preferred visit:")} {item.date}
+          {t("Preferred visit:")} {item.date}{" "}
+          {item.time ? `· ${item.time} (${t("Myanmar time")})` : ""}
         </p>
       )}
       <div className="message">{item.message}</div>
       {item.emailStatus === "failed" && (
         <p className="request-email-warning">
           {t("Email notification failed. This message is saved here.")}
+        </p>
+      )}
+      {item.acknowledgementStatus === "failed" && (
+        <p className="request-email-warning">
+          {t("Parent acknowledgement email failed. The enquiry is saved here.")}
         </p>
       )}
       <details className="request-notes">
@@ -62,6 +81,49 @@ function RequestCard({ item, save, remove, busy }) {
           />
         </label>
       </details>
+      <div className="two-columns">
+        <label>
+          {t("Follow-up date")}
+          <input
+            type="date"
+            value={followUp}
+            onChange={(event) => setFollowUp(event.target.value)}
+          />
+        </label>
+        {item.kind === "Book a school visit" && (
+          <label>
+            {t("Confirm or reschedule visit time")}
+            <select
+              value={slotId}
+              onChange={(event) => setSlotId(event.target.value)}
+            >
+              <option value="">{t("Keep preferred date")}</option>
+              {item.slotId && (
+                <option value={item.slotId}>
+                  {item.date} · {item.time}
+                </option>
+              )}
+              {slots
+                .filter((slot) => slot.available && slot.id !== item.slotId)
+                .map((slot) => (
+                  <option key={slot.id} value={slot.id}>
+                    {slot.date} · {slot.time}
+                  </option>
+                ))}
+            </select>
+          </label>
+        )}
+      </div>
+      {item.kind === "Book a school visit" && (
+        <label className="check">
+          <input
+            type="checkbox"
+            checked={notify}
+            onChange={(event) => setNotify(event.target.checked)}
+          />
+          {t("Email visit confirmation when saving")}
+        </label>
+      )}
       <div className="request-actions">
         <label>
           {t("Status")}
@@ -71,12 +133,24 @@ function RequestCard({ item, save, remove, busy }) {
           >
             {["new", "in-progress", "confirmed", "closed"].map((value) => (
               <option key={value} value={value}>
-                {t(value.replace("-", " "))}
+                {t(
+                  {
+                    new: "New",
+                    "in-progress": "Contacted",
+                    confirmed: "Visit scheduled",
+                    closed: "Closed",
+                  }[value],
+                )}
               </option>
             ))}
           </select>
         </label>
-        <button disabled={busy} onClick={() => save(item, status, notes)}>
+        <button
+          disabled={busy}
+          onClick={() =>
+            save(item, status, notes, { followUp, slotId, notify })
+          }
+        >
           {t("Save update")}
         </button>
         <a
@@ -124,15 +198,48 @@ export function Inbox({
   remove,
   busy,
   mailConfigured,
+  filterRequests,
+  api,
 }) {
   const { t, language } = usePreferences();
   const [filter, setFilter] = useState("all");
+  const [search, setSearch] = useState(""),
+    [programme, setProgramme] = useState(""),
+    [from, setFrom] = useState(""),
+    [to, setTo] = useState(""),
+    [slots, setSlots] = useState([]);
+  useEffect(() => {
+    let alive = true;
+    api?.("/api/visits")
+      .then((data) => {
+        if (alive) setSlots(data.slots || []);
+      })
+      .catch(() => {});
+    return () => {
+      alive = false;
+    };
+  }, [items]);
   const matching = items.filter(
     (item) =>
-      filter === "all" ||
-      (filter === "visits"
-        ? item.kind === "Book a school visit"
-        : item.status === filter),
+      (filter === "all" ||
+        (filter === "visits"
+          ? item.kind === "Book a school visit"
+          : item.status === filter)) &&
+      (!programme || item.programme === programme) &&
+      (!search ||
+        [item.name, item.email, item.phone, item.message].some((value) =>
+          String(value || "")
+            .toLowerCase()
+            .includes(search.toLowerCase()),
+        )) &&
+      (!from ||
+        new Date(Date.parse(item.created) + 23400000)
+          .toISOString()
+          .slice(0, 10) >= from) &&
+      (!to ||
+        new Date(Date.parse(item.created) + 23400000)
+          .toISOString()
+          .slice(0, 10) <= to),
   );
   return (
     <section id="panel-inbox">
@@ -150,6 +257,83 @@ export function Inbox({
           {t("Email notifications are unavailable. Messages are saved here.")}
         </div>
       )}
+      <form
+        className="card inbox-search"
+        onSubmit={(event) => {
+          event.preventDefault();
+          filterRequests?.({
+            search,
+            programme,
+            from,
+            to,
+            status: filter === "all" ? "" : filter,
+          });
+        }}
+      >
+        <div className="two-columns">
+          <label>
+            {t("Search enquiries")}
+            <input
+              type="search"
+              maxLength={200}
+              value={search}
+              onChange={(event) => setSearch(event.target.value)}
+              placeholder={t("Name, email, phone or message")}
+            />
+          </label>
+          <label>
+            {t("Programme")}
+            <select
+              value={programme}
+              onChange={(event) => setProgramme(event.target.value)}
+            >
+              <option value="">{t("All programmes")}</option>
+              {[
+                "Early years",
+                "Lower primary",
+                "Upper primary",
+                "Not sure yet",
+              ].map((value) => (
+                <option key={value} value={value}>
+                  {t(value)}
+                </option>
+              ))}
+            </select>
+          </label>
+          <label>
+            {t("Received from")}
+            <input
+              type="date"
+              value={from}
+              onChange={(event) => setFrom(event.target.value)}
+            />
+          </label>
+          <label>
+            {t("Received until")}
+            <input
+              type="date"
+              min={from || undefined}
+              value={to}
+              onChange={(event) => setTo(event.target.value)}
+            />
+          </label>
+        </div>
+        <button disabled={busy}>{t("Search all enquiries")}</button>
+        <button
+          type="button"
+          disabled={busy}
+          onClick={() => {
+            setSearch("");
+            setProgramme("");
+            setFrom("");
+            setTo("");
+            setFilter("all");
+            filterRequests?.({});
+          }}
+        >
+          {t("Clear filters")}
+        </button>
+      </form>
       <div className="filters">
         <label>
           {t("Show")}
@@ -161,8 +345,8 @@ export function Inbox({
             {[
               ["all", "All requests"],
               ["new", "New"],
-              ["in-progress", "In progress"],
-              ["confirmed", "Confirmed"],
+              ["in-progress", "Contacted"],
+              ["confirmed", "Visit scheduled"],
               ["closed", "Closed"],
               ["visits", "Visit requests"],
             ].map(([value, label]) => (
@@ -175,6 +359,12 @@ export function Inbox({
         <span id="inbox-count">
           {matching.length} {t("shown")}
           {cursor ? ` · ${items.length} ${t("loaded")}` : ""}
+          {cursor && (
+            <span>
+              {" "}
+              · {t("Search all enquiries to include older messages.")}
+            </span>
+          )}
         </span>
       </div>
       <div id="inbox-list">
@@ -184,6 +374,7 @@ export function Inbox({
               key={item.id + ":" + item.version}
               item={item}
               busy={busy}
+              slots={slots}
               save={save}
               remove={remove}
             />

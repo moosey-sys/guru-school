@@ -3014,3 +3014,5 @@ body { font-size: 18px; }
   .button, button, input, select, textarea { font-size: 16px; }
   .team-grid article h3 { font-size: 21px; }
 }
+.gallery-album-filter { display:flex; flex-wrap:wrap; align-items:center; gap:12px; margin-bottom:20px; font-weight:700; }
+.gallery-album-filter select { max-width:100%; padding:10px 14px; border:var(--line); color:var(--ink); background:var(--paper); font:inherit; }

@@ -39,9 +39,11 @@ describe("React public website", () => {
   it("keeps nine real page links and changes the theme and language preferences", async () => {
     setup();
     await screen.findByText("School announcement");
-    expect(screen.getByRole("navigation", { name: "Main navigation" }).querySelectorAll("a")).toHaveLength(
-      9,
-    );
+    expect(
+      screen
+        .getByRole("navigation", { name: "Main navigation" })
+        .querySelectorAll("a"),
+    ).toHaveLength(9);
     expect(
       screen.getByRole("link", { name: "Programmes", exact: true }),
     ).toHaveAttribute("href", "/programmes");
@@ -147,11 +149,11 @@ describe("React enquiry form", () => {
         <EnquiryForm />
       </PreferencesProvider>,
     );
-    fireEvent.change(screen.getByRole("combobox"), {
+    fireEvent.change(screen.getByLabelText("I would like to"), {
       target: { value: "Book a school visit" },
     });
     expect(screen.getByLabelText("Preferred visit date")).toBeRequired();
-    fireEvent.change(screen.getByRole("combobox"), {
+    fireEvent.change(screen.getByLabelText("I would like to"), {
       target: { value: "Short message" },
     });
     expect(
@@ -307,4 +309,81 @@ it("separates graduation and trips and includes graduation in school events", as
     screen.getByRole("button", { name: "Student life", exact: true }),
   );
   expect(screen.getByText("Showing 6 of 6 photos.")).toBeInTheDocument();
+});
+
+it("filters published gallery photos by album without including hidden existing photos", async () => {
+  const { Gallery } = await import("./components/Gallery");
+  const { galleryPhotos } = await import("./content/gallery");
+  render(
+    <PreferencesProvider>
+      <Gallery
+        openPhoto={() => {}}
+        photos={[
+          {
+            id: "album-photo",
+            caption: "Graduation memory",
+            category: "graduation",
+            published: true,
+            album: "Graduation 2026",
+          },
+          {
+            id: "draft-photo",
+            caption: "Draft",
+            published: false,
+            album: "Private album",
+          },
+        ]}
+        existingAlbums={{ [galleryPhotos[0].image]: "Hidden album" }}
+        hiddenGallery={[galleryPhotos[0].image]}
+      />
+    </PreferencesProvider>,
+  );
+  expect(
+    screen.queryByRole("option", { name: "Private album" }),
+  ).not.toBeInTheDocument();
+  expect(
+    screen.queryByRole("option", { name: "Hidden album" }),
+  ).not.toBeInTheDocument();
+  fireEvent.change(screen.getByLabelText("Browse an album"), {
+    target: { value: "Graduation 2026" },
+  });
+  expect(screen.getByText("Showing 1 of 1 photos.")).toBeInTheDocument();
+  expect(
+    screen.getByRole("img", { name: "Graduation memory" }),
+  ).toBeInTheDocument();
+});
+it("allows parents to choose an available visit time instead of entering a preferred date", async () => {
+  vi.stubGlobal(
+    "fetch",
+    vi.fn(async (url) => ({
+      ok: true,
+      json: async () =>
+        url === "/api/visits"
+          ? { slots: [{ id: "slot-1", date: "2099-01-01", time: "09:00" }] }
+          : { token: "proof" },
+    })),
+  );
+  render(
+    <PreferencesProvider>
+      <EnquiryForm />
+    </PreferencesProvider>,
+  );
+  fireEvent.change(screen.getByLabelText("I would like to"), {
+    target: { value: "Book a school visit" },
+  });
+  await screen.findByLabelText("Available visit times (Myanmar time)");
+  fireEvent.change(
+    screen.getByLabelText("Available visit times (Myanmar time)"),
+    { target: { value: "slot-1" } },
+  );
+  expect(
+    screen.queryByLabelText("Preferred visit date"),
+  ).not.toBeInTheDocument();
+  fireEvent.change(screen.getByLabelText("I would like to"), {
+    target: { value: "General enquiry" },
+  });
+  fireEvent.change(screen.getByLabelText("I would like to"), {
+    target: { value: "Book a school visit" },
+  });
+  expect(screen.getByLabelText("Preferred visit date")).toBeRequired();
 });

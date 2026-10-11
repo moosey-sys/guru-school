@@ -1,4 +1,4 @@
-const c=require('../lib/core');const sharp=require('sharp');const {randomUUID}=require('node:crypto');
+const c=require('../lib/core');const {visible}=require('../lib/publishing');const sharp=require('sharp');const {randomUUID}=require('node:crypto');
 module.exports=c.wrap(async(req,res)=>{
  if(req.method==='POST'){
   c.staff(req,true);const data=c.json(req,3900000);
@@ -9,7 +9,7 @@ module.exports=c.wrap(async(req,res)=>{
  }
  if(req.method!=='GET')return res.status(405).json({error:'Method not allowed.'});
  const id=req.query.id;if(!c.UUID.test(id||''))return res.status(404).end();
- if(!c.session(req)){const site=await c.read('content/site.json');if(!site?.data.photos.some(photo=>photo.id===id&&photo.published)&&!site?.data.news.some(item=>item.imageId===id&&item.published))return res.status(404).end();}
+ if(!c.session(req)){const site=await c.read('content/site.json');if(!site?.data.photos.some(photo=>photo.id===id&&photo.published)&&!site?.data.news.some(item=>item.imageId===id&&visible(item)))return res.status(404).end();}
  const image=await c.get(`media/${id}.webp`,{access:'private'});if(!image)return res.status(404).end();
  res.setHeader('Content-Type','image/webp');res.setHeader('Cache-Control','private, max-age=60');c.Readable.fromWeb(image.stream).pipe(res);
 });

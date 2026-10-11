@@ -131,6 +131,24 @@ export function ContentEditor({
                   onChange={(value) => changeNews(item.id, "date", value)}
                   required
                 />
+                <Field
+                  label="Publish at (Myanmar time, optional)"
+                  type="datetime-local"
+                  value={
+                    item.publishAt
+                      ? new Date(Date.parse(item.publishAt) + 23400000)
+                          .toISOString()
+                          .slice(0, 16)
+                      : ""
+                  }
+                  onChange={(value) =>
+                    changeNews(
+                      item.id,
+                      "publishAt",
+                      value ? new Date(value + ":00+06:30").toISOString() : "",
+                    )
+                  }
+                />
                 <label className="check">
                   <input
                     type="checkbox"
@@ -157,6 +175,15 @@ export function ContentEditor({
                   multiline
                 />
               </div>
+              <p>
+                {t(
+                  item.published
+                    ? item.publishAt && Date.parse(item.publishAt) > Date.now()
+                      ? "Scheduled: appears automatically at the selected time."
+                      : "Published on the website."
+                    : "Draft: hidden from the website.",
+                )}
+              </p>
               <div className="news-image-editor">
                 <label>
                   {t("News image (optional)")}
@@ -239,6 +266,7 @@ export function PhotosEditor({
   savePhoto,
   removePhoto,
   toggleExisting,
+  saveAlbums,
   busy,
 }) {
   const { t, language } = usePreferences();
@@ -290,6 +318,14 @@ export function PhotosEditor({
             </select>
           </label>
           <label>
+            {t("Album (optional)")}
+            <input
+              name="album"
+              maxLength={100}
+              placeholder={t("For example: Graduation 2026")}
+            />
+          </label>
+          <label>
             {t("Caption — English")}
             <input name="caption" maxLength={200} required />
           </label>
@@ -321,6 +357,9 @@ export function PhotosEditor({
             {t("of")} {galleryPhotos.length} {t("visible")}
           </span>
         </div>
+        <button disabled={busy} onClick={saveAlbums}>
+          {t("Save album assignments")}
+        </button>
         <div className="existing-photo-grid">
           {galleryPhotos.map((photo) => {
             const hidden = (content.hiddenGallery || []).includes(photo.image);
@@ -336,6 +375,22 @@ export function PhotosEditor({
                     {t(hidden ? "Hidden" : "Visible")}
                   </span>
                   <h4>{photo.caption}</h4>
+                  <label>
+                    {t("Album (optional)")}
+                    <input
+                      maxLength={100}
+                      value={content.existingAlbums?.[photo.image] || ""}
+                      onChange={(event) =>
+                        setContent((current) => ({
+                          ...current,
+                          existingAlbums: {
+                            ...current.existingAlbums,
+                            [photo.image]: event.target.value,
+                          },
+                        }))
+                      }
+                    />
+                  </label>
                   <button
                     type="button"
                     disabled={busy}
@@ -369,6 +424,12 @@ export function PhotosEditor({
                   value={item.captionMy}
                   onChange={(value) => change(item.id, "captionMy", value)}
                   maxLength={200}
+                />
+                <Field
+                  label="Album (optional)"
+                  value={item.album}
+                  maxLength={100}
+                  onChange={(value) => change(item.id, "album", value)}
                 />
                 <label>
                   {t("Category")}

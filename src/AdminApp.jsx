@@ -3,9 +3,12 @@ import { request } from "./api";
 import { usePreferences } from "./preferences";
 import { TrafficPanel, initialSelection } from "./components/TrafficPanel";
 import { ContentEditor, PhotosEditor } from "./components/ContentEditor";
+import { VisitsPanel } from "./components/VisitsPanel";
+import { BackupsPanel } from "./components/BackupsPanel";
 import { Inbox } from "./components/Inbox";
 export default function AdminApp() {
   const { theme, toggleTheme, language, selectLanguage, t } = usePreferences();
+  const [challenge, setChallenge] = useState(null);
   const [session, setSession] = useState(null);
   const [tab, setTab] = useState("overview");
   const [content, setContent] = useState(null);
@@ -42,6 +45,7 @@ export default function AdminApp() {
   }, []);
   const lock = useRef(false);
   const csrf = useRef("");
+  const inboxFilters = useRef({});
   const analyticsRequest = useRef(0);
   const alive = useRef(true);
   function loggedOut() {
@@ -87,9 +91,11 @@ export default function AdminApp() {
     setContent(result.content);
     setVersion(result.version);
   }
-  async function loadInbox(more = false) {
+  async function loadInbox(more = false, filters = null) {
+    const params = new URLSearchParams(filters || inboxFilters.current);
+    if (more && cursor) params.set("cursor", cursor);
     const result = await api(
-      `/api/inbox${more && cursor ? "?cursor=" + encodeURIComponent(cursor) : ""}`,
+      "/api/inbox" + (params.size ? "?" + params.toString() : ""),
     );
     if (!alive.current || !csrf.current) return;
     setInbox((current) =>
@@ -162,12 +168,17 @@ export default function AdminApp() {
     const form = event.currentTarget;
     const data = Object.fromEntries(new FormData(form));
     await work(async () => {
-      await signedIn(
-        await api("/api/session", {
-          method: "POST",
-          body: JSON.stringify(data),
-        }),
-      );
+      const result = await request("/api/session", {
+        method: "POST",
+        body: JSON.stringify(challenge ? { challenge, code: data.code } : data),
+      });
+      if (result.challenge) {
+        setChallenge(result.challenge);
+        setStatus(result.message);
+      } else {
+        setChallenge(null);
+        await signedIn(result);
+      }
       form.reset();
     });
   }
@@ -233,6 +244,7 @@ export default function AdminApp() {
             captionMy: fields.captionMy,
             category: fields.category,
             published,
+            album: String(fields.album || "").trim(),
           },
           ...content.photos,
         ],
@@ -327,25 +339,59 @@ export default function AdminApp() {
             </h1>
             <p>{t("Sign in to keep your school community up to date.")}</p>
             <form id="login-form" onSubmit={login}>
-              <label>
-                {t("Username")}
-                <input
-                  name="username"
-                  autoComplete="username"
-                  required
-                  maxLength={100}
-                />
-              </label>
-              <label>
-                {t("Password")}
-                <input
-                  name="password"
-                  type="password"
-                  autoComplete="current-password"
-                  required
-                  maxLength={200}
-                />
-              </label>
+              {!challenge && (
+                <>
+                  <label>
+                    {t("Username")}
+                    <input
+                      name="username"
+                      autoComplete="username"
+                      required
+                      maxLength={100}
+                    />
+                  </label>
+                  <label>
+                    {t("Password")}
+                    <input
+                      name="password"
+                      type="password"
+                      autoComplete="current-password"
+                      required
+                      maxLength={200}
+                    />
+                  </label>
+                </>
+              )}
+              {challenge && (
+                <>
+                  <p>
+                    {t(
+                      "Enter the six-digit code sent to the school admin inbox. It expires in 10 minutes.",
+                    )}
+                  </p>
+                  <label>
+                    {t("Sign-in code")}
+                    <input
+                      name="code"
+                      inputMode="numeric"
+                      pattern="[0-9]{6}"
+                      maxLength={6}
+                      autoComplete="one-time-code"
+                      required
+                    />
+                  </label>
+                  <button
+                    type="button"
+                    disabled={busy}
+                    onClick={() => {
+                      setChallenge(null);
+                      setStatus("");
+                    }}
+                  >
+                    {t("Start sign-in again")}
+                  </button>
+                </>
+              )}
               <button type="submit" className="primary" disabled={busy}>
                 {t("Sign in ↗")}
               </button>
@@ -373,6 +419,8 @@ export default function AdminApp() {
                 ["inbox", "Enquiries & visits"],
                 ["content", "Announcements & news"],
                 ["photos", "Gallery"],
+                ["visits", "Visit calendar"],
+                ["backups", "Security & backups"],
               ].map(([value, label]) => (
                 <button
                   key={value}
@@ -403,6 +451,13 @@ export default function AdminApp() {
             <div hidden={tab !== "inbox"}>
               <Inbox
                 items={inbox}
+                filterRequests={(filters) =>
+                  work(async () => {
+                    inboxFilters.current = filters;
+                    await loadInbox(false, filters);
+                  })
+                }
+                api={api}
                 cursor={cursor}
                 refresh={() =>
                   work(async () => {
@@ -431,7 +486,7 @@ export default function AdminApp() {
                     );
                   })
                 }
-                save={(item, status, notes) =>
+                save={(item, status, notes, extra = {}) =>
                   work(async () => {
                     const result = await api("/api/inbox", {
                       method: "PATCH",
@@ -441,6 +496,7 @@ export default function AdminApp() {
                         version: item.version,
                         status,
                         notes,
+                        ...extra,
                       }),
                     });
                     setInbox((current) =>
@@ -449,7 +505,11 @@ export default function AdminApp() {
                       ),
                     );
                     setStatus(
-                      "Request updated. Status changes do not send an email; contact the family to confirm.",
+                      extra.notify
+                        ? result.item.visitEmailStatus === "accepted"
+                          ? "Visit email accepted for delivery."
+                          : "Visit saved, but the email could not be sent. Please contact the family."
+                        : "Request updated. Status changes do not send an email; contact the family to confirm.",
                     );
                   })
                 }
@@ -487,6 +547,12 @@ export default function AdminApp() {
                   content={content}
                   setContent={setContent}
                   upload={upload}
+                  saveAlbums={() =>
+                    work(async () => {
+                      await saveSite();
+                      setStatus("Gallery albums saved.");
+                    })
+                  }
                   toggleExisting={(image, hidden) =>
                     work(async () => {
                       const hiddenGallery = content.hiddenGallery || [];
@@ -535,6 +601,32 @@ export default function AdminApp() {
                 </p>
               )}
             </div>
+            {tab === "visits" && (
+              <VisitsPanel
+                api={api}
+                work={work}
+                busy={busy}
+                items={inbox}
+                onRefresh={() => loadInbox()}
+              />
+            )}
+            {tab === "backups" && (
+              <BackupsPanel
+                api={api}
+                work={work}
+                busy={busy}
+                session={session}
+                restore={async (backupId) => {
+                  const result = await api("/api/content", {
+                    method: "PUT",
+                    body: JSON.stringify({ backupId, version }),
+                  });
+                  setContent(result.content);
+                  setVersion(result.version);
+                  setStatus("Website content restored.");
+                }}
+              />
+            )}
           </div>
         )}
         <p id="global-status" role="status" aria-live="polite">

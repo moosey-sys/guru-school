@@ -1,9 +1,15 @@
 import React, { useState } from "react";
 import { galleryPhotos } from "../content/gallery";
 import { usePreferences } from "../preferences";
-export function Gallery({ photos = [], hiddenGallery = [], openPhoto }) {
+export function Gallery({
+  photos = [],
+  hiddenGallery = [],
+  existingAlbums = {},
+  openPhoto,
+}) {
   const { language, t } = usePreferences();
   const [category, setCategory] = useState("all");
+  const [album, setAlbum] = useState("");
   const [expanded, setExpanded] = useState(false);
   const uploaded = photos
     .filter((photo) => photo.published)
@@ -22,13 +28,15 @@ export function Gallery({ photos = [], hiddenGallery = [], openPhoto }) {
         ...photo,
         image: "/assets/" + photo.image,
         caption: t(photo.caption),
+        album: existingAlbums[photo.image] || "",
       })),
   ];
   const matching = cards.filter(
     (photo) =>
-      category === "all" ||
-      photo.category === category ||
-      (category === "events" && photo.category === "graduation"),
+      (!album || photo.album === album) &&
+      (category === "all" ||
+        photo.category === category ||
+        (category === "events" && photo.category === "graduation")),
   );
   const shown = expanded ? matching.length : Math.min(8, matching.length);
   const filters = {
@@ -75,6 +83,27 @@ export function Gallery({ photos = [], hiddenGallery = [], openPhoto }) {
           ))}
         </div>
       </div>
+      {cards.some((photo) => photo.album) && (
+        <label className="gallery-album-filter">
+          {t("Browse an album")}
+          <select
+            value={album}
+            onChange={(event) => {
+              setAlbum(event.target.value);
+              setExpanded(false);
+            }}
+          >
+            <option value="">{t("All albums")}</option>
+            {[...new Set(cards.map((photo) => photo.album).filter(Boolean))]
+              .sort()
+              .map((value) => (
+                <option key={value} value={value}>
+                  {value}
+                </option>
+              ))}
+          </select>
+        </label>
+      )}
       <p className="gallery-status" aria-live="polite">
         {language === "my"
           ? `ဓာတ်ပုံ ${matching.length} ပုံမှ ${shown} ပုံကို ပြထားပါသည်။`
