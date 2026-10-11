@@ -2902,11 +2902,12 @@ html[data-theme="dark"] .footer-motto:hover, html[data-theme="dark"] .footer-mot
 
 /* Hover floating photos across public pages; touch and reduced motion stay still. */
 @media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
-  main img {
+  main img:not(.portrait-crop-source) {
     transition: transform 300ms ease, filter 300ms ease;
     transform-origin: center;
   }
-  main img:hover {
+  main img:not(.portrait-crop-source):hover,
+  .chairman-portrait:hover .chairman-crop {
     animation: school-photo-float 2.6s ease-in-out infinite;
     filter: brightness(1.04);
   }

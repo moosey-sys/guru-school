@@ -597,6 +597,7 @@ export function Team() {
           <div className="chairman-portrait">
             <div className="chairman-crop">
               <img
+                className="portrait-crop-source"
                 src="/assets/chairman.webp"
                 alt={t("Mr. Aung Min Soe")}
                 loading="lazy"
