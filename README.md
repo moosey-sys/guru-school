@@ -49,7 +49,7 @@ Vercel runs `npm run build` and serves `dist/`, with existing page rewrites and 
 
 Required server variables: `BLOB_READ_WRITE_TOKEN`, `ADMIN_USERNAME`, `ADMIN_PASSWORD_HASH`, `SESSION_SECRET`.
 
-Optional mail variables: `SMTP_HOST`, `SMTP_PORT` (465 or 587), `SMTP_USER`, `SMTP_PASS`, `MAIL_FROM`, `MAIL_TO`. The notification recipient is `guruinternationalschool.aca@gmail.com`. The sender is the authenticated SMTP account; Reply-To is the visitor's email. For Gmail use a Google-generated App Password for the sending account, not its normal password. The receiving inbox does not need an App Password.
+Optional mail variables: `SMTP_HOST`, `SMTP_PORT` (465 or 587), `SMTP_USER`, `SMTP_PASS`, `MAIL_FROM`, `MAIL_TO`. The notification recipient is `mooseythaw03@gmail.com`. The sender is the authenticated SMTP account; Reply-To is the visitor's email. For Gmail use a Google-generated App Password for the sending account, not its normal password. The receiving inbox does not need an App Password.
 
 Enquiries are saved privately before SMTP delivery is attempted. Missing or failed SMTP does not lose the message. The staff inbox shows `not-configured`, `accepted` or `failed`; SMTP acceptance is not proof of inbox delivery. Visit requests require school confirmation, and changing their status does not automatically send a booking email.
 
