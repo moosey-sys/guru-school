@@ -1,4 +1,5 @@
 const c=require('../lib/core');const nodemailer=require('nodemailer');const {randomUUID}=require('node:crypto');
+const {notification}=require('../lib/mail');
 const kinds=['General enquiry','Programme discussion','Short message','Book a school visit'];
 module.exports=c.wrap(async(req,res)=>{
  if(!process.env.SESSION_SECRET||!process.env.BLOB_READ_WRITE_TOKEN)return res.status(503).json({error:'Enquiries temporarily unavailable.'});
@@ -21,7 +22,7 @@ module.exports=c.wrap(async(req,res)=>{
  let mailStatus='not-configured';
  if(['SMTP_HOST','SMTP_USER','SMTP_PASS','MAIL_FROM','MAIL_TO'].every(key=>process.env[key])&&[465,587].includes(Number(process.env.SMTP_PORT||465))){
   const port=Number(process.env.SMTP_PORT||465),transport=nodemailer.createTransport({host:process.env.SMTP_HOST,port,secure:port===465,requireTLS:port===587,auth:{user:process.env.SMTP_USER,pass:process.env.SMTP_PASS},connectionTimeout:5000,greetingTimeout:5000,socketTimeout:8000});
-  try{const result=await transport.sendMail({from:process.env.MAIL_FROM,to:process.env.MAIL_TO,replyTo:{name,address:email},subject:`Guru website — ${kind}`,text:`Name: ${name}\nEmail: ${email}\nPhone: ${phone||'Not supplied'}\nRequest: ${kind}\nPreferred visit date: ${date||'Not supplied'}\nReference: ${id}\n\n${message}\n\nVisit requests require confirmation by the school.`});mailStatus=result.accepted?.length?'accepted':'failed';}catch{mailStatus='failed';}finally{transport.close();}
+  try{const result=await transport.sendMail({from:process.env.MAIL_FROM,to:process.env.MAIL_TO,replyTo:{name,address:email},...notification(record)});mailStatus=result.accepted?.length?'accepted':'failed';}catch{mailStatus='failed';}finally{transport.close();}
  }
  try{const saved=await c.read(path);await c.write(path,{...saved.data,emailStatus:mailStatus},saved.etag);}catch{/* The enquiry remains saved even when notification tracking is temporarily unavailable. */}
  try{const receipt=await c.read(`receipts/${proof.nonce}.json`);await c.write(`receipts/${proof.nonce}.json`,{id,path,state:'saved',exp:proof.exp},receipt.etag);}catch{/* The durable enquiry already exists; acknowledge it. */}
