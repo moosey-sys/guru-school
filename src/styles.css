@@ -2928,3 +2928,12 @@ html[data-theme="dark"] .footer-motto:hover, html[data-theme="dark"] .footer-mot
   background-repeat: no-repeat;
 }
 .team-grid .chairman-crop .portrait-crop-source { opacity: 0; }
+
+/* Match the chairman's head-and-shoulders framing to the other profiles. */
+.team-grid .chairman-crop {
+  width: 76%;
+  max-width: 76%;
+  aspect-ratio: auto;
+  background-size: 205% auto;
+  background-position: center 23%;
+}
