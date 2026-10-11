@@ -595,7 +595,7 @@ export function Team() {
         </article>
         <article>
           <div className="chairman-portrait">
-            <div className="chairman-crop">
+            <div className="chairman-crop profile-motion">
               <img
                 className="portrait-crop-source"
                 src="/assets/chairman.webp"
