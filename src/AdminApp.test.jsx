@@ -590,6 +590,12 @@ it("converts scheduled news from Myanmar time to UTC and saves gallery albums", 
   fireEvent.change(screen.getByLabelText("Story — English"), {
     target: { value: "Future event" },
   });
+  fireEvent.click(
+    screen.getByRole("checkbox", {
+      name: "Publish on the website",
+      exact: true,
+    }),
+  );
   fireEvent.change(
     screen.getByLabelText("Publish at (Myanmar time, optional)"),
     { target: { value: "2099-01-01T09:00" } },
@@ -605,6 +611,7 @@ it("converts scheduled news from Myanmar time to UTC and saves gallery albums", 
       )[1].body,
     ).content.news[0].publishAt,
   ).toBe("2099-01-01T02:30:00.000Z");
+  expect(document.querySelector("#metric-news")).toHaveTextContent("0");
   fireEvent.click(screen.getByRole("button", { name: "Gallery", exact: true }));
   fireEvent.change(screen.getAllByLabelText("Album (optional)")[1], {
     target: { value: "School trip 2026" },

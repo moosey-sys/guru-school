@@ -302,7 +302,12 @@ export function TrafficPanel({
           <div className="content-totals">
             <div>
               <strong id="metric-news">
-                {content?.news.filter((item) => item.published).length || 0}
+                {content?.news.filter(
+                  (item) =>
+                    item.published &&
+                    (!item.publishAt ||
+                      Date.parse(item.publishAt) <= Date.now()),
+                ).length || 0}
               </strong>
               <span>{t("Published stories")}</span>
             </div>
