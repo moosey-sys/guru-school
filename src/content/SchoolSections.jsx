@@ -1,3 +1,4 @@
+import { ResponsiveImage } from "../components/ResponsiveImage";
 import React, { useState } from "react";
 import { usePreferences } from "../preferences";
 import { Counter } from "../components/Counter";
@@ -53,7 +54,7 @@ export function Hero() {
         className={selected ? "hero-art is-selected" : "hero-art"}
         tabIndex="0"
         role="button"
-        aria-label={t("Float school photo")}
+        aria-labelledby="hero-caption hero-sticker hero-label"
         aria-pressed={selected}
         onClick={() => setSelected(!selected)}
         onKeyDown={(event) => {
@@ -64,7 +65,7 @@ export function Hero() {
         }}
       >
         <div className="photo-frame" data-parallax="0.07">
-          <img
+          <ResponsiveImage
             src="/assets/hero.webp"
             alt={t(
               "A Guru student concentrating on a classroom drawing activity",
@@ -73,11 +74,11 @@ export function Hero() {
             width="1200"
             height="900"
           />
-          <span className="photo-caption">
+          <span id="hero-caption" className="photo-caption">
             {t("TODAY’S CURIOSITY. TOMORROW’S CONFIDENCE.")}
           </span>
         </div>
-        <div className="sticker" data-parallax="-0.04">
+        <div id="hero-sticker" className="sticker" data-parallax="-0.04">
           {t("LET THEM")}
           <br />
           <strong>
@@ -87,7 +88,7 @@ export function Hero() {
           </strong>
           <span>{t("↗︎")}</span>
         </div>
-        <div className="little-label">
+        <div id="hero-label" className="little-label">
           {t("Small steps. Extraordinary journeys.")}
         </div>
         <span className="orbit" aria-hidden="true">
@@ -354,7 +355,7 @@ export function Life() {
           data-image="/assets/discovery.webp"
           data-caption={t("Learning through hands-on discovery")}
         >
-          <img
+          <ResponsiveImage
             src="/assets/discovery.webp"
             alt={t("Two Guru students exploring a hands-on classroom activity")}
             loading="lazy"
@@ -367,7 +368,7 @@ export function Life() {
             data-image="/assets/sports.webp"
             data-caption={t("Outdoor play and movement at Guru")}
           >
-            <img
+            <ResponsiveImage
               src="/assets/sports.webp"
               alt={t(
                 "Guru students taking part in outdoor movement activities",
@@ -509,7 +510,7 @@ export function Campus() {
           data-caption={t("Preschool classrooms")}
           hidden={filter !== "all" && filter !== "learn"}
         >
-          <img
+          <ResponsiveImage
             src="/assets/classroom.webp"
             alt={t("A colourful preschool classroom with child-sized tables")}
             loading="lazy"
@@ -523,7 +524,7 @@ export function Campus() {
           data-caption={t("Primary classrooms")}
           hidden={filter !== "all" && filter !== "learn"}
         >
-          <img
+          <ResponsiveImage
             src="/assets/primary.webp"
             alt={t(
               "Primary classroom with individual desks and bright windows",
@@ -539,7 +540,7 @@ export function Campus() {
           data-caption={t("Indoor playground")}
           hidden={filter !== "all" && filter !== "play"}
         >
-          <img
+          <ResponsiveImage
             src="/assets/playground.webp"
             alt={t("Colourful indoor playground at Guru")}
             loading="lazy"
@@ -553,7 +554,7 @@ export function Campus() {
           data-caption={t("Outdoor play and sports area")}
           hidden={filter !== "all" && filter !== "play"}
         >
-          <img
+          <ResponsiveImage
             src="/assets/outdoor.webp"
             alt={t("Guru outdoor play and sports area")}
             loading="lazy"
@@ -592,7 +593,7 @@ export function Team() {
       </div>
       <div className="team-grid">
         <article>
-          <img
+          <ResponsiveImage
             src="/assets/principal.webp"
             alt={t("Mr. Naing Win Latt")}
             loading="lazy"
@@ -608,7 +609,7 @@ export function Team() {
           </div>
         </article>
         <article>
-          <img
+          <ResponsiveImage
             src="/assets/founder.webp"
             alt={t("Mr. Swan Yee Phyo")}
             loading="lazy"
@@ -626,7 +627,7 @@ export function Team() {
         <article>
           <div className="chairman-portrait">
             <div className="chairman-crop profile-motion">
-              <img
+              <ResponsiveImage
                 className="portrait-crop-source"
                 src="/assets/chairman.webp"
                 alt={t("Mr. Aung Min Soe")}
@@ -645,7 +646,7 @@ export function Team() {
           </div>
         </article>
         <article id="ceo-profile">
-          <img
+          <ResponsiveImage
             src="/assets/ceo.webp?v=white-background"
             alt={t("Ms. Tin Tin Khaing")}
             loading="lazy"
@@ -657,7 +658,7 @@ export function Team() {
           </div>
         </article>
         <article id="operations-profile">
-          <img
+          <ResponsiveImage
             src="/assets/operations.webp"
             alt={t("Mr. Htun Aung Kyaw")}
             loading="lazy"
@@ -840,7 +841,7 @@ export function Contact() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          <img
+          <ResponsiveImage
             src="/assets/map.webp"
             alt={t(
               "School location map from the Guru profile, near U Wisara Road in San Chaung",
@@ -889,7 +890,12 @@ export function Footer() {
       </div>
       <div className="footer-identity">
         <a className="brand" href="/">
-          <img src="/assets/crest.png" alt="" width="47" height="57" />
+          <ResponsiveImage
+            src="/assets/crest.png"
+            alt=""
+            width="47"
+            height="57"
+          />
           <span>
             {t("GURU")}
             <small>{t("INTERNATIONAL SCHOOL")}</small>

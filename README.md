@@ -78,3 +78,14 @@ No additional hosted service is required beyond the existing Vercel private Blob
 ## Security hardening
 
 Signing out revokes the server session as well as clearing the cookie. Staff image previews and dashboard pages use no-store caching. JSON requests enforce media types, byte limits and field types. Parent acknowledgement emails are rate limited per recipient without discarding saved enquiries. Email-code sign-in remains enabled. Calendar and content snapshot endpoints have been removed; historical private records have not been purged.
+
+## Reliability and quality checks
+
+- `npm test` includes axe checks for public pages in English/Myanmar and all four authenticated dashboard tabs, alongside API abuse/permission tests and recovery UI tests. DOM-only axe tests exclude colour contrast because jsdom cannot measure layout; the existing palette contrast tests and browser Lighthouse runs cover separate aspects. These checks are not a WCAG certification.
+- `npm run audit:mobile` runs a mobile Lighthouse lab audit against production and writes `/tmp/guru-mobile-audit.html`. Scores vary with network and machine conditions and are not real-user Core Web Vitals.
+- `npm run monitor:check` checks all public routes, security headers, and anonymous access to private APIs. GitHub Actions runs this every six hours and offers a manual trigger. GitHub workflow-failure notifications depend on the account's Actions notification settings; no external alert subscription was created.
+- Application errors appear in Vercel Runtime Logs under `server_error`, `browser_error`, and `mail_delivery_failed`. Filter the project logs by error level. Responses include `X-Request-ID` for support correlation. Diagnostics deliberately omit raw exception messages/stacks, form bodies, contact details, cookies, credentials and query strings. Browser reports allow only four fixed categories and known paths, with per-page and server rate limits. The hosting platform may record its own network metadata.
+- The browser has an accessible reload/contact fallback for React render failures. No additional paid monitoring service is required. Runtime log retention depends on the Vercel plan; persistent external alerting is not configured.
+- Large static images have responsive WebP variants. Regenerate them with `npm run prepare:images` after replacing source photos. Fonts are self-hosted under their SIL Open Font License; see `licenses/`.
+
+Security assessment remains a first-party code and endpoint review. Independent penetration testing, screen-reader user testing and long-term field performance measurement remain separate activities.

@@ -1,3 +1,4 @@
+import { ResponsiveImage } from "./components/ResponsiveImage";
 import React, { useEffect, useRef, useState } from "react";
 import { usePreferences } from "./preferences";
 import { request } from "./api";
@@ -41,18 +42,14 @@ export function SiteHeader({ page, announcement }) {
         </a>
       </div>
       <header>
-        <a
-          href="/"
-          className="brand"
-          aria-label={t("Guru International School home")}
-        >
-          <img
+        <a href="/" className="brand" aria-labelledby="header-school-name">
+          <ResponsiveImage
             src="/assets/crest.png"
             alt={t("Guru school crest")}
             width="47"
             height="57"
           />
-          <span>
+          <span id="header-school-name">
             GURU<small>{t("INTERNATIONAL SCHOOL")}</small>
           </span>
         </a>
@@ -142,7 +139,7 @@ export function Explore({ selection }) {
       <div className="explore-grid">
         {selection.map((page) => (
           <a className="explore-card" key={page.slug} href={"/" + page.slug}>
-            <img
+            <ResponsiveImage
               src={"/assets/" + page.image}
               className={
                 page.logoCover
@@ -229,7 +226,7 @@ function News({ content }) {
         {published.map((item) => (
           <article className="news-card" key={item.id}>
             {item.imageId && (
-              <img
+              <ResponsiveImage
                 className="news-image"
                 src={`/api/media?id=${item.imageId}`}
                 loading="lazy"
@@ -437,7 +434,7 @@ export default function PublicApp({ path = "/" }) {
                 <figure
                   className={`page-heading-photo ${page.containCover ? "poster-heading" : ""}`}
                 >
-                  <img
+                  <ResponsiveImage
                     src={"/assets/" + page.image}
                     alt={t(page.imageAlt)}
                     width="1280"

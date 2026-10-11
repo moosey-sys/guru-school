@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=Noto+Sans+Myanmar:wght@400;500;600;700&display=swap");
+@import "./fonts.css";
 :root {
   --ink: #18232b;
   --blue: #2448a5;
@@ -3016,3 +3016,5 @@ body { font-size: 18px; }
 }
 .gallery-album-filter { display:flex; flex-wrap:wrap; align-items:center; gap:12px; margin-bottom:20px; font-weight:700; }
 .gallery-album-filter select { max-width:100%; padding:10px 14px; border:var(--line); color:var(--ink); background:var(--paper); font:inherit; }
+
+.error-recovery { padding: 2rem; max-width: 55rem; margin: auto; }

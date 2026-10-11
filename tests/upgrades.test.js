@@ -447,3 +447,75 @@ test("malformed content entries and removed feature payloads are rejected", asyn
     400,
   );
 });
+
+test("diagnostic reports enforce origin, size, field allowlists and rate limits without logging PII", async () => {
+  const monitor = require("../api/monitor"),
+    original = console.error,
+    logs = [];
+  console.error = (value) => logs.push(value);
+  try {
+    assert.equal(
+      (
+        await run(monitor, {
+          method: "POST",
+          headers: { ...headers, origin: "https://evil.example" },
+          body: { kind: "runtime", path: "/" },
+        })
+      ).statusCode,
+      403,
+    );
+    for (const body of [
+      { kind: "runtime", path: "/", message: "private text" },
+      { kind: "bad", path: "/" },
+      { kind: "runtime", path: "/unknown" },
+    ])
+      assert.equal(
+        (await run(monitor, { method: "POST", headers, body })).statusCode,
+        400,
+      );
+    const diagnosticHeaders = {
+      ...headers,
+      "x-vercel-forwarded-for": "diagnostic-test",
+    };
+    for (let i = 0; i < 5; i++)
+      assert.equal(
+        (
+          await run(monitor, {
+            method: "POST",
+            headers: diagnosticHeaders,
+            body: { kind: "runtime", path: "/contact" },
+          })
+        ).statusCode,
+        204,
+      );
+    assert.equal(
+      (
+        await run(monitor, {
+          method: "POST",
+          headers: diagnosticHeaders,
+          body: { kind: "runtime", path: "/contact" },
+        })
+      ).statusCode,
+      429,
+    );
+    assert.equal(logs.length, 5);
+    assert.deepEqual(Object.keys(JSON.parse(logs[0])).sort(), [
+      "event",
+      "kind",
+      "requestId",
+      "route",
+    ]);
+    const failing = c.wrap(async () => {
+      throw Error("secret password parent@example.com");
+    });
+    const failure = await run(failing, { url: "/api/content?secret=private" });
+    assert.equal(failure.statusCode, 503);
+    assert.ok(failure.headers["X-Request-ID"]);
+    assert.equal(JSON.parse(logs.at(-1)).route, "/api/content");
+    assert.ok(!logs.join("").includes("password"));
+    assert.ok(!logs.join("").includes("parent@example.com"));
+    assert.ok(!logs.join("").includes("secret="));
+  } finally {
+    console.error = original;
+  }
+});

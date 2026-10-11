@@ -1,0 +1,116 @@
+{
+  "/assets/campus.webp": {
+    "srcSet": "/assets/responsive-campus-400.webp 400w, /assets/responsive-campus-800.webp 800w"
+  },
+  "/assets/crest.png": {
+    "srcSet": "/assets/responsive-crest-400.webp 400w"
+  },
+  "/assets/gallery-folder-9260.webp": {
+    "srcSet": "/assets/responsive-gallery-folder-9260-400.webp 400w, /assets/responsive-gallery-folder-9260-800.webp 800w, /assets/responsive-gallery-folder-9260-1200.webp 1200w"
+  },
+  "/assets/gallery-folder-9261.webp": {
+    "srcSet": "/assets/responsive-gallery-folder-9261-400.webp 400w, /assets/responsive-gallery-folder-9261-800.webp 800w, /assets/responsive-gallery-folder-9261-1200.webp 1200w"
+  },
+  "/assets/gallery-folder-9262.webp": {
+    "srcSet": "/assets/responsive-gallery-folder-9262-400.webp 400w, /assets/responsive-gallery-folder-9262-800.webp 800w, /assets/responsive-gallery-folder-9262-1200.webp 1200w"
+  },
+  "/assets/gallery-folder-9263.webp": {
+    "srcSet": "/assets/responsive-gallery-folder-9263-400.webp 400w, /assets/responsive-gallery-folder-9263-800.webp 800w, /assets/responsive-gallery-folder-9263-1200.webp 1200w"
+  },
+  "/assets/gallery-folder-9264.webp": {
+    "srcSet": "/assets/responsive-gallery-folder-9264-400.webp 400w, /assets/responsive-gallery-folder-9264-800.webp 800w, /assets/responsive-gallery-folder-9264-1200.webp 1200w"
+  },
+  "/assets/gallery-p1-3.webp": {
+    "srcSet": "/assets/responsive-gallery-p1-3-400.webp 400w, /assets/responsive-gallery-p1-3-800.webp 800w"
+  },
+  "/assets/gallery-p13-4.webp": {
+    "srcSet": "/assets/responsive-gallery-p13-4-400.webp 400w"
+  },
+  "/assets/gallery-p19-2.webp": {
+    "srcSet": "/assets/responsive-gallery-p19-2-400.webp 400w"
+  },
+  "/assets/gallery-p2-0.webp": {
+    "srcSet": "/assets/responsive-gallery-p2-0-400.webp 400w"
+  },
+  "/assets/gallery-p21-2.webp": {
+    "srcSet": "/assets/responsive-gallery-p21-2-400.webp 400w, /assets/responsive-gallery-p21-2-800.webp 800w"
+  },
+  "/assets/gallery-p4-1.webp": {
+    "srcSet": "/assets/responsive-gallery-p4-1-400.webp 400w"
+  },
+  "/assets/gallery-update-6222095624409125895.webp": {
+    "srcSet": "/assets/responsive-gallery-update-6222095624409125895-400.webp 400w, /assets/responsive-gallery-update-6222095624409125895-800.webp 800w, /assets/responsive-gallery-update-6222095624409125895-1200.webp 1200w"
+  },
+  "/assets/gallery-update-6222095624409125896.webp": {
+    "srcSet": "/assets/responsive-gallery-update-6222095624409125896-400.webp 400w, /assets/responsive-gallery-update-6222095624409125896-800.webp 800w, /assets/responsive-gallery-update-6222095624409125896-1200.webp 1200w"
+  },
+  "/assets/gallery-update-6222095624409125897.webp": {
+    "srcSet": "/assets/responsive-gallery-update-6222095624409125897-400.webp 400w, /assets/responsive-gallery-update-6222095624409125897-800.webp 800w, /assets/responsive-gallery-update-6222095624409125897-1200.webp 1200w"
+  },
+  "/assets/gallery-update-6222095624409125898.webp": {
+    "srcSet": "/assets/responsive-gallery-update-6222095624409125898-400.webp 400w, /assets/responsive-gallery-update-6222095624409125898-800.webp 800w, /assets/responsive-gallery-update-6222095624409125898-1200.webp 1200w"
+  },
+  "/assets/gallery-update-6222095624409125899.webp": {
+    "srcSet": "/assets/responsive-gallery-update-6222095624409125899-400.webp 400w, /assets/responsive-gallery-update-6222095624409125899-800.webp 800w, /assets/responsive-gallery-update-6222095624409125899-1200.webp 1200w"
+  },
+  "/assets/gallery-update-6222095624409125900.webp": {
+    "srcSet": "/assets/responsive-gallery-update-6222095624409125900-400.webp 400w, /assets/responsive-gallery-update-6222095624409125900-800.webp 800w, /assets/responsive-gallery-update-6222095624409125900-1200.webp 1200w"
+  },
+  "/assets/gallery-update-6222095624409125901.webp": {
+    "srcSet": "/assets/responsive-gallery-update-6222095624409125901-400.webp 400w, /assets/responsive-gallery-update-6222095624409125901-800.webp 800w, /assets/responsive-gallery-update-6222095624409125901-1200.webp 1200w"
+  },
+  "/assets/gallery-update-6222095624409125902.webp": {
+    "srcSet": "/assets/responsive-gallery-update-6222095624409125902-400.webp 400w, /assets/responsive-gallery-update-6222095624409125902-800.webp 800w, /assets/responsive-gallery-update-6222095624409125902-1200.webp 1200w"
+  },
+  "/assets/gallery-update-6222095624409125903.webp": {
+    "srcSet": "/assets/responsive-gallery-update-6222095624409125903-400.webp 400w, /assets/responsive-gallery-update-6222095624409125903-800.webp 800w, /assets/responsive-gallery-update-6222095624409125903-1200.webp 1200w"
+  },
+  "/assets/gallery-update-6222095624409125904.webp": {
+    "srcSet": "/assets/responsive-gallery-update-6222095624409125904-400.webp 400w, /assets/responsive-gallery-update-6222095624409125904-800.webp 800w, /assets/responsive-gallery-update-6222095624409125904-1200.webp 1200w"
+  },
+  "/assets/gallery-update-6222095624409125905.webp": {
+    "srcSet": "/assets/responsive-gallery-update-6222095624409125905-400.webp 400w, /assets/responsive-gallery-update-6222095624409125905-800.webp 800w, /assets/responsive-gallery-update-6222095624409125905-1200.webp 1200w"
+  },
+  "/assets/gallery-update-6222095624409125906.webp": {
+    "srcSet": "/assets/responsive-gallery-update-6222095624409125906-400.webp 400w, /assets/responsive-gallery-update-6222095624409125906-800.webp 800w, /assets/responsive-gallery-update-6222095624409125906-1200.webp 1200w"
+  },
+  "/assets/gallery-update-6222095624409125907.webp": {
+    "srcSet": "/assets/responsive-gallery-update-6222095624409125907-400.webp 400w, /assets/responsive-gallery-update-6222095624409125907-800.webp 800w, /assets/responsive-gallery-update-6222095624409125907-1200.webp 1200w"
+  },
+  "/assets/gallery-update-6222095624409125908.webp": {
+    "srcSet": "/assets/responsive-gallery-update-6222095624409125908-400.webp 400w, /assets/responsive-gallery-update-6222095624409125908-800.webp 800w, /assets/responsive-gallery-update-6222095624409125908-1200.webp 1200w"
+  },
+  "/assets/gallery-update-6222095624409125909.webp": {
+    "srcSet": "/assets/responsive-gallery-update-6222095624409125909-400.webp 400w, /assets/responsive-gallery-update-6222095624409125909-800.webp 800w, /assets/responsive-gallery-update-6222095624409125909-1200.webp 1200w"
+  },
+  "/assets/gallery-update-6222095624409125910.webp": {
+    "srcSet": "/assets/responsive-gallery-update-6222095624409125910-400.webp 400w, /assets/responsive-gallery-update-6222095624409125910-800.webp 800w, /assets/responsive-gallery-update-6222095624409125910-1200.webp 1200w"
+  },
+  "/assets/gallery-update-6222095624409125912.webp": {
+    "srcSet": "/assets/responsive-gallery-update-6222095624409125912-400.webp 400w, /assets/responsive-gallery-update-6222095624409125912-800.webp 800w, /assets/responsive-gallery-update-6222095624409125912-1200.webp 1200w"
+  },
+  "/assets/gallery-update-6222095624409125913.webp": {
+    "srcSet": "/assets/responsive-gallery-update-6222095624409125913-400.webp 400w, /assets/responsive-gallery-update-6222095624409125913-800.webp 800w, /assets/responsive-gallery-update-6222095624409125913-1200.webp 1200w"
+  },
+  "/assets/gallery-update-6222095624409125914.webp": {
+    "srcSet": "/assets/responsive-gallery-update-6222095624409125914-400.webp 400w, /assets/responsive-gallery-update-6222095624409125914-800.webp 800w, /assets/responsive-gallery-update-6222095624409125914-1200.webp 1200w"
+  },
+  "/assets/gallery-update-6222095624409125915.webp": {
+    "srcSet": "/assets/responsive-gallery-update-6222095624409125915-400.webp 400w, /assets/responsive-gallery-update-6222095624409125915-800.webp 800w, /assets/responsive-gallery-update-6222095624409125915-1200.webp 1200w"
+  },
+  "/assets/gallery-update-6222095624409125916.webp": {
+    "srcSet": "/assets/responsive-gallery-update-6222095624409125916-400.webp 400w, /assets/responsive-gallery-update-6222095624409125916-800.webp 800w, /assets/responsive-gallery-update-6222095624409125916-1200.webp 1200w"
+  },
+  "/assets/gallery-update-6222095624409125917.webp": {
+    "srcSet": "/assets/responsive-gallery-update-6222095624409125917-400.webp 400w, /assets/responsive-gallery-update-6222095624409125917-800.webp 800w"
+  },
+  "/assets/life-at-guru-latest.jpg": {
+    "srcSet": "/assets/responsive-life-at-guru-latest-400.webp 400w, /assets/responsive-life-at-guru-latest-800.webp 800w, /assets/responsive-life-at-guru-latest-1200.webp 1200w"
+  },
+  "/assets/outdoor.webp": {
+    "srcSet": "/assets/responsive-outdoor-400.webp 400w"
+  },
+  "/assets/sports.webp": {
+    "srcSet": "/assets/responsive-sports-400.webp 400w, /assets/responsive-sports-800.webp 800w"
+  }
+}

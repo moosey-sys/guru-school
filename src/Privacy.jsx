@@ -35,6 +35,14 @@ export default function Privacy() {
             tracked. Blocking or clearing these cookies does not prevent you
             from reading the website or sending an enquiry.
           </p>
+          <h2>Website reliability</h2>
+          <p>
+            To diagnose technical failures, we record an error category and page
+            path. We do not include message text, form contents, passwords or
+            error stacks in diagnostic events. Reports are rate limited and
+            stored in our hosting provider’s runtime logs. Hosting access logs
+            may contain network metadata under the provider’s retention policy.
+          </p>
           <h2>Contact the school</h2>
           <p>
             For questions about an enquiry or your information, contact the team

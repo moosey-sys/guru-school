@@ -1,3 +1,4 @@
+import { ResponsiveImage } from "./ResponsiveImage";
 import React, { useState } from "react";
 import { galleryPhotos } from "../content/gallery";
 import { usePreferences } from "../preferences";
@@ -118,7 +119,7 @@ export function Gallery({
             data-gallery-category={photo.category}
             onClick={() => openPhoto(photo)}
           >
-            <img
+            <ResponsiveImage
               src={photo.image}
               alt={photo.caption}
               loading="lazy"

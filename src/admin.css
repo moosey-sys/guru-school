@@ -1255,3 +1255,8 @@ html[lang="my"] .admin-shell .eyebrow { letter-spacing: normal; }
 .admin-shell .header-actions { flex-wrap: wrap; }
 .inbox-search button + button { margin-left:12px; }
 .request-notes + .two-columns { margin-block:16px; }
+
+/* Keyboard bypass link; hidden until focused so the established layout stays intact. */
+.admin-skip { position: fixed; left: 1rem; top: -6rem; z-index: 100; background: var(--paper); color: var(--ink); padding: .8rem; }
+.admin-skip:focus { top: 1rem; }
+.error-recovery { padding: 2rem; max-width: 55rem; margin: auto; }

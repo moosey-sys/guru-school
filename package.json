@@ -11,7 +11,10 @@
     "test:api": "node --test tests/*.test.js",
     "test:ui": "vitest run",
     "test": "npm run test:api && npm run test:ui",
-    "preview": "vite preview --host localhost"
+    "preview": "vite preview --host localhost",
+    "monitor:check": "node scripts/monitor-check.mjs",
+    "prepare:images": "node scripts/prepare-responsive.mjs",
+    "audit:mobile": "lighthouse https://guru-school.vercel.app/ --chrome-flags=\"--headless\" --only-categories=performance,accessibility,best-practices,seo --output=html --output-path=/tmp/guru-mobile-audit.html"
   },
   "dependencies": {
     "@vercel/blob": "^2.8.1",
@@ -25,7 +28,9 @@
     "@testing-library/react": "^16.3.3",
     "@testing-library/user-event": "^14.6.7",
     "@vitejs/plugin-react": "^6.1.2",
+    "axe-core": "^4.14.0",
     "jsdom": "^30.1.2",
+    "lighthouse": "^13.5.0",
     "parse5": "^8.0.1",
     "prettier": "^3.9.10",
     "vite": "^8.3.4",

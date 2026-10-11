@@ -1,4 +1,5 @@
 export default {
+  "Skip to content": "အကြောင်းအရာသို့ ကျော်သွားရန်",
   Events: "ကျောင်းပွဲများ",
   Graduation: "ဘွဲ့နှင်းသဘင်",
   Trips: "လေ့လာရေးခရီးများ",

@@ -268,6 +268,9 @@ export default function AdminApp() {
   };
   return (
     <div className="admin-shell" ref={shell}>
+      <a className="admin-skip" href="#admin-main">
+        {t("Skip to content")}
+      </a>
       <div className="admin-decoration" aria-hidden="true">
         <span className="deco-square" />
         <span className="deco-ring" />
@@ -336,7 +339,7 @@ export default function AdminApp() {
           )}
         </div>
       </header>
-      <main>
+      <main id="admin-main" tabIndex={-1}>
         {!session ? (
           <section id="login-panel" className="login card">
             <p className="eyebrow">{t("WELCOME BACK")}</p>
