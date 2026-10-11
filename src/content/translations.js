@@ -1,4 +1,5 @@
 export default {
+  "Footer links": "စာမျက်နှာအောက်ခြေ လင့်ခ်များ",
   Events: "ကျောင်းပွဲများ",
   Graduation: "ဘွဲ့နှင်းသဘင်",
   Trips: "လေ့လာရေးခရီးများ",

@@ -807,12 +807,6 @@ export function Footer() {
   const { t } = usePreferences();
   return (
     <footer>
-      <a className="staff-link" href="/privacy.html">
-        {t("Privacy & visitor statistics")}
-      </a>
-      <a className="staff-link" href="/admin">
-        {t("Staff dashboard ↗︎")}
-      </a>
       <a className="brand" href="/">
         <img src="/assets/crest.png" alt={t("")} width="47" height="57" />
         <span>
@@ -821,7 +815,10 @@ export function Footer() {
         </span>
       </a>
       <p>{t("Every Child, Every Dream, Every Success.")}</p>
-      <a href="#">{t("Back to the top ↑︎")}</a>
+      <nav className="footer-links" aria-label={t("Footer links")}>
+        <a href="/privacy.html">{t("Privacy & visitor statistics")}</a>
+        <a href="#">{t("Back to the top ↑︎")}</a>
+      </nav>
       <div className="footer-bottom">
         <span>
           {t("© ")}

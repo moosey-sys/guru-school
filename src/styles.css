@@ -2833,3 +2833,25 @@ html[data-theme="dark"] textarea:focus-visible {
   padding: 20px;
   background: #202e49;
 }
+
+footer {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 28px 40px;
+}
+footer > p { text-align: center; max-width: none; line-height: 1.6; }
+.footer-links { display: flex; align-items: center; gap: 24px; flex-wrap: wrap; font-size: 13px; }
+.footer-links a { color: var(--ink); text-underline-offset: 5px; }
+.footer-bottom { grid-column: 1 / -1; gap: 16px; line-height: 1.6; }
+@media (max-width: 1000px) {
+  footer { grid-template-columns: 1fr auto; }
+  footer > p { grid-column: 1 / -1; grid-row: 2; text-align: left; }
+}
+@media (max-width: 600px) {
+  footer { grid-template-columns: 1fr; gap: 22px; }
+  footer > p { grid-column: auto; grid-row: auto; }
+  .footer-links { gap: 18px; }
+  .footer-bottom { flex-direction: column; gap: 8px; }
+  .footer-bottom > span:last-child { text-align: left; }
+}
