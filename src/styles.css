@@ -2980,6 +2980,7 @@ html[data-theme="dark"] .footer-motto:hover, html[data-theme="dark"] .footer-mot
 .footer-invitation h2 { font-size: clamp(30px, 3vw, 42px); margin: 0 0 12px; }
 .footer-invitation p { margin: 0; max-width: 620px; font-size: 15px; line-height: 1.7; }
 .footer-invitation .button { background: #192743; color: #fff; border-color: #192743; flex-shrink: 0; }
+html[data-theme="dark"] .footer-invitation .button { color: #fff; }
 .footer-identity > p { margin: 22px 0 14px; max-width: 320px; line-height: 1.7; font-size: 15px; }
 .footer-explore, .footer-connect { display: flex; flex-direction: column; align-items: flex-start; gap: 14px; font-size: 14px; }
 .school-footer h3 { font-size: 16px; margin: 0 0 4px; }
