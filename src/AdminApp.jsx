@@ -3,8 +3,6 @@ import { request } from "./api";
 import { usePreferences } from "./preferences";
 import { TrafficPanel, initialSelection } from "./components/TrafficPanel";
 import { ContentEditor, PhotosEditor } from "./components/ContentEditor";
-import { VisitsPanel } from "./components/VisitsPanel";
-import { BackupsPanel } from "./components/BackupsPanel";
 import { Inbox } from "./components/Inbox";
 export default function AdminApp() {
   const { theme, toggleTheme, language, selectLanguage, t } = usePreferences();
@@ -159,8 +157,18 @@ export default function AdminApp() {
             setStatus("Unable to check your session. Please sign in again.");
         }
       });
+    const resume = (event) => {
+      if (event.persisted) {
+        loggedOut();
+        api("/api/session")
+          .then(signedIn)
+          .catch(() => {});
+      }
+    };
+    window.addEventListener("pageshow", resume);
     return () => {
       alive.current = false;
+      window.removeEventListener("pageshow", resume);
     };
   }, []);
   async function login(event) {
@@ -419,8 +427,6 @@ export default function AdminApp() {
                 ["inbox", "Enquiries & visits"],
                 ["content", "Announcements & news"],
                 ["photos", "Gallery"],
-                ["visits", "Visit calendar"],
-                ["backups", "Security & backups"],
               ].map(([value, label]) => (
                 <button
                   key={value}
@@ -457,7 +463,6 @@ export default function AdminApp() {
                     await loadInbox(false, filters);
                   })
                 }
-                api={api}
                 cursor={cursor}
                 refresh={() =>
                   work(async () => {
@@ -601,32 +606,6 @@ export default function AdminApp() {
                 </p>
               )}
             </div>
-            {tab === "visits" && (
-              <VisitsPanel
-                api={api}
-                work={work}
-                busy={busy}
-                items={inbox}
-                onRefresh={() => loadInbox()}
-              />
-            )}
-            {tab === "backups" && (
-              <BackupsPanel
-                api={api}
-                work={work}
-                busy={busy}
-                session={session}
-                restore={async (backupId) => {
-                  const result = await api("/api/content", {
-                    method: "PUT",
-                    body: JSON.stringify({ backupId, version }),
-                  });
-                  setContent(result.content);
-                  setVersion(result.version);
-                  setStatus("Website content restored.");
-                }}
-              />
-            )}
           </div>
         )}
         <p id="global-status" role="status" aria-live="polite">

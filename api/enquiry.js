@@ -2,7 +2,6 @@ const c = require("../lib/core");
 const { randomUUID } = require("node:crypto");
 const { notification, acknowledgement } = require("../lib/mail");
 const { deliver } = require("../lib/delivery");
-const visits = require("../lib/visits");
 const kinds = [
   "General enquiry",
   "Programme discussion",
@@ -36,10 +35,14 @@ module.exports = c.wrap(async (req, res) => {
     data.website
   )
     return res.status(400).json({ error: "Please reload and try again." });
-  const field = (key, max) =>
-    typeof data[key] === "string" && data[key].trim().length <= max
-      ? data[key].trim()
-      : "";
+  const field = (key, max) => {
+    if (data[key] === undefined) return "";
+    if (typeof data[key] !== "string" || data[key].length > max)
+      throw Object.assign(new Error("Check field types and lengths."), {
+        status: 400,
+      });
+    return data[key].trim();
+  };
   const name = field("name", 100),
     email = field("email", 254),
     phone = field("phone", 40),
@@ -70,8 +73,10 @@ module.exports = c.wrap(async (req, res) => {
     return res
       .status(400)
       .json({ error: "Check required fields and visit date." });
-  if (data.slotId && (kind !== kinds[3] || !c.UUID.test(data.slotId)))
-    return res.status(400).json({ error: "Select a valid visit time." });
+  if (data.slotId !== undefined)
+    return res
+      .status(400)
+      .json({ error: "Visit times are arranged directly with the school." });
   const prior = await c.read(`receipts/${proof.nonce}.json`);
   if (prior) {
     if (
@@ -103,17 +108,6 @@ module.exports = c.wrap(async (req, res) => {
         .json({ error: "Submission is being processed. Please wait." });
     throw e;
   }
-  let booking = {};
-  if (data.slotId) {
-    if (kind !== kinds[3])
-      return res.status(400).json({ error: "Select a visit request." });
-    try {
-      booking = await visits.reserve(data.slotId, { id, path });
-    } catch (e) {
-      await c.del(`receipts/${proof.nonce}.json`);
-      throw e;
-    }
-  }
   const record = {
     id,
     createdKey,
@@ -124,7 +118,6 @@ module.exports = c.wrap(async (req, res) => {
     message,
     date,
     programme,
-    ...booking,
     status: "new",
     notes: "",
     created: new Date(now).toISOString(),
@@ -134,7 +127,6 @@ module.exports = c.wrap(async (req, res) => {
     await c.write(path, record);
   } catch (e) {
     await c.del(`receipts/${proof.nonce}.json`);
-    await visits.release(booking.slotId, id);
     throw e;
   }
   const mailStatus = await deliver({
@@ -142,11 +134,22 @@ module.exports = c.wrap(async (req, res) => {
     replyTo: { name, address: email },
     ...notification(record),
   });
-  const acknowledgementStatus = await deliver({
-    to: email,
-    replyTo: process.env.MAIL_TO,
-    ...acknowledgement(record),
-  });
+  let acknowledgementStatus = "rate-limited";
+  try {
+    await c.rate(
+      { headers: { "x-vercel-forwarded-for": email.toLowerCase() } },
+      "acknowledgement",
+      3,
+      60,
+    );
+    acknowledgementStatus = await deliver({
+      to: email,
+      replyTo: process.env.MAIL_TO,
+      ...acknowledgement(record),
+    });
+  } catch (error) {
+    if (error.status !== 429) acknowledgementStatus = "failed";
+  }
   try {
     const saved = await c.read(path);
     await c.write(

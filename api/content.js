@@ -1,6 +1,5 @@
 const c = require("../lib/core");
 const { visible } = require("../lib/publishing");
-const backups = require("../lib/backups");
 const galleryImages = new Set(
   require("../lib/gallery.json").map((photo) => photo.image),
 );
@@ -33,6 +32,9 @@ function bilingual(item, key, max, required = false) {
   };
 }
 module.exports = c.wrap(async (req, res) => {
+  if (!["GET", "PUT"].includes(req.method))
+    return res.status(405).json({ error: "Method not allowed." });
+  if (req.method === "PUT") await c.staff(req, true);
   const record = await c.read("content/site.json");
   const content = record?.data || {
     announcement: "A little curiosity. A world of possibility.",
@@ -41,7 +43,7 @@ module.exports = c.wrap(async (req, res) => {
     photos: [],
   };
   if (req.method === "GET") {
-    const isStaff = !!c.session(req);
+    const isStaff = !!(await c.activeSession(req));
     return res.json({
       content: isStaff
         ? content
@@ -57,21 +59,28 @@ module.exports = c.wrap(async (req, res) => {
     res.setHeader("Allow", "GET, PUT");
     return res.status(405).json({ error: "Method not allowed." });
   }
-  c.staff(req, true);
   const data = c.json(req);
   if (data.version !== (record?.etag || null))
     return res
       .status(409)
       .json({ error: "Content changed. Reload before saving." });
-  const input = data.backupId
-    ? (await backups.find(data.backupId)).data.content
-    : data.content;
+  if (data.backupId !== undefined)
+    return res
+      .status(400)
+      .json({ error: "Backup restoration is no longer supported." });
+  const input = data.content;
   if (
     !input ||
     !Array.isArray(input.news) ||
     !Array.isArray(input.photos) ||
     input.news.length > 40 ||
-    input.photos.length > 100
+    input.photos.length > 100 ||
+    input.news.some(
+      (item) => !item || typeof item !== "object" || Array.isArray(item),
+    ) ||
+    input.photos.some(
+      (item) => !item || typeof item !== "object" || Array.isArray(item),
+    )
   )
     return res
       .status(400)
@@ -170,11 +179,6 @@ module.exports = c.wrap(async (req, res) => {
     new Set(clean.photos.map((x) => x.id)).size !== clean.photos.length
   )
     return res.status(400).json({ error: "Duplicate records." });
-  if (record)
-    await backups.snapshot(
-      record.data,
-      data.backupId ? "before-restore" : "before-update",
-    );
   const result = await c.write("content/site.json", clean, record?.etag);
   res.json({ content: clean, version: result.etag });
 });

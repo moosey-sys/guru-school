@@ -20,7 +20,7 @@ function signedIn(res, verified = false) {
 }
 module.exports = c.wrap(async (req, res) => {
   if (req.method === "GET") {
-    const s = c.session(req);
+    const s = await c.activeSession(req);
     return res.status(s ? 200 : 401).json(
       s
         ? {
@@ -34,7 +34,10 @@ module.exports = c.wrap(async (req, res) => {
   if (!c.originOK(req))
     return res.status(403).json({ error: "Invalid origin." });
   if (req.method === "DELETE") {
-    c.staff(req, true);
+    const current = await c.staff(req, true);
+    await c.write(`auth/revoked/${c.sign(current.id)}.json`, {
+      exp: current.exp,
+    });
     res.setHeader(
       "Set-Cookie",
       "__Host-guru=; Path=/; Secure; HttpOnly; SameSite=Strict; Max-Age=0",

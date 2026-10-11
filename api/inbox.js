@@ -1,9 +1,7 @@
-const c = require("../lib/core"),
-  v = require("../lib/visits");
-const { deliver } = require("../lib/delivery");
-const { visitUpdate } = require("../lib/mail");
+const c = require("../lib/core");
+const v = require("../lib/validation");
 module.exports = c.wrap(async (req, res) => {
-  c.staff(req, req.method !== "GET");
+  await c.staff(req, req.method !== "GET");
   if (req.method === "GET") {
     const search = String(req.query.search || "")
         .trim()
@@ -83,7 +81,9 @@ module.exports = c.wrap(async (req, res) => {
     (!["new", "in-progress", "confirmed", "closed"].includes(data.status) ||
       typeof data.notes !== "string" ||
       data.notes.length > 2000 ||
-      (data.followUp && !v.validDate(data.followUp)))
+      (data.followUp !== undefined &&
+        (typeof data.followUp !== "string" ||
+          (data.followUp && !v.validDate(data.followUp)))))
   )
     return res
       .status(400)
@@ -97,74 +97,19 @@ module.exports = c.wrap(async (req, res) => {
       .json({ error: "Record changed. Refresh before saving." });
   if (req.method === "DELETE") {
     await c.del(path, { ifMatch: item.etag });
-    await v.release(item.data.slotId, data.id);
     return res.json({ ok: true });
-  }
-  let booking = {},
-    newReservation = false;
-  if (data.slotId && data.slotId !== item.data.slotId) {
-    if (item.data.kind !== "Book a school visit" || data.status === "closed")
-      return res
-        .status(400)
-        .json({ error: "Only open visit requests can be rescheduled." });
-    booking = await v.reserve(data.slotId, { id: data.id, path });
-    newReservation = true;
   }
   const next = {
     ...item.data,
-    ...booking,
     status: data.status,
     notes: data.notes.trim(),
     followUp: data.followUp ?? item.data.followUp ?? "",
     updated: new Date().toISOString(),
   };
-  if (
-    next.status === "confirmed" &&
-    next.kind === "Book a school visit" &&
-    next.time &&
-    !next.slotId
-  ) {
-    if (newReservation) await v.release(booking.slotId, data.id);
+  if (data.slotId !== undefined || data.notify !== undefined)
     return res
       .status(400)
-      .json({
-        error:
-          "Choose an available visit time before reopening a closed booking.",
-      });
-  }
-  if (
-    data.notify &&
-    (!next.date ||
-      !next.time ||
-      next.kind !== "Book a school visit" ||
-      next.status !== "confirmed")
-  ) {
-    if (newReservation) await v.release(booking.slotId, data.id);
-    return res.status(400).json({
-      error:
-        "Choose a visit time and confirmed status before emailing the family.",
-    });
-  }
-  let saved;
-  try {
-    saved = await c.write(path, next, item.etag);
-  } catch (e) {
-    if (newReservation) await v.release(booking.slotId, data.id);
-    throw e;
-  }
-  if (newReservation || data.status === "closed")
-    await v.release(item.data.slotId, data.id);
-  if (data.status === "closed" && next.slotId) {
-    next.slotId = "";
-    saved = await c.write(path, next, saved.etag);
-  }
-  if (data.notify) {
-    next.visitEmailStatus = await deliver({
-      to: next.email,
-      replyTo: process.env.MAIL_TO,
-      ...visitUpdate(next),
-    });
-    saved = await c.write(path, next, saved.etag);
-  }
+      .json({ error: "Visit scheduling is no longer supported." });
+  const saved = await c.write(path, next, item.etag);
   res.json({ item: { ...next, version: saved.etag } });
 });

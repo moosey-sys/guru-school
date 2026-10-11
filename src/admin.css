@@ -1253,14 +1253,5 @@ html[lang="my"] .admin-shell h1, html[lang="my"] .admin-shell h2, html[lang="my"
 html[lang="my"] .admin-shell h1 { font-size: clamp(28px, 3.2vw, 44px); }
 html[lang="my"] .admin-shell .eyebrow { letter-spacing: normal; }
 .admin-shell .header-actions { flex-wrap: wrap; }
-/* Existing dashboard cards also host calendar and backup controls. */
-.visit-slot-row { display:flex; align-items:center; gap:16px; flex-wrap:wrap; padding:16px 0; border-bottom:var(--line); }
-.visit-slot-row > span:first-of-type { flex:1; min-width:180px; }
 .inbox-search button + button { margin-left:12px; }
 .request-notes + .two-columns { margin-block:16px; }
-.visit-calendar { display:grid; grid-template-columns:repeat(7,minmax(0,1fr)); gap:8px; margin:20px 0; }
-.visit-calendar > strong { text-align:center; font-size:12px; }
-.visit-calendar button { padding:12px 4px; min-width:0; position:relative; }
-.visit-calendar button[aria-pressed="true"] { background:var(--blue); color:white; }
-.visit-calendar small { display:inline-block; margin-left:6px; background:var(--yellow); color:#17232b; padding:1px 5px; border-radius:50%; }
-@media(max-width:600px) { .visit-calendar { gap:4px; } .visit-calendar button { padding:10px 0; } .visit-calendar small { display:block; margin:4px auto 0; width:20px; } }

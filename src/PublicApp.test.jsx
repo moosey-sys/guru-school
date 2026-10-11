@@ -352,38 +352,3 @@ it("filters published gallery photos by album without including hidden existing 
     screen.getByRole("img", { name: "Graduation memory" }),
   ).toBeInTheDocument();
 });
-it("allows parents to choose an available visit time instead of entering a preferred date", async () => {
-  vi.stubGlobal(
-    "fetch",
-    vi.fn(async (url) => ({
-      ok: true,
-      json: async () =>
-        url === "/api/visits"
-          ? { slots: [{ id: "slot-1", date: "2099-01-01", time: "09:00" }] }
-          : { token: "proof" },
-    })),
-  );
-  render(
-    <PreferencesProvider>
-      <EnquiryForm />
-    </PreferencesProvider>,
-  );
-  fireEvent.change(screen.getByLabelText("I would like to"), {
-    target: { value: "Book a school visit" },
-  });
-  await screen.findByLabelText("Available visit times (Myanmar time)");
-  fireEvent.change(
-    screen.getByLabelText("Available visit times (Myanmar time)"),
-    { target: { value: "slot-1" } },
-  );
-  expect(
-    screen.queryByLabelText("Preferred visit date"),
-  ).not.toBeInTheDocument();
-  fireEvent.change(screen.getByLabelText("I would like to"), {
-    target: { value: "General enquiry" },
-  });
-  fireEvent.change(screen.getByLabelText("I would like to"), {
-    target: { value: "Book a school visit" },
-  });
-  expect(screen.getByLabelText("Preferred visit date")).toBeRequired();
-});

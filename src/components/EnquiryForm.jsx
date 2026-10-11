@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from "react";
+import React, { useRef, useState } from "react";
 import { usePreferences } from "../preferences";
 import { request, yangonDate } from "../api";
 const kinds = [
@@ -10,26 +10,6 @@ const kinds = [
 export function EnquiryForm() {
   const { t } = usePreferences();
   const [kind, setKind] = useState(kinds[0]);
-  const [slots, setSlots] = useState([]);
-  const [slotId, setSlotId] = useState("");
-  const [slotError, setSlotError] = useState(false);
-  useEffect(() => {
-    if (kind !== kinds[3]) return;
-    let active = true;
-    request("/api/visits")
-      .then((data) => {
-        if (active) {
-          setSlots(data.slots || []);
-          setSlotError(false);
-        }
-      })
-      .catch(() => {
-        if (active) setSlotError(true);
-      });
-    return () => {
-      active = false;
-    };
-  }, [kind]);
   const [busy, setBusy] = useState(false);
   const [prepared, setPrepared] = useState(false);
   const [status, setStatus] = useState({ text: "", state: "" });
@@ -66,16 +46,11 @@ export function EnquiryForm() {
         method: "POST",
         body: JSON.stringify({
           ...fields,
-          date: slotId
-            ? slots.find((slot) => slot.id === slotId)?.date
-            : fields.date,
-          slotId,
           token: proof.current,
         }),
       });
       form.reset();
       setKind(kinds[0]);
-      setSlotId("");
       proof.current = null;
       setStatus({
         text: "Thank you! Your enquiry has been saved for our team. We will contact you to confirm visit requests.",
@@ -83,17 +58,8 @@ export function EnquiryForm() {
       });
     } catch (error) {
       if ([400, 403, 409].includes(error.status)) proof.current = null;
-      if (error.status === 409 && kind === kinds[3]) {
-        setSlotId("");
-        request("/api/visits")
-          .then((data) => setSlots(data.slots || []))
-          .catch(() => {});
-      }
       setStatus({
-        text:
-          error.status === 409
-            ? "This visit time is no longer available. Please choose another time or request a preferred date."
-            : "Your message could not be sent. Please try again, or email or call our team.",
+        text: "Your message could not be sent. Please try again, or email or call our team.",
         state: "error",
       });
     } finally {
@@ -142,7 +108,6 @@ export function EnquiryForm() {
             value={kind}
             onChange={(event) => {
               setKind(event.target.value);
-              setSlotId("");
             }}
           >
             {kinds.map((value) => (
@@ -168,30 +133,7 @@ export function EnquiryForm() {
             ))}
           </select>
         </label>
-        {kind === kinds[3] && slots.length > 0 && (
-          <label>
-            {t("Available visit times (Myanmar time)")}
-            <select
-              value={slotId}
-              onChange={(event) => setSlotId(event.target.value)}
-            >
-              <option value="">{t("Request another date")}</option>
-              {slots.map((slot) => (
-                <option key={slot.id} value={slot.id}>
-                  {slot.date} · {slot.time}
-                </option>
-              ))}
-            </select>
-          </label>
-        )}
-        {kind === kinds[3] && slotError && (
-          <p>
-            {t(
-              "Visit times could not be loaded. You can request a preferred date below.",
-            )}
-          </p>
-        )}
-        {kind === kinds[3] && !slotId && (
+        {kind === kinds[3] && (
           <label className="visit-date">
             {t("Preferred visit date")}
             <input name="date" type="date" min={yangonDate()} required />

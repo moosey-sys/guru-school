@@ -21,3 +21,7 @@ scripts/live-check.js
 
 .build-server
 coverage
+
+# Unused source photos are not part of the deployed application.
+photo_*.jpg
+gallery-p12-4.webp

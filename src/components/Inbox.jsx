@@ -1,13 +1,11 @@
 import { usePreferences } from "../preferences";
-import React, { useState, useEffect } from "react";
-function RequestCard({ item, save, remove, busy, slots }) {
+import React, { useState } from "react";
+function RequestCard({ item, save, remove, busy }) {
   const { t, language } = usePreferences();
   const [confirmDelete, setConfirmDelete] = useState(false);
   const [notes, setNotes] = useState(item.notes || "");
   const [status, setStatus] = useState(item.status);
   const [followUp, setFollowUp] = useState(item.followUp || "");
-  const [slotId, setSlotId] = useState(item.slotId || "");
-  const [notify, setNotify] = useState(false);
   return (
     <article className="card">
       <div className="request-heading">
@@ -90,40 +88,7 @@ function RequestCard({ item, save, remove, busy, slots }) {
             onChange={(event) => setFollowUp(event.target.value)}
           />
         </label>
-        {item.kind === "Book a school visit" && (
-          <label>
-            {t("Confirm or reschedule visit time")}
-            <select
-              value={slotId}
-              onChange={(event) => setSlotId(event.target.value)}
-            >
-              <option value="">{t("Keep preferred date")}</option>
-              {item.slotId && (
-                <option value={item.slotId}>
-                  {item.date} · {item.time}
-                </option>
-              )}
-              {slots
-                .filter((slot) => slot.available && slot.id !== item.slotId)
-                .map((slot) => (
-                  <option key={slot.id} value={slot.id}>
-                    {slot.date} · {slot.time}
-                  </option>
-                ))}
-            </select>
-          </label>
-        )}
       </div>
-      {item.kind === "Book a school visit" && (
-        <label className="check">
-          <input
-            type="checkbox"
-            checked={notify}
-            onChange={(event) => setNotify(event.target.checked)}
-          />
-          {t("Email visit confirmation when saving")}
-        </label>
-      )}
       <div className="request-actions">
         <label>
           {t("Status")}
@@ -147,9 +112,7 @@ function RequestCard({ item, save, remove, busy, slots }) {
         </label>
         <button
           disabled={busy}
-          onClick={() =>
-            save(item, status, notes, { followUp, slotId, notify })
-          }
+          onClick={() => save(item, status, notes, { followUp })}
         >
           {t("Save update")}
         </button>
@@ -199,26 +162,13 @@ export function Inbox({
   busy,
   mailConfigured,
   filterRequests,
-  api,
 }) {
   const { t, language } = usePreferences();
   const [filter, setFilter] = useState("all");
   const [search, setSearch] = useState(""),
     [programme, setProgramme] = useState(""),
     [from, setFrom] = useState(""),
-    [to, setTo] = useState(""),
-    [slots, setSlots] = useState([]);
-  useEffect(() => {
-    let alive = true;
-    api?.("/api/visits")
-      .then((data) => {
-        if (alive) setSlots(data.slots || []);
-      })
-      .catch(() => {});
-    return () => {
-      alive = false;
-    };
-  }, [items]);
+    [to, setTo] = useState("");
   const matching = items.filter(
     (item) =>
       (filter === "all" ||
@@ -374,7 +324,6 @@ export function Inbox({
               key={item.id + ":" + item.version}
               item={item}
               busy={busy}
-              slots={slots}
               save={save}
               remove={remove}
             />

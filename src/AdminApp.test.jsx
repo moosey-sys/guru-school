@@ -524,61 +524,6 @@ it("searches all enquiries with programme and date filters", async () => {
     ).toBe(true),
   );
 });
-it("adds visit times with a versioned CSRF request", async () => {
-  const fetch = setup();
-  await screen.findByText("Signed in as staff");
-  fireEvent.click(
-    screen.getByRole("button", { name: "Visit calendar", exact: true }),
-  );
-  await waitFor(() =>
-    expect(
-      screen.getByRole("button", { name: "Add visit time" }),
-    ).toBeEnabled(),
-  );
-  fireEvent.change(screen.getByLabelText("Visit date"), {
-    target: { value: "2099-01-02" },
-  });
-  fireEvent.change(screen.getByLabelText("Visit time (Myanmar time)"), {
-    target: { value: "10:00" },
-  });
-  fireEvent.click(screen.getByRole("button", { name: "Add visit time" }));
-  await waitFor(() =>
-    expect(
-      fetch.mock.calls.some(
-        ([url, options]) => url === "/api/visits" && options.method === "PUT",
-      ),
-    ).toBe(true),
-  );
-  const save = fetch.mock.calls.find(
-    ([url, options]) => url === "/api/visits" && options.method === "PUT",
-  )[1];
-  expect(save.headers["X-CSRF-Token"]).toBe("csrf-value");
-  expect(JSON.parse(save.body)).toMatchObject({
-    version: "1",
-    slots: [{}, { date: "2099-01-02", time: "10:00", open: true }],
-  });
-});
-it("requires confirmation before restoring a backup", async () => {
-  const fetch = setup();
-  await screen.findByText("Signed in as staff");
-  fireEvent.click(screen.getByRole("button", { name: "Security & backups" }));
-  await screen.findByRole("button", { name: "Restore this backup" });
-  fireEvent.click(screen.getByRole("button", { name: "Restore this backup" }));
-  expect(
-    fetch.mock.calls.some(
-      ([url, options]) => url === "/api/content" && options.method === "PUT",
-    ),
-  ).toBe(false);
-  fireEvent.click(screen.getByRole("button", { name: "Confirm restore" }));
-  await screen.findByText("Website content restored.");
-  expect(
-    JSON.parse(
-      fetch.mock.calls.find(
-        ([url, options]) => url === "/api/content" && options.method === "PUT",
-      )[1].body,
-    ),
-  ).toEqual({ backupId: "backup-1", version: "1" });
-});
 it("converts scheduled news from Myanmar time to UTC and saves gallery albums", async () => {
   const fetch = setup();
   await screen.findByText("Signed in as staff");
