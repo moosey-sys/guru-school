@@ -2899,3 +2899,20 @@ html[data-theme="dark"] .footer-motto:hover, html[data-theme="dark"] .footer-mot
   from { opacity: 0; transform: translateY(8px); }
   to { opacity: 1; transform: translateY(0); }
 }
+
+/* Hover floating photos across public pages; touch and reduced motion stay still. */
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  main img {
+    transition: transform 300ms ease, filter 300ms ease;
+    transform-origin: center;
+  }
+  main img:hover {
+    animation: school-photo-float 2.6s ease-in-out infinite;
+    filter: brightness(1.04);
+  }
+}
+@keyframes school-photo-float {
+  0%, 100% { transform: translateY(0) rotate(0) scale(1); }
+  35% { transform: translateY(-7px) rotate(-.35deg) scale(1.015); }
+  70% { transform: translateY(-3px) rotate(.25deg) scale(1.01); }
+}
