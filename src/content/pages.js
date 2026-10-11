@@ -37,9 +37,9 @@ export const pages = [
       "Explore learning, play, creativity and community in everyday life at Guru.",
     ids: ["life"],
     community: true,
-    image: "gallery-folder-9264.webp",
+    image: "life-at-guru-latest.jpg",
     updatedCover: true,
-    imageAlt: "Classroom facilities",
+    imageAlt: "Guru students performing together at a school celebration",
   },
   {
     slug: "campus",

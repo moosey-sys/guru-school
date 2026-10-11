@@ -1,4 +1,5 @@
 export default {
+  "Guru students performing together at a school celebration": "ကျောင်းပွဲတွင် အတူတကွ ဖျော်ဖြေနေသော Guru ကျောင်းသားများ",
   "A BRIGHTER NEXT CHAPTER": "ပိုမိုတောက်ပသော အနာဂတ်ဆီသို့",
   "Let’s grow together.": "အတူတကွ တိုးတက်ကြပါစို့။",
   "Come meet our team and discover a place for your child to thrive.":
