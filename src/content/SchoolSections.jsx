@@ -814,7 +814,7 @@ export function Footer() {
           <small>{t("INTERNATIONAL SCHOOL")}</small>
         </span>
       </a>
-      <p>{t("Every Child, Every Dream, Every Success.")}</p>
+      <p><a className="footer-motto" href="/about">{t("Every Child, Every Dream, Every Success.")}</a></p>
       <nav className="footer-links" aria-label={t("Footer links")}>
         <a href="/privacy.html">{t("Privacy & visitor statistics")}</a>
         <a href="#">{t("Back to the top ↑︎")}</a>
