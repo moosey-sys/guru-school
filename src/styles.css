@@ -2859,3 +2859,18 @@ footer > p { text-align: center; max-width: none; line-height: 1.6; }
 .footer-motto { color: var(--ink); font-size: 13px; font-weight: 600; text-decoration: none; transition: color .15s; }
 .footer-motto:hover, .footer-motto:focus-visible, .footer-motto:active, .footer-links a:hover, .footer-links a:focus-visible, .footer-links a:active { color: #2448a5; }
 html[data-theme="dark"] .footer-motto:hover, html[data-theme="dark"] .footer-motto:focus-visible, html[data-theme="dark"] .footer-motto:active, html[data-theme="dark"] .footer-links a:hover, html[data-theme="dark"] .footer-links a:focus-visible, html[data-theme="dark"] .footer-links a:active { color: #a9beff; }
+
+.page-heading-copy > .text-link { display: inline-block; margin-bottom: 24px; }
+.photo-page-heading { display: grid; grid-template-columns: 1.1fr 1fr; gap: clamp(28px, 5vw, 80px); align-items: center; }
+.page-heading-photo { margin: 0; position: relative; border: 2px solid #edf2ff; box-shadow: 9px 9px #182743; overflow: hidden; background: #202e49; }
+.page-heading-photo img { display: block; width: 100%; height: 330px; object-fit: cover; }
+.page-heading-photo figcaption { position: absolute; bottom: 16px; left: 16px; background: #ffe45e; color: #192743; padding: 8px 14px; font-size: 13px; font-weight: 700; border: 2px solid #192743; }
+.poster-heading img { object-fit: contain; padding: 12px; }
+.explore-card > img.poster-cover { object-fit: contain; background: #202e49; }
+.explore-card > img { transition: filter .2s; }
+.explore-card:hover > img { filter: brightness(1.06); }
+@media(max-width: 800px) {
+ .photo-page-heading { grid-template-columns: 1fr; }
+ .page-heading-photo img { height: 280px; }
+}
+@media(prefers-reduced-motion: reduce) { .explore-card > img { transition: none; } }

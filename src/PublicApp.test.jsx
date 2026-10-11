@@ -39,7 +39,7 @@ describe("React public website", () => {
   it("keeps nine real page links and changes the theme and language preferences", async () => {
     setup();
     await screen.findByText("School announcement");
-    expect(screen.getByRole("navigation").querySelectorAll("a")).toHaveLength(
+    expect(screen.getByRole("navigation", { name: "Main navigation" }).querySelectorAll("a")).toHaveLength(
       9,
     );
     expect(

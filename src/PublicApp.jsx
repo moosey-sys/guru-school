@@ -144,8 +144,20 @@ export function Explore({ selection }) {
           <a className="explore-card" key={page.slug} href={"/" + page.slug}>
             <img
               src={"/assets/" + page.image}
-              className={page.logoCover ? "school-logo-cover" : undefined}
-              alt={page.logoCover ? t("Guru school crest") : ""}
+              className={
+                page.logoCover
+                  ? "school-logo-cover"
+                  : page.containCover
+                    ? "poster-cover"
+                    : undefined
+              }
+              alt={
+                page.logoCover
+                  ? t("Guru school crest")
+                  : page.updatedCover
+                    ? t(page.imageAlt)
+                    : ""
+              }
               loading="lazy"
               width="600"
               height="450"
@@ -406,13 +418,31 @@ export default function PublicApp({ path = "/" }) {
           </>
         ) : (
           <>
-            <section className="page-heading section">
-              <a className="text-link" href="/">
-                {t("Home ↗︎")}
-              </a>
-              <p className="eyebrow">{t(page.label)}</p>
-              <h1>{t(page.title)}</h1>
-              <p className="large-copy">{t(page.description)}</p>
+            <section
+              className={`page-heading section ${page.updatedCover ? "photo-page-heading" : ""}`}
+            >
+              <div className="page-heading-copy">
+                <a className="text-link" href="/">
+                  {t("Home ↗︎")}
+                </a>
+                <p className="eyebrow">{t(page.label)}</p>
+                <h1>{t(page.title)}</h1>
+                <p className="large-copy">{t(page.description)}</p>
+              </div>
+              {page.updatedCover && (
+                <figure
+                  className={`page-heading-photo ${page.containCover ? "poster-heading" : ""}`}
+                >
+                  <img
+                    src={"/assets/" + page.image}
+                    alt={t(page.imageAlt)}
+                    width="1280"
+                    height="960"
+                    fetchPriority="high"
+                  />
+                  <figcaption>{t(page.label)}</figcaption>
+                </figure>
+              )}
             </section>
             {page.slug === "gallery" ? (
               <Gallery

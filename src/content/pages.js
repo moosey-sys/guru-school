@@ -14,7 +14,9 @@ export const pages = [
     description:
       "Get to know Guru’s story, values and approach to nurturing curious, confident children.",
     ids: ["about", "values"],
-    image: "campus.webp",
+    image: "gallery-folder-9262.webp",
+    updatedCover: true,
+    imageAlt: "Guru school entrance",
   },
   {
     slug: "programmes",
@@ -23,7 +25,9 @@ export const pages = [
     description:
       "Explore Guru’s early years and primary programmes, then talk with our team about the right next step for your child.",
     ids: ["programmes"],
-    image: "primary.webp",
+    image: "gallery-folder-9260.webp",
+    updatedCover: true,
+    imageAlt: "Primary classroom",
   },
   {
     slug: "life",
@@ -33,7 +37,9 @@ export const pages = [
       "Explore learning, play, creativity and community in everyday life at Guru.",
     ids: ["life"],
     community: true,
-    image: "discovery.webp",
+    image: "gallery-folder-9264.webp",
+    updatedCover: true,
+    imageAlt: "Classroom facilities",
   },
   {
     slug: "campus",
@@ -42,7 +48,9 @@ export const pages = [
     description:
       "Explore Guru’s classrooms, play spaces and facilities in San Chaung, Yangon.",
     ids: ["campus"],
-    image: "classroom.webp",
+    image: "gallery-folder-9261.webp",
+    updatedCover: true,
+    imageAlt: "School welcome area",
   },
   {
     slug: "team",
@@ -70,7 +78,10 @@ export const pages = [
     description:
       "Read the latest published updates and announcements from our school team.",
     ids: ["school-news"],
-    image: "gallery-update-6222095624409125898.webp",
+    image: "gallery-folder-9263.webp",
+    updatedCover: true,
+    imageAlt: "School information poster",
+    containCover: true,
   },
   {
     slug: "contact",
