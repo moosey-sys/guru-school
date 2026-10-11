@@ -2827,3 +2827,9 @@ html[data-theme="dark"] textarea:focus-visible {
   margin-bottom: 24px;
   border: var(--line);
 }
+
+.explore-card > img.school-logo-cover {
+  object-fit: contain;
+  padding: 20px;
+  background: #202e49;
+}

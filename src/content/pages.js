@@ -51,7 +51,8 @@ export const pages = [
     description:
       "Get to know the leadership and people guiding our school community.",
     ids: ["team"],
-    image: "founder.webp",
+    image: "crest.png",
+    logoCover: true,
   },
   {
     slug: "gallery",

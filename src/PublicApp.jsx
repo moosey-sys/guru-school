@@ -144,7 +144,8 @@ export function Explore({ selection }) {
           <a className="explore-card" key={page.slug} href={"/" + page.slug}>
             <img
               src={"/assets/" + page.image}
-              alt=""
+              className={page.logoCover ? "school-logo-cover" : undefined}
+              alt={page.logoCover ? t("Guru school crest") : ""}
               loading="lazy"
               width="600"
               height="450"
