@@ -1245,3 +1245,11 @@ html[data-theme="dark"] .admin-shell {
 .delete-confirmation { margin-top: 20px; padding: 16px; border: 2px solid #de6674; }
 .delete-confirmation p { margin-top: 0; }
 .delete-confirmation button + button { margin-left: 12px; }
+
+.admin-language { display: flex; gap: 4px; }
+.admin-shell .admin-language button[aria-pressed="true"] { background: #ffe45e; color: #192743; }
+html[lang="my"] .admin-shell { line-height: 1.8; }
+html[lang="my"] .admin-shell h1, html[lang="my"] .admin-shell h2, html[lang="my"] .admin-shell h3 { line-height: 1.5; letter-spacing: normal; }
+html[lang="my"] .admin-shell h1 { font-size: clamp(28px, 3.2vw, 44px); }
+html[lang="my"] .admin-shell .eyebrow { letter-spacing: normal; }
+.admin-shell .header-actions { flex-wrap: wrap; }

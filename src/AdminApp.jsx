@@ -5,7 +5,7 @@ import { TrafficPanel, initialSelection } from "./components/TrafficPanel";
 import { ContentEditor, PhotosEditor } from "./components/ContentEditor";
 import { Inbox } from "./components/Inbox";
 export default function AdminApp() {
-  const { theme, toggleTheme } = usePreferences();
+  const { theme, toggleTheme, language, selectLanguage, t } = usePreferences();
   const [session, setSession] = useState(null);
   const [tab, setTab] = useState("overview");
   const [content, setContent] = useState(null);
@@ -262,20 +262,42 @@ export default function AdminApp() {
             alt="Guru crest"
           />
           <span>
-            GURU<small>STAFF DASHBOARD</small>
+            GURU<small>{t("STAFF DASHBOARD")}</small>
           </span>
         </a>
         <div className="header-actions">
+          <div
+            className="admin-language"
+            role="group"
+            aria-label="Dashboard language"
+          >
+            <button
+              type="button"
+              lang="en"
+              aria-pressed={language === "en"}
+              onClick={() => selectLanguage("en")}
+            >
+              EN
+            </button>
+            <button
+              type="button"
+              lang="my"
+              aria-pressed={language === "my"}
+              onClick={() => selectLanguage("my")}
+            >
+              မြန်မာ
+            </button>
+          </div>
           <button
             id="admin-theme-toggle"
             aria-pressed={theme === "dark"}
             type="button"
             onClick={toggleTheme}
           >
-            {theme === "dark" ? "☀ Light mode" : "☾ Dark mode"}
+            {t(theme === "dark" ? "☀ Light mode" : "☾ Dark mode")}
           </button>
           <a href="/" target="_blank" rel="noopener">
-            View website ↗
+            {t("View website ↗")}
           </a>
           {session && (
             <button
@@ -289,7 +311,7 @@ export default function AdminApp() {
                 })
               }
             >
-              Sign out
+              {t("Sign out")}
             </button>
           )}
         </div>
@@ -297,15 +319,16 @@ export default function AdminApp() {
       <main>
         {!session ? (
           <section id="login-panel" className="login card">
-            <p className="eyebrow">WELCOME BACK</p>
+            <p className="eyebrow">{t("WELCOME BACK")}</p>
             <h1>
-              A little care.
-              <br />A big difference.
+              {t("A little care.")}
+              <br />
+              {t("A big difference.")}
             </h1>
-            <p>Sign in to keep your school community up to date.</p>
+            <p>{t("Sign in to keep your school community up to date.")}</p>
             <form id="login-form" onSubmit={login}>
               <label>
-                Username
+                {t("Username")}
                 <input
                   name="username"
                   autoComplete="username"
@@ -314,7 +337,7 @@ export default function AdminApp() {
                 />
               </label>
               <label>
-                Password
+                {t("Password")}
                 <input
                   name="password"
                   type="password"
@@ -324,7 +347,7 @@ export default function AdminApp() {
                 />
               </label>
               <button type="submit" className="primary" disabled={busy}>
-                Sign in ↗
+                {t("Sign in ↗")}
               </button>
             </form>
           </section>
@@ -332,13 +355,17 @@ export default function AdminApp() {
           <div id="workspace">
             <div className="dashboard-heading">
               <div>
-                <p className="eyebrow">YOUR SCHOOL, CONNECTED</p>
-                <h1>A clearer view of your school.</h1>
+                <p className="eyebrow">{t("YOUR SCHOOL, CONNECTED")}</p>
+                <h1>{t("A clearer view of your school.")}</h1>
                 <p className="heading-caption">
-                  Your community, conversations and latest updates — together.
+                  {t(
+                    "Your community, conversations and latest updates — together.",
+                  )}
                 </p>
               </div>
-              <p id="account">Signed in as {session.user}</p>
+              <p id="account">
+                {t("Signed in as")} {session.user}
+              </p>
             </div>
             <nav aria-label="Dashboard sections">
               {[
@@ -357,7 +384,7 @@ export default function AdminApp() {
                     setStatus("");
                   }}
                 >
-                  {label}
+                  {t(label)}
                 </button>
               ))}
             </nav>
@@ -447,9 +474,9 @@ export default function AdminApp() {
                 />
               ) : (
                 <p>
-                  Content could not be loaded.{" "}
+                  {t("Content could not be loaded.")}{" "}
                   <button disabled={busy} onClick={() => work(loadContent)}>
-                    Reload content
+                    {t("Reload content")}
                   </button>
                 </p>
               )}
@@ -501,9 +528,9 @@ export default function AdminApp() {
                 />
               ) : (
                 <p>
-                  Gallery content could not be loaded.{" "}
+                  {t("Gallery content could not be loaded.")}{" "}
                   <button disabled={busy} onClick={() => work(loadContent)}>
-                    Reload content
+                    {t("Reload content")}
                   </button>
                 </p>
               )}
@@ -511,10 +538,10 @@ export default function AdminApp() {
           </div>
         )}
         <p id="global-status" role="status" aria-live="polite">
-          {status}
+          {t(status)}
         </p>
       </main>
-      <footer>Guru International School · Staff access only</footer>
+      <footer>{t("Guru International School · Staff access only")}</footer>
     </div>
   );
 }

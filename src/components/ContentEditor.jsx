@@ -1,3 +1,4 @@
+import { usePreferences } from "../preferences";
 import React from "react";
 import { galleryPhotos } from "../content/gallery";
 export const categories = {
@@ -8,10 +9,11 @@ export const categories = {
   information: "Information",
 };
 function Field({ label, value, onChange, multiline, ...props }) {
+  const { t, language } = usePreferences();
   const Input = multiline ? "textarea" : "input";
   return (
     <label className={multiline ? "full" : undefined}>
-      {label}
+      {t(label)}
       <Input
         value={value || ""}
         onChange={(event) => onChange(event.target.value)}
@@ -28,6 +30,7 @@ export function ContentEditor({
   status,
   uploadNewsImage,
 }) {
+  const { t, language } = usePreferences();
   const changeNews = (id, key, value) =>
     setContent((current) => ({
       ...current,
@@ -64,15 +67,15 @@ export function ContentEditor({
       >
         <div className="section-heading">
           <div>
-            <h2>Keep families in the loop.</h2>
-            <p>English is required. Add Myanmar text when available.</p>
+            <h2>{t("Keep families in the loop.")}</h2>
+            <p>{t("English is required. Add Myanmar text when available.")}</p>
           </div>
           <button className="primary" type="submit" disabled={busy}>
-            Save changes ↗
+            {t("Save changes ↗")}
           </button>
         </div>
         <div className="card">
-          <h3>Announcement ribbon</h3>
+          <h3>{t("Announcement ribbon")}</h3>
           <div className="two-columns">
             <Field
               label="Announcement — English"
@@ -96,9 +99,9 @@ export function ContentEditor({
           </div>
         </div>
         <div className="section-heading">
-          <h3>School news</h3>
+          <h3>{t("School news")}</h3>
           <button id="add-news" type="button" onClick={add} disabled={busy}>
-            + Add news
+            {t("+ Add news")}
           </button>
         </div>
         <div id="news-editor">
@@ -133,7 +136,7 @@ export function ContentEditor({
                       changeNews(item.id, "published", event.target.checked)
                     }
                   />
-                  Publish on the website
+                  {t("Publish on the website")}
                 </label>
                 <Field
                   label="Story — English"
@@ -153,7 +156,7 @@ export function ContentEditor({
               </div>
               <div className="news-image-editor">
                 <label>
-                  News image (optional)
+                  {t("News image (optional)")}
                   <input
                     type="file"
                     accept="image/jpeg,image/png,image/webp"
@@ -166,7 +169,9 @@ export function ContentEditor({
                   />
                 </label>
                 <p>
-                  JPEG, PNG or WebP, up to 2.5 MB. Save changes after uploading.
+                  {t(
+                    "JPEG, PNG or WebP, up to 2.5 MB. Save changes after uploading.",
+                  )}
                 </p>
                 {item.imageId && (
                   <>
@@ -197,7 +202,7 @@ export function ContentEditor({
                       disabled={busy}
                       onClick={() => changeNews(item.id, "imageId", "")}
                     >
-                      Remove image
+                      {t("Remove image")}
                     </button>
                   </>
                 )}
@@ -215,7 +220,7 @@ export function ContentEditor({
                   );
                 }}
               >
-                Remove news
+                {t("Remove news")}
               </button>
             </article>
           ))}
@@ -233,6 +238,7 @@ export function PhotosEditor({
   toggleExisting,
   busy,
 }) {
+  const { t, language } = usePreferences();
   const change = (id, key, value) =>
     setContent((current) => ({
       ...current,
@@ -244,9 +250,11 @@ export function PhotosEditor({
     <section id="panel-photos">
       <div className="section-heading">
         <div>
-          <h2>Life at Guru, in pictures.</h2>
+          <h2>{t("Life at Guru, in pictures.")}</h2>
           <p>
-            Add photos to the existing gallery. JPEG, PNG or WebP, up to 2.5 MB.
+            {t(
+              "Add photos to the existing gallery. JPEG, PNG or WebP, up to 2.5 MB.",
+            )}
           </p>
         </div>
       </div>
@@ -260,7 +268,7 @@ export function PhotosEditor({
       >
         <div className="two-columns">
           <label>
-            Photo
+            {t("Photo")}
             <input
               name="photo"
               type="file"
@@ -269,44 +277,45 @@ export function PhotosEditor({
             />
           </label>
           <label>
-            Category
+            {t("Category")}
             <select name="category">
               {Object.entries(categories).map(([value, label]) => (
                 <option key={value} value={value}>
-                  {label}
+                  {t(label)}
                 </option>
               ))}
             </select>
           </label>
           <label>
-            Caption — English
+            {t("Caption — English")}
             <input name="caption" maxLength={200} required />
           </label>
           <label>
-            Caption — Myanmar
+            {t("Caption — Myanmar")}
             <input name="captionMy" maxLength={200} />
           </label>
         </div>
         <label className="check">
           <input name="published" type="checkbox" defaultChecked />
-          Publish on the website
+          {t("Publish on the website")}
         </label>
         <button className="primary" disabled={busy}>
-          Upload photo ↗
+          {t("Upload photo ↗")}
         </button>
       </form>
       <section className="existing-gallery">
         <div className="section-heading">
           <div>
-            <h3>Existing website photos</h3>
+            <h3>{t("Existing website photos")}</h3>
             <p>
-              Hide a photo to remove it from the gallery. You can show it again
-              at any time.
+              {t(
+                "Hide a photo to remove it from the gallery. You can show it again at any time.",
+              )}
             </p>
           </div>
           <span>
-            {galleryPhotos.length - (content.hiddenGallery || []).length} of{" "}
-            {galleryPhotos.length} visible
+            {galleryPhotos.length - (content.hiddenGallery || []).length}{" "}
+            {t("of")} {galleryPhotos.length} {t("visible")}
           </span>
         </div>
         <div className="existing-photo-grid">
@@ -320,7 +329,9 @@ export function PhotosEditor({
                   loading="lazy"
                 />
                 <div>
-                  <span className="badge">{hidden ? "Hidden" : "Visible"}</span>
+                  <span className="badge">
+                    {t(hidden ? "Hidden" : "Visible")}
+                  </span>
                   <h4>{photo.caption}</h4>
                   <button
                     type="button"
@@ -328,7 +339,7 @@ export function PhotosEditor({
                     aria-label={`${hidden ? "Show" : "Hide"} ${photo.caption}`}
                     onClick={() => toggleExisting(photo.image, hidden)}
                   >
-                    {hidden ? "Show on website" : "Hide from website"}
+                    {t(hidden ? "Show on website" : "Hide from website")}
                   </button>
                 </div>
               </article>
@@ -336,7 +347,7 @@ export function PhotosEditor({
           })}
         </div>
       </section>
-      {content.photos.length > 0 && <h3>Uploaded photos</h3>}
+      {content.photos.length > 0 && <h3>{t("Uploaded photos")}</h3>}
       <div id="photos-editor">
         {content.photos.map((item) => (
           <article key={item.id} className="card photo-editor">
@@ -357,7 +368,7 @@ export function PhotosEditor({
                   maxLength={200}
                 />
                 <label>
-                  Category
+                  {t("Category")}
                   <select
                     value={item.category}
                     onChange={(event) =>
@@ -366,7 +377,7 @@ export function PhotosEditor({
                   >
                     {Object.entries(categories).map(([value, label]) => (
                       <option key={value} value={value}>
-                        {label}
+                        {t(label)}
                       </option>
                     ))}
                   </select>
@@ -379,7 +390,7 @@ export function PhotosEditor({
                       change(item.id, "published", event.target.checked)
                     }
                   />
-                  Published
+                  {t("Published")}
                 </label>
               </div>
               <div className="editor-actions">
@@ -388,14 +399,14 @@ export function PhotosEditor({
                   disabled={busy}
                   onClick={() => savePhoto(item)}
                 >
-                  Save photo changes
+                  {t("Save photo changes")}
                 </button>
                 <button
                   type="button"
                   disabled={busy}
                   onClick={() => removePhoto(item)}
                 >
-                  Remove from website
+                  {t("Remove from website")}
                 </button>
               </div>
             </div>

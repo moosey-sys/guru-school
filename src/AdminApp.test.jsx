@@ -391,3 +391,45 @@ it("requires confirmation before deleting a message and removes it from the inbo
   });
   expect(request.headers["X-CSRF-Token"]).toBe("csrf-value");
 });
+it("switches dashboard language without changing messages or unsaved content", async () => {
+  setup();
+  await screen.findByText("Signed in as staff");
+  await waitFor(() =>
+    expect(document.querySelector("#inbox-count")).toHaveTextContent("1 shown"),
+  );
+  fireEvent.click(screen.getByRole("button", { name: "Announcements & news" }));
+  fireEvent.change(screen.getByLabelText("Announcement — English"), {
+    target: { value: "Unsaved English announcement" },
+  });
+  fireEvent.click(screen.getByRole("button", { name: "မြန်မာ", exact: true }));
+  expect(document.documentElement.lang).toBe("my");
+  expect(localStorage.getItem("guru-admin-language")).toBe("my");
+  expect(localStorage.getItem("guru-language")).toBeNull();
+  expect(screen.getByLabelText("ကြေညာချက် — အင်္ဂလိပ်")).toHaveValue(
+    "Unsaved English announcement",
+  );
+  fireEvent.click(
+    screen.getByRole("button", {
+      name: "စုံစမ်းမေးမြန်းမှုနှင့် ကျောင်းလည်ပတ်မှု",
+      exact: true,
+    }),
+  );
+  expect(screen.getByText(item.message)).toBeInTheDocument();
+  expect(screen.getByRole("button", { name: "စာဖျက်ရန်" })).toBeInTheDocument();
+  fireEvent.click(screen.getByRole("button", { name: "EN", exact: true }));
+  expect(document.documentElement.lang).toBe("en");
+  expect(
+    screen.getByRole("button", { name: "Delete message" }),
+  ).toBeInTheDocument();
+});
+it("restores the admin language independently of public website preferences", async () => {
+  localStorage.setItem("guru-admin-language", "my");
+  localStorage.setItem("guru-language", "en");
+  setup();
+  await screen.findByRole("button", {
+    name: "စုံစမ်းမေးမြန်းမှုနှင့် ကျောင်းလည်ပတ်မှု",
+    exact: true,
+  });
+  expect(document.documentElement.lang).toBe("my");
+  expect(localStorage.getItem("guru-language")).toBe("en");
+});
