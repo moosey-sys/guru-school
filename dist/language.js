@@ -1,6 +1,8 @@
 'use strict';
 (() => {
   const dictionary = window.GURU_MYANMAR;
+  const originalTitle = document.title;
+  const originalDescription = document.querySelector('meta[name="description"]').content;
   let language = 'en';
   try { language = localStorage.getItem('guru-language') === 'my' ? 'my' : 'en'; } catch { /* Storage is optional. */ }
   const textBindings = [];
@@ -28,8 +30,8 @@
     });
     attributes.forEach(({ element, attribute, original }) => element.setAttribute(attribute, window.guruTranslate(original)));
     document.querySelectorAll('[data-language]').forEach(button => button.setAttribute('aria-pressed', String(button.dataset.language === language)));
-    document.title = language === 'my' ? 'Guru နိုင်ငံတကာကျောင်း — ကလေးတိုင်း၊ အိပ်မက်တိုင်း။' : 'Guru International School — Every child. Every dream.';
-    document.querySelector('meta[name="description"]').content = language === 'my' ? 'ရန်ကုန်၊ စမ်းချောင်းရှိ Guru နိုင်ငံတကာကျောင်း။ အသက် ၂ မှ ၁၁ နှစ်အတွက် စူးစမ်းမှုအခြေခံ ပညာရေး။' : 'Discover Guru International School in San Chaung, Yangon. A nurturing, inquiry-based education for children ages 2–11.';
+    document.title = language === 'my' ? window.guruTranslate(originalTitle) : originalTitle;
+    document.querySelector('meta[name="description"]').content = window.guruTranslate(originalDescription);
     document.dispatchEvent(new CustomEvent('guru-language-change'));
   }
   document.querySelectorAll('[data-language]').forEach(button => button.addEventListener('click', () => {

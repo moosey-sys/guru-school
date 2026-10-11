@@ -158,6 +158,7 @@ const galleryMore = document.querySelector('.gallery-more');
 let galleryCategory = 'all';
 let galleryExpanded = false;
 function renderGallery() {
+  if (!galleryMore) return;
   const matching = galleryCards.filter(card => galleryCategory === 'all' || card.dataset.galleryCategory === galleryCategory);
   galleryCards.forEach(card => { const index = matching.indexOf(card); card.hidden = index < 0 || (!galleryExpanded && index >= 8); });
   galleryMore.hidden = matching.length <= 8;
@@ -172,17 +173,18 @@ document.querySelectorAll('[data-gallery-filter]').forEach(button => button.addE
   document.querySelectorAll('[data-gallery-filter]').forEach(item => { const active = item === button; item.classList.toggle('active', active); item.setAttribute('aria-pressed', String(active)); });
   renderGallery();
 }));
-galleryMore.addEventListener('click', () => { galleryExpanded = !galleryExpanded; renderGallery(); });
+galleryMore?.addEventListener('click', () => { galleryExpanded = !galleryExpanded; renderGallery(); });
 document.addEventListener('guru-language-change', renderGallery);
 renderGallery();
 
 const heroArt = document.querySelector('.hero-art');
 function toggleHeroPhoto() {
+  if (!heroArt) return;
   const selected = heroArt.classList.toggle('is-selected');
   heroArt.setAttribute('aria-pressed', String(selected));
 }
-heroArt.addEventListener('click', toggleHeroPhoto);
-heroArt.addEventListener('keydown', event => {
+heroArt?.addEventListener('click', toggleHeroPhoto);
+heroArt?.addEventListener('keydown', event => {
   if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); toggleHeroPhoto(); }
 });
 

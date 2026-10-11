@@ -4,8 +4,9 @@
   "private": true,
   "scripts": {
     "dev": "node --env-file=.env --env-file=.env.local scripts/dev-server.js",
-    "check": "node scripts/check.mjs && node security-check.mjs",
-    "test": "node --test tests/*.test.js"
+    "check": "node scripts/build-pages.mjs && node scripts/check.mjs && node security-check.mjs",
+    "test": "node --test tests/*.test.js",
+    "build": "node scripts/build-pages.mjs"
   },
   "dependencies": {
     "@vercel/blob": "^2.8.1",

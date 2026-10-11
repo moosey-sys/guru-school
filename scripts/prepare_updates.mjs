@@ -14,6 +14,8 @@ for(const [i,source] of photos.entries()){
 }
 const escape=value=>value.replaceAll('&','&amp;').replaceAll('"','&quot;').replaceAll('<','&lt;');
 const cards=items.map(({image,caption,category,width,height})=>`<button class="full-gallery-card" data-gallery-category="${category}" data-image="assets/${image}" data-caption="${escape(caption)}"><img src="assets/${image}" alt="${escape(caption)}" loading="lazy" width="${width}" height="${height}"><span>${escape(caption)} ↗︎</span></button>`).join('');
-const htmlPath=project+'dist/index.html';let html=readFileSync(htmlPath,'utf8');html=html.replace(/<!-- updated-photos:start -->[\s\S]*?<!-- updated-photos:end -->/,'');html=html.replace('<div class="full-gallery">',`<div class="full-gallery"><!-- updated-photos:start -->${cards}<!-- updated-photos:end -->`).replace('Photos and visuals from our school materials.','School moments, celebrations and adventures.').replace('translations.js?v=dynamic-14','translations.js?v=photos-15');writeFileSync(htmlPath,html);
+const htmlPath=project+'scripts/site-template.html';let html=readFileSync(htmlPath,'utf8');html=html.replace(/<!-- updated-photos:start -->[\s\S]*?<!-- updated-photos:end -->/,'');html=html.replace('<div class="full-gallery">',`<div class="full-gallery"><!-- updated-photos:start -->${cards}<!-- updated-photos:end -->`).replace('Photos and visuals from our school materials.','School moments, celebrations and adventures.').replace('translations.js?v=dynamic-14','translations.js?v=photos-15');writeFileSync(htmlPath,html);
 const path=project+'scripts/gallery-manifest.json';let manifest=JSON.parse(readFileSync(path,'utf8')).filter(item=>!item.image.startsWith('gallery-update-'));writeFileSync(path,JSON.stringify([...items,...manifest],null,2)+'\n');
 console.log(`Prepared ${items.length} updated photos.`);
+
+await import('./build-pages.mjs');

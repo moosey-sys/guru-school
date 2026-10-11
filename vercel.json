@@ -39,6 +39,38 @@
     {
       "source": "/admin",
       "destination": "/admin.html"
+    },
+    {
+      "source": "/about",
+      "destination": "/about.html"
+    },
+    {
+      "source": "/programmes",
+      "destination": "/programmes.html"
+    },
+    {
+      "source": "/life",
+      "destination": "/life.html"
+    },
+    {
+      "source": "/campus",
+      "destination": "/campus.html"
+    },
+    {
+      "source": "/team",
+      "destination": "/team.html"
+    },
+    {
+      "source": "/gallery",
+      "destination": "/gallery.html"
+    },
+    {
+      "source": "/news",
+      "destination": "/news.html"
+    },
+    {
+      "source": "/contact",
+      "destination": "/contact.html"
     }
   ],
   "functions": {

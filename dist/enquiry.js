@@ -1,5 +1,6 @@
 (() => {
   const form = document.querySelector('#enquiry-form');
+  if (!form) return;
   const status = document.querySelector('#enquiry-status');
   const submit = form.querySelector('[type="submit"]');
   const dateRow = form.querySelector('.visit-date');

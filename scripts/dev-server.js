@@ -10,7 +10,7 @@ http.createServer(async(req,res)=>{
   res.status=code=>{res.statusCode=code;return res;};res.json=data=>{res.setHeader('Content-Type','application/json');res.end(JSON.stringify(data));};
   await handler(req,res);return;
  }
- const target=url.pathname==='/admin'?'/admin.html':url.pathname==='/'?'/index.html':url.pathname;
+ const target=url.pathname==='/admin'?'/admin.html':url.pathname==='/'?'/index.html':/^\/(about|programmes|life|campus|team|gallery|news|contact)$/.test(url.pathname)?url.pathname+'.html':url.pathname;
  const root=path.resolve('dist'),file=path.resolve(root,`.${target}`);if(!file.startsWith(root+path.sep)){res.writeHead(403).end();return;}
  try{res.setHeader('Content-Type',types[path.extname(file)]||'application/octet-stream');res.end(fs.readFileSync(file));}catch{res.writeHead(404).end();}
-}).listen(5173,()=>console.log('Guru local preview: http://localhost:5173 (staff authentication requires HTTPS; use the deployed dashboard).'));
+}).listen(Number(process.env.PORT||5173),()=>console.log(`Guru local preview: http://localhost:${process.env.PORT||5173} (staff authentication requires HTTPS; use the deployed dashboard).`));
