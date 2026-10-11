@@ -6,11 +6,23 @@ function RequestCard({ item, save, busy }) {
     <article className="card">
       <div className="request-heading">
         <h3>{item.name}</h3>
-        <span className="badge">{item.kind}</span>
+        <div className="request-badges">
+          <span className="badge">{item.kind}</span>
+          <span className={`badge request-status status-${item.status}`}>
+            {{
+              new: "New",
+              "in-progress": "In progress",
+              confirmed: "Confirmed",
+              closed: "Closed",
+            }[item.status] || item.status}
+          </span>
+        </div>
       </div>
       <div className="request-info">
         <a href={`mailto:${item.email}`}>{item.email}</a>
-        <span>{item.phone || "No phone supplied"}</span>
+        {item.phone && (
+          <a href={`tel:${item.phone.replace(/[^+0-9]/g, "")}`}>{item.phone}</a>
+        )}
         <span>
           {new Date(item.created).toLocaleString("en-GB", {
             timeZone: "Asia/Yangon",
@@ -19,17 +31,22 @@ function RequestCard({ item, save, busy }) {
       </div>
       {item.date && <p>Preferred visit: {item.date}</p>}
       <div className="message">{item.message}</div>
-      <p className="muted">
-        Email notification: {item.emailStatus} · Reference: {item.id}
-      </p>
-      <label>
-        Internal team notes
-        <textarea
-          value={notes}
-          maxLength={2000}
-          onChange={(event) => setNotes(event.target.value)}
-        />
-      </label>
+      {item.emailStatus === "failed" && (
+        <p className="request-email-warning">
+          Email notification failed. This message is saved here.
+        </p>
+      )}
+      <details className="request-notes">
+        <summary>Team notes{notes ? " · added" : " (optional)"}</summary>
+        <label>
+          Internal team notes
+          <textarea
+            value={notes}
+            maxLength={2000}
+            onChange={(event) => setNotes(event.target.value)}
+          />
+        </label>
+      </details>
       <div className="request-actions">
         <label>
           Status
@@ -45,7 +62,7 @@ function RequestCard({ item, save, busy }) {
           </select>
         </label>
         <button disabled={busy} onClick={() => save(item, status, notes)}>
-          Save status &amp; notes
+          Save update
         </button>
         <a
           href={`mailto:${item.email}?subject=${encodeURIComponent("Re: Guru school enquiry")}`}
@@ -77,21 +94,18 @@ export function Inbox({
     <section id="panel-inbox">
       <div className="section-heading">
         <div>
-          <h2>Conversations start here.</h2>
-          <p>
-            View messages, track visit requests, and keep your team’s notes
-            together.
-          </p>
+          <h2>Enquiries &amp; visits</h2>
+          <p>Read messages, contact families and track requests.</p>
         </div>
         <button id="refresh-inbox" disabled={busy} onClick={refresh}>
           Refresh
         </button>
       </div>
-      <div id="mail-status" className="notice">
-        {mailConfigured
-          ? "Enquiries are saved here. Email notifications are configured; each request shows its delivery status."
-          : "Enquiries are saved here. Email notifications are not configured yet; review new messages in this dashboard."}
-      </div>
+      {!mailConfigured && (
+        <div id="mail-status" className="notice">
+          Email notifications are unavailable. Messages are saved here.
+        </div>
+      )}
       <div className="filters">
         <label>
           Show
@@ -115,7 +129,7 @@ export function Inbox({
           </select>
         </label>
         <span id="inbox-count">
-          {matching.length} shown · {items.length} loaded
+          {matching.length} shown{cursor ? ` · ${items.length} loaded` : ""}
         </span>
       </div>
       <div id="inbox-list">
@@ -129,7 +143,11 @@ export function Inbox({
             />
           ))
         ) : (
-          <div className="card">No requests here yet.</div>
+          <div className="card">
+            {items.length
+              ? "No requests match this filter."
+              : "No enquiries yet. New messages will appear here."}
+          </div>
         )}
       </div>
       {cursor && (

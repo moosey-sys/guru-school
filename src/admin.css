@@ -958,3 +958,38 @@ html[data-theme="dark"] a:focus-visible {
 .news-image-editor > button {
   justify-self: start;
 }
+
+.request-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+}
+.request-status.status-new {
+  background: #315ddb;
+  color: #fff;
+}
+.request-status.status-closed {
+  background: var(--surface-soft);
+  color: var(--muted);
+}
+.request-notes {
+  margin-block: 18px;
+  border-top: 1px solid var(--border);
+  padding-top: 16px;
+}
+.request-notes summary {
+  cursor: pointer;
+  font-weight: 600;
+  color: var(--muted);
+}
+.request-notes label {
+  margin-top: 16px;
+}
+.request-email-warning {
+  color: var(--ink);
+  font-size: 13px;
+}
+#inbox-list .message {
+  margin-block: 18px;
+}

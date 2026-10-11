@@ -207,7 +207,7 @@ it("filters visit requests and saves internal notes/status without claiming a bo
   fireEvent.change(screen.getByLabelText("Status", { exact: true }), {
     target: { value: "confirmed" },
   });
-  fireEvent.click(screen.getByRole("button", { name: "Save status & notes" }));
+  fireEvent.click(screen.getByRole("button", { name: "Save update" }));
   await screen.findByText(
     "Request updated. Status changes do not send an email; contact the family to confirm.",
   );
