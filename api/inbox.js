@@ -119,6 +119,20 @@ module.exports = c.wrap(async (req, res) => {
     updated: new Date().toISOString(),
   };
   if (
+    next.status === "confirmed" &&
+    next.kind === "Book a school visit" &&
+    next.time &&
+    !next.slotId
+  ) {
+    if (newReservation) await v.release(booking.slotId, data.id);
+    return res
+      .status(400)
+      .json({
+        error:
+          "Choose an available visit time before reopening a closed booking.",
+      });
+  }
+  if (
     data.notify &&
     (!next.date ||
       !next.time ||
@@ -126,12 +140,10 @@ module.exports = c.wrap(async (req, res) => {
       next.status !== "confirmed")
   ) {
     if (newReservation) await v.release(booking.slotId, data.id);
-    return res
-      .status(400)
-      .json({
-        error:
-          "Choose a visit time and confirmed status before emailing the family.",
-      });
+    return res.status(400).json({
+      error:
+        "Choose a visit time and confirmed status before emailing the family.",
+    });
   }
   let saved;
   try {
