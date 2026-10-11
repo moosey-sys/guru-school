@@ -358,3 +358,36 @@ it("hides and restores existing gallery photos without uploading or deleting ima
   expect(JSON.parse(restored.body).content.hiddenGallery).toEqual([]);
   expect(fetch.mock.calls.some(([url]) => url === "/api/media")).toBe(false);
 });
+it("requires confirmation before deleting a message and removes it from the inbox", async () => {
+  const fetch = setup();
+  await screen.findByText("Signed in as staff");
+  await waitFor(() =>
+    expect(document.querySelector("#inbox-count")).toHaveTextContent("1 shown"),
+  );
+  fireEvent.click(screen.getByRole("button", { name: "Enquiries & visits" }));
+  fireEvent.click(screen.getByRole("button", { name: "Delete message" }));
+  expect(
+    fetch.mock.calls.some(
+      ([url, options]) => url === "/api/inbox" && options.method === "DELETE",
+    ),
+  ).toBe(false);
+  fireEvent.click(screen.getByRole("button", { name: "Cancel" }));
+  expect(
+    screen.queryByRole("button", { name: "Confirm deletion" }),
+  ).not.toBeInTheDocument();
+  fireEvent.click(screen.getByRole("button", { name: "Delete message" }));
+  fireEvent.click(screen.getByRole("button", { name: "Confirm deletion" }));
+  await screen.findByText(
+    "Message deleted from the dashboard. Existing emails remain in your mailbox.",
+  );
+  expect(document.querySelector("#inbox-count")).toHaveTextContent("0 shown");
+  const request = fetch.mock.calls.find(
+    ([url, options]) => url === "/api/inbox" && options.method === "DELETE",
+  )[1];
+  expect(JSON.parse(request.body)).toEqual({
+    id: item.id,
+    createdKey: item.createdKey,
+    version: item.version,
+  });
+  expect(request.headers["X-CSRF-Token"]).toBe("csrf-value");
+});

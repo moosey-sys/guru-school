@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-function RequestCard({ item, save, busy }) {
+function RequestCard({ item, save, remove, busy }) {
+  const [confirmDelete, setConfirmDelete] = useState(false);
   const [notes, setNotes] = useState(item.notes || "");
   const [status, setStatus] = useState(item.status);
   return (
@@ -69,7 +70,33 @@ function RequestCard({ item, save, busy }) {
         >
           Reply by email ↗
         </a>
+        <button
+          className="request-delete"
+          disabled={busy}
+          onClick={() => setConfirmDelete(true)}
+        >
+          Delete message
+        </button>
       </div>
+      {confirmDelete && (
+        <div className="delete-confirmation" role="alert">
+          <p>
+            Delete this message from {item.name}? This permanently removes the
+            dashboard record and team notes. Emails already in your mailbox
+            remain.
+          </p>
+          <button disabled={busy} onClick={() => setConfirmDelete(false)}>
+            Cancel
+          </button>
+          <button
+            className="request-delete"
+            disabled={busy}
+            onClick={() => remove(item)}
+          >
+            Confirm deletion
+          </button>
+        </div>
+      )}
     </article>
   );
 }
@@ -79,6 +106,7 @@ export function Inbox({
   refresh,
   more,
   save,
+  remove,
   busy,
   mailConfigured,
 }) {
@@ -140,6 +168,7 @@ export function Inbox({
               item={item}
               busy={busy}
               save={save}
+              remove={remove}
             />
           ))
         ) : (

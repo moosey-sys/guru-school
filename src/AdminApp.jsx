@@ -386,6 +386,24 @@ export default function AdminApp() {
                 more={() => work(() => loadInbox(true))}
                 busy={busy}
                 mailConfigured={mailConfigured}
+                remove={(item) =>
+                  work(async () => {
+                    await api("/api/inbox", {
+                      method: "DELETE",
+                      body: JSON.stringify({
+                        id: item.id,
+                        createdKey: item.createdKey,
+                        version: item.version,
+                      }),
+                    });
+                    setInbox((current) =>
+                      current.filter((old) => old.id !== item.id),
+                    );
+                    setStatus(
+                      "Message deleted from the dashboard. Existing emails remain in your mailbox.",
+                    );
+                  })
+                }
                 save={(item, status, notes) =>
                   work(async () => {
                     const result = await api("/api/inbox", {

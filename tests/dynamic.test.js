@@ -55,3 +55,16 @@ test('existing gallery visibility persists and rejects unknown or duplicate phot
  for(const hiddenGallery of [['../private'],[image,image]])assert.equal((await run(content,{method:'PUT',headers,body:{content:{...site,hiddenGallery},version:saved.body.version}})).statusCode,400);
  const restored=await run(content,{method:'PUT',headers,body:{content:{...site,hiddenGallery:[]},version:saved.body.version}});assert.equal(restored.statusCode,200);assert.deepEqual(restored.body.content.hiddenGallery,[]);
 });
+test('deleting enquiries requires staff, CSRF and current version and frees storage',async()=>{
+ const id=crypto.randomUUID(),createdKey='1791670000000',path=`enquiries/${createdKey}-${id}.json`;
+ const saved=await c.write(path,{id,createdKey,created:new Date().toISOString(),name:'Delete test',status:'closed'});
+ const body={id,createdKey,version:saved.etag};
+ assert.equal((await run(inbox,{method:'DELETE',body})).statusCode,401);
+ assert.equal((await run(inbox,{method:'DELETE',headers:{...headers,'x-csrf-token':''},body})).statusCode,403);
+ assert.equal((await run(inbox,{method:'DELETE',headers,body:{...body,createdKey:'../private'}})).statusCode,400);
+ assert.equal((await run(inbox,{method:'DELETE',headers,body:{...body,version:'stale'}})).statusCode,409);
+ assert.ok(records.has(path));
+ assert.equal((await run(inbox,{method:'DELETE',headers,body})).statusCode,200);
+ assert.equal(records.has(path),false);
+ assert.equal((await run(inbox,{method:'DELETE',headers,body})).statusCode,404);
+});
