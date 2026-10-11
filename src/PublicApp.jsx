@@ -21,13 +21,14 @@ import { Lightbox } from "./components/Lightbox";
 export function SiteHeader({ page, announcement }) {
   const { language, selectLanguage, theme, toggleTheme, t } = usePreferences();
   const [open, setOpen] = useState(false);
+  const menuButton = useRef(null);
   useEffect(() => {
     const escape = (event) => {
-      if (event.key === "Escape") setOpen(false);
+      if (event.key === "Escape" && open) { setOpen(false); menuButton.current?.focus(); }
     };
     document.addEventListener("keydown", escape);
     return () => document.removeEventListener("keydown", escape);
-  }, []);
+  }, [open]);
   return (
     <>
       <a className="skip" href="#main">
@@ -101,6 +102,7 @@ export function SiteHeader({ page, announcement }) {
             </span>
           </button>
           <button
+            ref={menuButton}
             className="menu-toggle"
             aria-controls="nav"
             aria-expanded={open}
@@ -410,7 +412,7 @@ export default function PublicApp({ path = "/" }) {
             : content?.announcement
         }
       />
-      <main id="main">
+      <main id="main" tabIndex={-1}>
         {!page.slug ? (
           <>
             <Hero />

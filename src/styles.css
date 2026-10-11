@@ -1435,7 +1435,7 @@ html[data-theme="dark"] .theme-toggle {
 }
 .language-tabs button[lang="my"] {
   font-family:
-    "Noto Sans Myanmar", "Myanmar Sangam MN", "Myanmar Text", sans-serif;
+    "Myanmar language label", "Myanmar Sangam MN", "Myanmar Text", sans-serif;
 }
 .header-controls {
   gap: 10px;
