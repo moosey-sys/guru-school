@@ -142,6 +142,15 @@ it("saves bilingual announcement and news through a CSRF-protected versioned req
       exact: true,
     }),
   );
+  fireEvent.change(screen.getByLabelText("News image (optional)"), {
+    target: { files: [new File(["photo"], "news.png", { type: "image/png" })] },
+  });
+  await screen.findByText(
+    "News image uploaded. Save changes to apply it to the story.",
+  );
+  fireEvent.change(screen.getByLabelText("Image description — English"), {
+    target: { value: "Children learning together" },
+  });
   fireEvent.submit(document.querySelector("#content-form"));
   await screen.findByText(
     "Changes saved. Published content is now available on the website.",
@@ -154,7 +163,14 @@ it("saves bilingual announcement and news through a CSRF-protected versioned req
     version: "1",
     content: {
       announcement: "Updated announcement",
-      news: [{ title: "School story", published: true }],
+      news: [
+        {
+          title: "School story",
+          published: true,
+          imageId: "uploaded-photo",
+          imageAlt: "Children learning together",
+        },
+      ],
     },
   });
 });

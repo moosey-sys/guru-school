@@ -39,3 +39,12 @@ test('email notification uses the school inbox and visitor Reply-To, and SMTP fa
   const failed=await submit();assert.equal(failed.statusCode,200);const second=await run(inbox,{headers});assert.equal(second.body.items.find(item=>item.id===failed.body.reference).emailStatus,'failed');
  }finally{nodemailer.createTransport=original;for(const key of keys){if(before[key]===undefined)delete process.env[key];else process.env[key]=before[key];}}
 });
+
+test('news images validate storage references and become accessible only when published',async()=>{
+ const media=require('../api/media');const imageId=crypto.randomUUID();await c.write(`media/${imageId}.json`,{id:imageId});
+ const current=await run(content,{headers});const site={...current.body.content,news:[{id:crypto.randomUUID(),title:'Image story',body:'With a photo',date:'2026-10-11',published:false,imageId,imageAlt:'School photo',imageAltMy:''}]};
+ const save=await run(content,{method:'PUT',headers,body:{content:site,version:current.body.version}});assert.equal(save.statusCode,200);assert.equal(save.body.content.news[0].imageId,imageId);assert.equal((await run(media,{query:{id:imageId}})).statusCode,404);
+ const invalid={...site,news:[{...site.news[0],imageId:crypto.randomUUID()}]};assert.equal((await run(content,{method:'PUT',headers,body:{content:invalid,version:save.body.version}})).statusCode,400);
+ site.news[0].published=true;assert.equal((await run(content,{method:'PUT',headers,body:{content:site,version:save.body.version}})).statusCode,200);
+ const original=c.get;let accessed=false;c.get=async()=>{accessed=true;return null;};try{await run(media,{query:{id:imageId}});assert.ok(accessed);}finally{c.get=original;}
+});

@@ -158,6 +158,30 @@ export default function AdminApp() {
     setVersion(result.version);
     return result;
   }
+  async function uploadNewsImage(id, file) {
+    await work(async () => {
+      if (!file || file.size > 2500000)
+        throw Error("Choose a JPEG, PNG or WebP photo under 2.5 MB.");
+      setStatus("Uploading news image…");
+      const image = await new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = () => resolve(reader.result.split(",")[1]);
+        reader.onerror = () => reject(Error("Could not read this photo."));
+        reader.readAsDataURL(file);
+      });
+      const uploaded = await api("/api/media", {
+        method: "POST",
+        body: JSON.stringify({ image }),
+      });
+      setContent((current) => ({
+        ...current,
+        news: current.news.map((item) =>
+          item.id === id ? { ...item, imageId: uploaded.id } : item,
+        ),
+      }));
+      setStatus("News image uploaded. Save changes to apply it to the story.");
+    });
+  }
   async function upload(form) {
     await work(async () => {
       if (content.photos.length >= 100)
@@ -366,6 +390,7 @@ export default function AdminApp() {
                   setContent={setContent}
                   busy={busy}
                   status={setStatus}
+                  uploadNewsImage={uploadNewsImage}
                   save={() =>
                     work(async () => {
                       await saveSite();

@@ -211,6 +211,21 @@ function News({ content }) {
       <div className="news-grid">
         {published.map((item) => (
           <article className="news-card" key={item.id}>
+            {item.imageId && (
+              <img
+                className="news-image"
+                src={`/api/media?id=${item.imageId}`}
+                loading="lazy"
+                alt={
+                  language === "my"
+                    ? item.imageAltMy ||
+                      item.imageAlt ||
+                      item.titleMy ||
+                      item.title
+                    : item.imageAlt || item.title
+                }
+              />
+            )}
             <time dateTime={item.date}>{item.date}</time>
             <h3>
               {language === "my" && item.titleMy ? item.titleMy : item.title}

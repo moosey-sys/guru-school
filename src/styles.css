@@ -2815,3 +2815,12 @@ html[data-theme="dark"] select:focus-visible,
 html[data-theme="dark"] textarea:focus-visible {
   outline-color: #ffe14e;
 }
+
+.news-card .news-image {
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  display: block;
+  margin-bottom: 24px;
+  border: var(--line);
+}

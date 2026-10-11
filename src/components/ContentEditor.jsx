@@ -19,7 +19,14 @@ function Field({ label, value, onChange, multiline, ...props }) {
     </label>
   );
 }
-export function ContentEditor({ content, setContent, save, busy, status }) {
+export function ContentEditor({
+  content,
+  setContent,
+  save,
+  busy,
+  status,
+  uploadNewsImage,
+}) {
   const changeNews = (id, key, value) =>
     setContent((current) => ({
       ...current,
@@ -142,6 +149,57 @@ export function ContentEditor({ content, setContent, save, busy, status }) {
                   maxLength={3000}
                   multiline
                 />
+              </div>
+              <div className="news-image-editor">
+                <label>
+                  News image (optional)
+                  <input
+                    type="file"
+                    accept="image/jpeg,image/png,image/webp"
+                    disabled={busy}
+                    onChange={(event) => {
+                      const file = event.target.files[0];
+                      if (file) uploadNewsImage(item.id, file);
+                      event.target.value = "";
+                    }}
+                  />
+                </label>
+                <p>
+                  JPEG, PNG or WebP, up to 2.5 MB. Save changes after uploading.
+                </p>
+                {item.imageId && (
+                  <>
+                    <img
+                      src={`/api/media?id=${item.imageId}`}
+                      alt={item.imageAlt || item.title || "News image preview"}
+                    />
+                    <div className="two-columns">
+                      <Field
+                        label="Image description — English"
+                        value={item.imageAlt}
+                        maxLength={200}
+                        onChange={(value) =>
+                          changeNews(item.id, "imageAlt", value)
+                        }
+                      />
+                      <Field
+                        label="Image description — Myanmar"
+                        value={item.imageAltMy}
+                        maxLength={200}
+                        onChange={(value) =>
+                          changeNews(item.id, "imageAltMy", value)
+                        }
+                      />
+                    </div>
+                    <button
+                      type="button"
+                      disabled={busy}
+                      onClick={() => changeNews(item.id, "imageId", "")}
+                    >
+                      Remove image
+                    </button>
+                  </>
+                )}
               </div>
               <button
                 type="button"

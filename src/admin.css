@@ -938,3 +938,23 @@ html[data-theme="dark"] button:focus-visible,
 html[data-theme="dark"] a:focus-visible {
   outline-color: #ffe14e;
 }
+
+.news-image-editor {
+  margin-block: 20px;
+  display: grid;
+  gap: 16px;
+}
+.news-image-editor > img {
+  width: 100%;
+  max-width: 480px;
+  max-height: 300px;
+  object-fit: contain;
+  border: var(--line);
+}
+.news-image-editor > p {
+  font-size: 13px;
+  margin: 0;
+}
+.news-image-editor > button {
+  justify-self: start;
+}
