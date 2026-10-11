@@ -18,6 +18,28 @@ export default function AdminApp() {
   const [mailConfigured, setMailConfigured] = useState(false);
   const [busy, setBusy] = useState(false);
   const [status, setStatus] = useState("");
+  const shell = useRef(null);
+  useEffect(() => {
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)");
+    let frame;
+    const update = () => {
+      cancelAnimationFrame(frame);
+      frame = requestAnimationFrame(() => {
+        shell.current?.style.setProperty(
+          "--parallax-offset",
+          `${reduced.matches ? 0 : Math.min(window.scrollY * 0.08, 120)}px`,
+        );
+      });
+    };
+    window.addEventListener("scroll", update, { passive: true });
+    reduced.addEventListener("change", update);
+    update();
+    return () => {
+      cancelAnimationFrame(frame);
+      window.removeEventListener("scroll", update);
+      reduced.removeEventListener("change", update);
+    };
+  }, []);
   const lock = useRef(false);
   const csrf = useRef("");
   const analyticsRequest = useRef(0);
@@ -225,7 +247,12 @@ export default function AdminApp() {
     work(() => loadAnalytics(next));
   };
   return (
-    <>
+    <div className="admin-shell" ref={shell}>
+      <div className="admin-decoration" aria-hidden="true">
+        <span className="deco-square" />
+        <span className="deco-ring" />
+        <span className="deco-cross">✳</span>
+      </div>
       <header>
         <a className="brand" href="/">
           <img
@@ -470,6 +497,6 @@ export default function AdminApp() {
         </p>
       </main>
       <footer>Guru International School · Staff access only</footer>
-    </>
+    </div>
   );
 }

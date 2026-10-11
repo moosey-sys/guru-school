@@ -1032,3 +1032,211 @@ html[data-theme="dark"] a:focus-visible {
     grid-template-columns: 1fr;
   }
 }
+
+/* Neo-brutalist staff workspace. Decorative parallax never moves form controls. */
+.admin-shell {
+  --brutal-shadow: #192743;
+  --brutal-border: #192743;
+  --parallax-offset: 0px;
+  position: relative;
+  isolation: isolate;
+  min-height: 100vh;
+  background: var(--paper);
+}
+html[data-theme="dark"] .admin-shell {
+  --brutal-shadow: #050a14;
+  --brutal-border: #a2b1cd;
+}
+.admin-shell header {
+  border-bottom: 3px solid var(--brutal-border);
+  box-shadow: none;
+}
+.admin-shell main {
+  position: relative;
+  z-index: 1;
+  padding-top: 48px;
+}
+.admin-shell footer {
+  border-top: 3px solid var(--brutal-border);
+  position: relative;
+  z-index: 1;
+}
+.admin-shell h1 {
+  font-size: clamp(32px, 4vw, 56px);
+  font-weight: 900;
+  line-height: 1.05;
+  max-width: 900px;
+}
+.admin-shell h2 {
+  font-weight: 850;
+}
+.admin-shell .eyebrow {
+  display: inline-block;
+  background: var(--yellow);
+  color: #192743;
+  border: 2px solid #192743;
+  padding: 6px 12px;
+  box-shadow: 3px 3px var(--brutal-shadow);
+}
+.admin-shell .card,
+.admin-shell .metric-card,
+.admin-shell .chart-card,
+.admin-shell #login-panel {
+  border: 2px solid var(--brutal-border);
+  border-radius: 0;
+  box-shadow: 6px 6px var(--brutal-shadow);
+}
+.admin-shell button {
+  border: 2px solid var(--brutal-border);
+  border-radius: 0;
+  box-shadow: 3px 3px var(--brutal-shadow);
+  font-weight: 750;
+  transition:
+    transform 0.15s,
+    box-shadow 0.15s,
+    background 0.15s;
+  translate: none;
+}
+.admin-shell button:hover:not(:disabled) {
+  transform: translate(-2px, -2px);
+  box-shadow: 5px 5px var(--brutal-shadow);
+}
+.admin-shell button:active:not(:disabled) {
+  transform: translate(2px, 2px);
+  box-shadow: 1px 1px var(--brutal-shadow);
+}
+.admin-shell button:disabled {
+  box-shadow: none;
+}
+.admin-shell button.primary {
+  background: #315ddb;
+  color: #fff;
+}
+.admin-shell nav[aria-label="Dashboard sections"] {
+  border: 2px solid var(--brutal-border);
+  border-radius: 0;
+  padding: 8px;
+  gap: 10px;
+  box-shadow: 5px 5px var(--brutal-shadow);
+  background: var(--surface);
+}
+.admin-shell nav button[aria-pressed="true"] {
+  background: var(--yellow);
+  color: #192743;
+}
+.admin-shell input,
+.admin-shell select,
+.admin-shell textarea {
+  border: 2px solid var(--brutal-border);
+  border-radius: 0;
+}
+.admin-shell input:focus,
+.admin-shell select:focus,
+.admin-shell textarea:focus {
+  box-shadow: none;
+  outline: 3px solid var(--blue);
+  outline-offset: 3px;
+}
+.admin-shell input[type="checkbox"] {
+  accent-color: #315ddb;
+}
+.admin-shell #account,
+.admin-shell .badge,
+.admin-shell .notice,
+.admin-shell #global-status {
+  border: 2px solid var(--brutal-border);
+  border-radius: 0;
+}
+.admin-shell #account {
+  box-shadow: 3px 3px var(--brutal-shadow);
+}
+.admin-shell .message {
+  border-left: 4px solid var(--blue);
+}
+.admin-shell .metric-card:nth-child(1) {
+  border-top: 7px solid #315ddb;
+}
+.admin-shell .metric-card:nth-child(2) {
+  border-top: 7px solid #ffe14e;
+}
+.admin-shell .metric-card:nth-child(3) {
+  border-top: 7px solid #e9a9c7;
+}
+.admin-shell .metric-card:nth-child(4) {
+  border-top: 7px solid #75c6ad;
+}
+.admin-shell #workspace > div:not([hidden]) > section {
+  animation: workspace-enter 0.25s ease-out;
+}
+.admin-decoration {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+  opacity: 0.18;
+}
+.admin-decoration span {
+  position: absolute;
+  display: block;
+}
+.deco-square {
+  right: -60px;
+  top: 160px;
+  width: 200px;
+  height: 200px;
+  background: #ffe14e;
+  border: 4px solid var(--brutal-border);
+  transform: translateY(calc(var(--parallax-offset) * -1)) rotate(12deg);
+}
+.deco-ring {
+  left: -90px;
+  top: 55%;
+  width: 210px;
+  height: 210px;
+  border: 24px solid #315ddb;
+  border-radius: 50%;
+  transform: translateY(var(--parallax-offset));
+}
+.deco-cross {
+  right: 7%;
+  bottom: 5%;
+  font-size: 120px;
+  line-height: 1;
+  color: #e9a9c7;
+  transform: translateY(calc(var(--parallax-offset) * -0.5)) rotate(-12deg);
+}
+@keyframes workspace-enter {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@media (max-width: 760px) {
+  .admin-shell main {
+    padding-top: 28px;
+  }
+  .admin-decoration {
+    display: none;
+  }
+  .admin-shell .card,
+  .admin-shell .metric-card {
+    box-shadow: 4px 4px var(--brutal-shadow);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .admin-shell *,
+  .admin-shell *::before,
+  .admin-shell *::after {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+  .admin-decoration {
+    display: none;
+  }
+}
