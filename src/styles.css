@@ -2920,4 +2920,4 @@ html[data-theme="dark"] .footer-motto:hover, html[data-theme="dark"] .footer-mot
 
 /* Keep the full-length chairman source anchored inside its own crop window. */
 .team-grid .chairman-crop { position: relative; padding: 0; }
-.team-grid .chairman-crop .portrait-crop-source { top: 0; left: 50%; transform: translate(-50%, -17%); animation: none; }
+.team-grid .chairman-crop .portrait-crop-source { top: 0; left: 50%; transform: translate(-50%, 2%); animation: none; }
