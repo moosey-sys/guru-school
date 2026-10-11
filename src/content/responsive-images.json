@@ -3,7 +3,7 @@
     "srcSet": "/assets/responsive-campus-400.webp 400w, /assets/responsive-campus-800.webp 800w"
   },
   "/assets/crest.png": {
-    "srcSet": "/assets/responsive-crest-400.webp 400w"
+    "srcSet": "/assets/responsive-crest-80.webp 80w, /assets/responsive-crest-160.webp 160w, /assets/responsive-crest-400.webp 400w"
   },
   "/assets/gallery-folder-9260.webp": {
     "srcSet": "/assets/responsive-gallery-folder-9260-400.webp 400w, /assets/responsive-gallery-folder-9260-800.webp 800w, /assets/responsive-gallery-folder-9260-1200.webp 1200w"

@@ -9,7 +9,7 @@ for (const name of await fs.readdir("public/assets")) {
   if (stat.size < 80000) continue;
   const meta = await sharp(path).metadata();
   const variants = [];
-  for (const width of [400, 800, 1200].filter((w) => w <= meta.width)) {
+  for (const width of (name === "crest.png" ? [80, 160, 400, 800, 1200] : [400, 800, 1200]).filter((w) => w <= meta.width)) {
     const target = `responsive-${name.replace(/\.[^.]+$/, "")}-${width}.webp`;
     await sharp(path)
       .rotate()

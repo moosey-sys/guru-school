@@ -1,3 +1,4 @@
+import { ResponsiveImage } from "./components/ResponsiveImage";
 import React, { useEffect, useRef, useState } from "react";
 import { request } from "./api";
 import { usePreferences } from "./preferences";
@@ -278,7 +279,7 @@ export default function AdminApp() {
       </div>
       <header>
         <a className="brand" href="/">
-          <img
+          <ResponsiveImage
             src="/assets/crest.png"
             width="40"
             height="50"
