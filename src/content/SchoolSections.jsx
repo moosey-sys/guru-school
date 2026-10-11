@@ -817,6 +817,11 @@ export function Footer() {
       </a>
       <p><a className="footer-motto" href="/about">{t("Every Child, Every Dream, Every Success.")}</a></p>
       <nav className="footer-links" aria-label={t("Footer links")}>
+        <a className="footer-facebook" href="https://www.facebook.com/share/1LxALvgQmL/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer" aria-label={t("Visit Guru on Facebook (opens in a new tab)")}>
+          <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor" aria-hidden="true">
+            <path d="M24 12.073C24 5.405 18.627 0 12 0S0 5.405 0 12.073c0 6.027 4.388 11.022 10.125 11.927v-8.437H7.078v-3.49h3.047V9.413c0-3.025 1.792-4.697 4.533-4.697 1.312 0 2.686.235 2.686.235v2.97h-1.513c-1.49 0-1.956.93-1.956 1.885v2.267h3.328l-.532 3.49h-2.796V24C19.612 23.095 24 18.1 24 12.073Z" />
+          </svg>
+        </a>
         <a href="/privacy.html">{t("Privacy & visitor statistics")}</a>
         <a href="#">{t("Back to the top ↑︎")}</a>
       </nav>

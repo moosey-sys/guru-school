@@ -1,4 +1,5 @@
 export default {
+  "Visit Guru on Facebook (opens in a new tab)": "Guru Facebook စာမျက်နှာသို့ (တက်ဘ်အသစ်ဖြင့် ဖွင့်မည်)",
   "Footer links": "စာမျက်နှာအောက်ခြေ လင့်ခ်များ",
   Events: "ကျောင်းပွဲများ",
   Graduation: "ဘွဲ့နှင်းသဘင်",

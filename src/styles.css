@@ -2968,3 +2968,8 @@ html[data-theme="dark"] .footer-motto:hover, html[data-theme="dark"] .footer-mot
     filter: brightness(1.04);
   }
 }
+
+.footer-links .footer-facebook { display: inline-flex; align-items: center; justify-content: center; width: 44px; height: 44px; border: var(--line); background: var(--paper); box-shadow: 3px 3px var(--ink); transition: transform .15s; }
+.footer-facebook svg { display: block; }
+.footer-facebook:hover { transform: translateY(-2px); }
+@media (prefers-reduced-motion: reduce) { .footer-facebook:hover { transform: none; } }
