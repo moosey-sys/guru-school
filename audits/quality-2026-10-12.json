@@ -1,0 +1,108 @@
+{
+  "date": "2026-10-12",
+  "scope": "First-party accessibility, performance and source/API security review",
+  "tests": {
+    "api": 29,
+    "ui": 42,
+    "total": 71,
+    "dependencyVulnerabilities": 0
+  },
+  "mobileLabResults": [
+    {
+      "page": "Home",
+      "url": "https://guru-school.vercel.app/",
+      "commit": "4f3fa48",
+      "measuredAt": "2026-10-11T21:48:07.961Z",
+      "lighthouseVersion": "13.5.0",
+      "scores": {
+        "performance": 98,
+        "accessibility": 100,
+        "best-practices": 100,
+        "seo": 100
+      },
+      "lcpMs": 2244.7349999999997,
+      "cls": 0.001059233825247936,
+      "tbtMs": 0
+    },
+    {
+      "page": "Contact",
+      "url": "https://guru-school.vercel.app/contact",
+      "commit": "f9c2281",
+      "measuredAt": "2026-10-11T21:45:34.837Z",
+      "lighthouseVersion": "13.5.0",
+      "scores": {
+        "performance": 91,
+        "accessibility": 100,
+        "best-practices": 100,
+        "seo": 100
+      },
+      "lcpMs": 3033.199,
+      "cls": 0,
+      "tbtMs": 57
+    },
+    {
+      "page": "Gallery",
+      "url": "https://guru-school.vercel.app/gallery",
+      "commit": "f9c2281",
+      "measuredAt": "2026-10-11T21:45:47.513Z",
+      "lighthouseVersion": "13.5.0",
+      "scores": {
+        "performance": 93,
+        "accessibility": 100,
+        "best-practices": 100,
+        "seo": 100
+      },
+      "lcpMs": 3041.065,
+      "cls": 0,
+      "tbtMs": 28
+    },
+    {
+      "page": "Admin sign-in",
+      "url": "https://guru-school.vercel.app/admin",
+      "commit": "4f3fa48",
+      "measuredAt": "2026-10-11T21:48:20.537Z",
+      "lighthouseVersion": "13.5.0",
+      "scores": {
+        "performance": 94,
+        "accessibility": 100,
+        "best-practices": 96
+      },
+      "lcpMs": 2737.5,
+      "cls": 0,
+      "tbtMs": 0
+    }
+  ],
+  "manualChecks": [
+    "All nine public routes and authenticated dashboard tabs reflow at 320px without horizontal overflow",
+    "English/Myanmar and light/dark mobile views",
+    "Public and admin skip links move keyboard focus to main content",
+    "Mobile navigation opens and closes; Escape restores toggle focus"
+  ],
+  "securityChecks": [
+    "Private endpoints require authentication",
+    "Captured session cookies are rejected after logout",
+    "Public content excludes private version fields and unpublished/future news",
+    "Environment, git, library and source-file URLs return 404",
+    "Diagnostics reject foreign origins and unexpected fields",
+    "Diagnostic size/type allowlists and rate limits",
+    "HTML escaping, upload re-encoding, CSRF, OTP expiry and one-use codes covered by regression tests"
+  ],
+  "monitoring": {
+    "runtimeEvents": [
+      "server_error",
+      "browser_error",
+      "mail_delivery_failed"
+    ],
+    "runtimeDiagnosticVerified": true,
+    "healthSchedule": "Every six hours through GitHub Actions",
+    "ci": "Build, tests, source checks and dependency audit",
+    "notifications": "GitHub failure notifications depend on account settings; no external log drain or alert subscription configured"
+  },
+  "limitations": [
+    "These are simulated mobile lab measurements, not field Core Web Vitals",
+    "Axe DOM checks exclude colour contrast; palette tests and browser audits cover separate aspects",
+    "Automated scores do not certify WCAG conformance; independent assistive-technology user testing remains",
+    "This review is not independent penetration testing",
+    "Admin best-practices score reflects the expected unauthenticated session 401; security protection is retained"
+  ]
+}

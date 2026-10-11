@@ -89,3 +89,11 @@ Signing out revokes the server session as well as clearing the cookie. Staff ima
 - Large static images have responsive WebP variants. Regenerate them with `npm run prepare:images` after replacing source photos. Fonts are self-hosted under their SIL Open Font License; see `licenses/`.
 
 Security assessment remains a first-party code and endpoint review. Independent penetration testing, screen-reader user testing and long-term field performance measurement remain separate activities.
+
+### Verified audit results — 12 October 2026
+
+The mobile lab runs measured Home **98**, Contact **91**, Gallery **93**, and admin sign-in **94** for performance. Automated accessibility scored **100** on these four views. Home, Contact and Gallery also scored 100 for Lighthouse best practices and SEO. Admin best practices scored 96 because an unauthenticated session check correctly returns HTTP 401; this protection remains enabled. Earlier homepage performance measured 78.
+
+There are **71 passing regression tests** (29 API, 42 UI), including axe checks for all public routes, the privacy page, login, and dashboard sections. Live browser checks verified 320px reflow on public routes and authenticated dashboard sections, mobile theme/language switching, and keyboard bypass focus. Production checks verified access controls, session revocation, protected source/environment paths, and diagnostic ingestion. A diagnostic event was observed in Vercel runtime logs. GitHub quality and production-health workflows passed.
+
+Machine-readable results and limitations are in `audits/quality-2026-10-12.json`. The scores describe individual Lighthouse lab runs; they are not an overall school-site security score or accessibility certification. See [Lighthouse scoring](https://developer.chrome.com/docs/lighthouse/performance/performance-scoring), [Vercel runtime logs](https://vercel.com/docs/logs/runtime), and [W3C accessibility evaluation guidance](https://www.w3.org/WAI/test-evaluate/).

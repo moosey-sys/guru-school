@@ -117,3 +117,7 @@ it("WCAG structure and labels: every staff dashboard tab in both languages", asy
   fireEvent.click(screen.getByRole("button", { name: "မြန်မာ", exact: true }));
   for (const button of screen.getByRole("navigation", {name:"Dashboard sections"}).querySelectorAll("button")) { fireEvent.click(button); await audit(); }
 });
+
+it('WCAG structure and labels: privacy page',async()=>{
+ const {default:Privacy}=await import('./Privacy');render(<PreferencesProvider><Privacy/></PreferencesProvider>);await audit();
+});

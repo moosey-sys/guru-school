@@ -352,3 +352,12 @@ it("filters published gallery photos by album without including hidden existing 
     screen.getByRole("img", { name: "Graduation memory" }),
   ).toBeInTheDocument();
 });
+
+it('mobile navigation returns keyboard focus to its toggle on Escape',async()=>{
+ setup('/');await screen.findByText('School announcement');
+ const toggle=screen.getByRole('button',{name:'Open navigation',exact:true});
+ fireEvent.click(toggle);screen.getByRole('link',{name:'Contact us',exact:true}).focus();
+ fireEvent.keyDown(document,{key:'Escape'});
+ expect(toggle).toHaveAttribute('aria-expanded','false');expect(toggle).toHaveFocus();
+ expect(document.getElementById('main')).toHaveAttribute('tabindex','-1');
+});
