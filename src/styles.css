@@ -2740,6 +2740,9 @@ header {
 html[data-theme="dark"] .page-cta {
   background: #202d48;
 }
+html[data-theme="dark"] .page-cta .button {
+  color: var(--ink);
+}
 html[data-theme="dark"] .page-heading {
   background: #202d48;
 }
