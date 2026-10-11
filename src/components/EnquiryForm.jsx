@@ -70,7 +70,14 @@ export function EnquiryForm() {
       method="post"
       onSubmit={submit}
       aria-busy={busy}
-      onFocus={() => prepare().catch(() => {})}
+      onFocus={() =>
+        prepare().catch(() =>
+          setStatus({
+            text: "Online enquiries are temporarily unavailable. Please email or call our team.",
+            state: "error",
+          }),
+        )
+      }
     >
       <div className="form-grid">
         <label>

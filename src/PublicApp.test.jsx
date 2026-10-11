@@ -233,3 +233,26 @@ describe("React enquiry form", () => {
     expect(screen.getByRole("status")).toHaveTextContent("could not be sent");
   });
 });
+
+it("offers email or telephone contact when the enquiry service is unavailable", async () => {
+  vi.stubGlobal(
+    "fetch",
+    vi.fn(async () => ({
+      ok: false,
+      status: 503,
+      json: async () => ({ error: "Unavailable" }),
+    })),
+  );
+  render(
+    <PreferencesProvider>
+      <EnquiryForm />
+    </PreferencesProvider>,
+  );
+  fireEvent.focus(screen.getByLabelText("Your name"));
+  expect(
+    await screen.findByText(
+      "Online enquiries are temporarily unavailable. Please email or call our team.",
+    ),
+  ).toBeInTheDocument();
+  expect(screen.getByRole("button", { name: "Send message ↗︎" })).toBeDisabled();
+});
