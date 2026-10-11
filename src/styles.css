@@ -2952,3 +2952,19 @@ html[data-theme="dark"] .footer-motto:hover, html[data-theme="dark"] .footer-mot
   inset: 0;
   background: url('/assets/chairman.webp') center 23% / 205% auto no-repeat;
 }
+
+/* All five profiles move their complete photo panel, including the blue background. */
+.team-grid article img,
+.team-grid .chairman-crop.profile-motion::before {
+  animation: none !important;
+}
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  .team-grid article > :first-child {
+    transform-origin: center;
+    transition: transform 300ms ease, filter 300ms ease;
+  }
+  .team-grid article > :first-child:hover {
+    animation: school-photo-float 2.6s ease-in-out infinite !important;
+    filter: brightness(1.04);
+  }
+}
