@@ -2992,3 +2992,5 @@ html[data-theme="dark"] .footer-motto:hover, html[data-theme="dark"] .footer-mot
 .school-footer .footer-bottom { align-items: center; }
 @media(max-width: 900px) { .school-footer { grid-template-columns: 1fr 1fr; gap: 32px; } .footer-identity { grid-column: 1 / -1; } .footer-invitation { flex-direction: column; align-items: flex-start; } }
 @media(max-width: 600px) { .school-footer { grid-template-columns: 1fr; } .footer-invitation { padding: 24px; } .school-footer .footer-bottom { align-items: flex-start; } .school-footer .footer-links { gap: 16px; } }
+.school-footer nav { position: static; inset: auto; padding: 0; background: transparent; border: 0; display: flex; }
+.school-footer .footer-links { flex-direction: row; align-items: center; }
