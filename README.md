@@ -4,6 +4,8 @@ The public website, staff dashboard and privacy page use React with JSX and Vite
 
 ## Run locally
 
+The project now lives directly in `Guru-Project-Website/`; there is no nested `guru-school/` folder. Open that folder in your editor and run commands from it.
+
 Use Node.js 22.12+ or 24 LTS, then:
 
 ```sh
@@ -34,6 +36,8 @@ npm run preview     # Serve the production build locally
 - `scripts/prerender.mjs`: writes initial React HTML for each public page. `dist/` and `.build-server/` are generated and ignored by Git.
 
 Edit `src/` and `public/`, then build. Do not edit generated files in `dist/`.
+
+The older showcase project, source-photo duplicates, preview screenshots and one-time image preparation scripts are no longer part of the active project. The website uses the prepared images in `public/assets/`.
 
 ## Pages and deployment
 

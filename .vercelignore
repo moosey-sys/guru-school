@@ -1,9 +1,6 @@
 .git
 .openai
 .vercel
-scripts/prepare_assets.py
-scripts/prepare_gallery.py
-scripts/gallery-manifest.json
 scripts/provision-env.js
 README.md
 *.tar.gz
