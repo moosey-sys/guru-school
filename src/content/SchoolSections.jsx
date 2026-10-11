@@ -741,10 +741,7 @@ export function Contact() {
           <EnquiryForm />
         </div>
         <div className="visit-contact-links">
-          <a
-            className="text-link"
-            href="mailto:mooseythaw03@gmail.com"
-          >
+          <a className="text-link" href="mailto:mooseythaw03@gmail.com">
             {t("Prefer email? Write to our team ↗︎")}
           </a>
           <a className="text-link" href="tel:+959404466882">
@@ -807,31 +804,75 @@ export function Contact() {
 export function Footer() {
   const { t } = usePreferences();
   return (
-    <footer>
-      <a className="brand" href="/">
-        <img src="/assets/crest.png" alt={t("")} width="47" height="57" />
-        <span>
-          {t("GURU")}
-          <small>{t("INTERNATIONAL SCHOOL")}</small>
-        </span>
-      </a>
-      <p><a className="footer-motto" href="/about">{t("Every Child, Every Dream, Every Success.")}</a></p>
-      <nav className="footer-links" aria-label={t("Footer links")}>
-        <a className="footer-facebook" href="https://www.facebook.com/share/1LxALvgQmL/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer" aria-label={t("Visit Guru on Facebook (opens in a new tab)")}>
-          <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor" aria-hidden="true">
-            <path d="M24 12.073C24 5.405 18.627 0 12 0S0 5.405 0 12.073c0 6.027 4.388 11.022 10.125 11.927v-8.437H7.078v-3.49h3.047V9.413c0-3.025 1.792-4.697 4.533-4.697 1.312 0 2.686.235 2.686.235v2.97h-1.513c-1.49 0-1.956.93-1.956 1.885v2.267h3.328l-.532 3.49h-2.796V24C19.612 23.095 24 18.1 24 12.073Z" />
-          </svg>
+    <footer className="school-footer">
+      <div className="footer-invitation">
+        <div>
+          <p className="eyebrow">{t("A BRIGHTER NEXT CHAPTER")}</p>
+          <h2>{t("Let’s grow together.")}</h2>
+          <p>
+            {t(
+              "Come meet our team and discover a place for your child to thrive.",
+            )}
+          </p>
+        </div>
+        <a className="button" href="/contact#visit">
+          {t("Arrange a school visit ↗︎")}
         </a>
-        <a href="/privacy.html">{t("Privacy & visitor statistics")}</a>
-        <a href="#">{t("Back to the top ↑︎")}</a>
+      </div>
+      <div className="footer-identity">
+        <a className="brand" href="/">
+          <img src="/assets/crest.png" alt="" width="47" height="57" />
+          <span>
+            {t("GURU")}
+            <small>{t("INTERNATIONAL SCHOOL")}</small>
+          </span>
+        </a>
+        <p>{t("A caring community. A world of possibility.")}</p>
+        <a className="footer-motto" href="/about">
+          {t("Every Child, Every Dream, Every Success.")}
+        </a>
+      </div>
+      <nav className="footer-explore" aria-label={t("Explore our school")}>
+        <h3>{t("Discover Guru")}</h3>
+        <a href="/about">{t("Discover our story ↗︎")}</a>
+        <a href="/programmes">{t("Explore our programmes ↗︎")}</a>
+        <a href="/gallery">{t("School moments ↗︎")}</a>
       </nav>
+      <div className="footer-connect">
+        <h3>{t("Let’s connect")}</h3>
+        <a href="tel:+959404466882">09 40 44 66 882</a>
+        <p>{t("San Chaung, Yangon")}</p>
+        <div className="footer-social">
+          {" "}
+          <a
+            className="footer-facebook"
+            href="https://www.facebook.com/share/1LxALvgQmL/?mibextid=wwXIfr"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={t("Visit Guru on Facebook (opens in a new tab)")}
+          >
+            <svg
+              viewBox="0 0 24 24"
+              width="24"
+              height="24"
+              fill="currentColor"
+              aria-hidden="true"
+            >
+              <path d="M24 12.073C24 5.405 18.627 0 12 0S0 5.405 0 12.073c0 6.027 4.388 11.022 10.125 11.927v-8.437H7.078v-3.49h3.047V9.413c0-3.025 1.792-4.697 4.533-4.697 1.312 0 2.686.235 2.686.235v2.97h-1.513c-1.49 0-1.956.93-1.956 1.885v2.267h3.328l-.532 3.49h-2.796V24C19.612 23.095 24 18.1 24 12.073Z" />
+            </svg>
+          </a>
+          <span>{t("Follow our school community")}</span>
+        </div>
+      </div>
       <div className="footer-bottom">
         <span>
-          {t("© ")}
-          <span id="year">{new Date().getFullYear()}</span>
-          {t(" Guru International School")}
+          © <span id="year">{new Date().getFullYear()}</span>{" "}
+          {t("Guru International School")}
         </span>
-        <span>{t("Built around curiosity. Rooted in care.")}</span>
+        <nav className="footer-links" aria-label={t("Footer links")}>
+          <a href="/privacy.html">{t("Privacy & visitor statistics")}</a>
+          <a href="#">{t("Back to the top ↑︎")}</a>
+        </nav>
       </div>
     </footer>
   );

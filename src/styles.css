@@ -2973,3 +2973,22 @@ html[data-theme="dark"] .footer-motto:hover, html[data-theme="dark"] .footer-mot
 .footer-facebook svg { display: block; }
 .footer-facebook:hover { transform: translateY(-2px); }
 @media (prefers-reduced-motion: reduce) { .footer-facebook:hover { transform: none; } }
+
+.school-footer { padding-block: 48px 24px; grid-template-columns: 1.3fr .8fr 1fr; gap: 40px 64px; }
+.footer-invitation { grid-column: 1 / -1; display: flex; justify-content: space-between; align-items: center; gap: 24px; padding: 32px; border: 2px solid #192743; box-shadow: 6px 6px #192743; background: #ffe45e; color: #192743; }
+.footer-invitation .eyebrow { margin: 0 0 12px; font-size: 11px; }
+.footer-invitation h2 { font-size: clamp(30px, 3vw, 42px); margin: 0 0 12px; }
+.footer-invitation p { margin: 0; max-width: 620px; font-size: 15px; line-height: 1.7; }
+.footer-invitation .button { background: #192743; color: #fff; border-color: #192743; flex-shrink: 0; }
+.footer-identity > p { margin: 22px 0 14px; max-width: 320px; line-height: 1.7; font-size: 15px; }
+.footer-explore, .footer-connect { display: flex; flex-direction: column; align-items: flex-start; gap: 14px; font-size: 14px; }
+.school-footer h3 { font-size: 16px; margin: 0 0 4px; }
+.footer-explore a, .footer-connect > a { color: var(--ink); text-decoration: none; font-weight: 600; }
+.footer-explore a:hover, .footer-connect > a:hover { color: var(--blue); }
+.footer-connect p { margin: 0; }
+.footer-social { display: flex; align-items: center; gap: 12px; margin-top: 4px; font-size: 12px; }
+.school-footer .footer-facebook { display: inline-flex; align-items: center; justify-content: center; width: 44px; height: 44px; border: var(--line); background: var(--paper); color: var(--ink); box-shadow: 3px 3px var(--ink); flex-shrink: 0; }
+.school-footer .footer-facebook:hover { color: var(--blue); }
+.school-footer .footer-bottom { align-items: center; }
+@media(max-width: 900px) { .school-footer { grid-template-columns: 1fr 1fr; gap: 32px; } .footer-identity { grid-column: 1 / -1; } .footer-invitation { flex-direction: column; align-items: flex-start; } }
+@media(max-width: 600px) { .school-footer { grid-template-columns: 1fr; } .footer-invitation { padding: 24px; } .school-footer .footer-bottom { align-items: flex-start; } .school-footer .footer-links { gap: 16px; } }

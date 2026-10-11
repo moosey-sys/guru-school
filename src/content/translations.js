@@ -1,5 +1,21 @@
 export default {
-  "Visit Guru on Facebook (opens in a new tab)": "Guru Facebook စာမျက်နှာသို့ (တက်ဘ်အသစ်ဖြင့် ဖွင့်မည်)",
+  "A BRIGHTER NEXT CHAPTER": "ပိုမိုတောက်ပသော အနာဂတ်ဆီသို့",
+  "Let’s grow together.": "အတူတကွ တိုးတက်ကြပါစို့။",
+  "Come meet our team and discover a place for your child to thrive.":
+    "ကျွန်ုပ်တို့အဖွဲ့နှင့် တွေ့ဆုံပြီး သင့်ကလေး တိုးတက်နိုင်မည့် နေရာကို လေ့လာပါ။",
+  "Arrange a school visit ↗︎": "ကျောင်းလည်ပတ်ရန် စီစဉ်ပါ ↗︎",
+  "A caring community. A world of possibility.":
+    "ဂရုစိုက်သော အသိုင်းအဝိုင်း။ အခွင့်အလမ်းများစွာရှိသော အနာဂတ်။",
+  "Explore our school": "ကျွန်ုပ်တို့ကျောင်းကို လေ့လာပါ",
+  "Discover Guru": "Guru ကို လေ့လာပါ",
+  "Discover our story ↗︎": "ကျွန်ုပ်တို့အကြောင်း လေ့လာပါ ↗︎",
+  "Explore our programmes ↗︎": "သင်ကြားရေးအစီအစဉ်များ လေ့လာပါ ↗︎",
+  "School moments ↗︎": "ကျောင်းဘဝ အမှတ်တရများ ↗︎",
+  "Let’s connect": "ဆက်သွယ်ကြပါစို့",
+  "San Chaung, Yangon": "စမ်းချောင်း၊ ရန်ကုန်",
+  "Follow our school community": "ကျောင်းအသိုင်းအဝိုင်းနှင့် ချိတ်ဆက်ပါ",
+  "Visit Guru on Facebook (opens in a new tab)":
+    "Guru Facebook စာမျက်နှာသို့ (တက်ဘ်အသစ်ဖြင့် ဖွင့်မည်)",
   "Footer links": "စာမျက်နှာအောက်ခြေ လင့်ခ်များ",
   Events: "ကျောင်းပွဲများ",
   Graduation: "ဘွဲ့နှင်းသဘင်",
