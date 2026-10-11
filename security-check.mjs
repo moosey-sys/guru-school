@@ -16,7 +16,7 @@ for (const file of files) {
   if (!/\.(html|css|js|svg)$/.test(file)) continue;
   const text = readFileSync(file, 'utf8');
   assert(!/-----BEGIN (?:RSA |EC |OPENSSH )?PRIVATE KEY-----|\bAKIA[A-Z0-9]{16}\b|\bgh[pousr]_[A-Za-z0-9]{30,}/.test(text), `Credential pattern in ${file}`);
-  if (file.endsWith('.js')) assert(!/\b(?:eval|Function)\s*\(|\.innerHTML\s*=|document\.write\s*\(/.test(text), `Unsafe script sink in ${file}`);
+
 }
 for (const file of files.filter(file => file.endsWith('.html'))) {
 const html = readFileSync(file, 'utf8');
@@ -26,10 +26,14 @@ for (const tag of html.matchAll(/<a\b[^>]*>/gi)) {
   if (/target="_blank"/.test(tag[0])) assert(/rel="[^"]*noopener/.test(tag[0]), 'External tab needs noopener');
 }
 for (const match of html.matchAll(/(?:src|data-image)="([^"]+)"/g)) {
-  const asset = match[1].split('?')[0];
+  const asset = match[1].split('?')[0].replace(/^\//,'');
   assert(/^assets\/[\w.-]+$|^[\w.-]+\.js$/.test(asset), `Nonlocal asset: ${asset}`);
   assert(files.includes(path.resolve(root, asset)), `Missing asset: ${asset}`);
 }
+}
+for (const file of walk(path.resolve('src')).filter(file => /\.(js|jsx)$/.test(file))) {
+  const text = readFileSync(file, 'utf8');
+  assert(!/\b(?:eval|Function)\s*\(|\.innerHTML\s*=|dangerouslySetInnerHTML|document\.write\s*\(/.test(text), `Unsafe application source in ${file}`);
 }
 const config = JSON.parse(readFileSync('vercel.json', 'utf8'));
 const headers = Object.fromEntries(config.headers[0].headers.map(h => [h.key, h.value]));

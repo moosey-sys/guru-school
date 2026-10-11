@@ -11,3 +11,7 @@ node_modules/
 .env*
 
 .admin-credentials
+
+/dist/
+/.build-server/
+/coverage/

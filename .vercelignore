@@ -21,3 +21,6 @@ tests
 *-preview.png
 
 scripts/live-check.js
+
+.build-server
+coverage

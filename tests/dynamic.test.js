@@ -13,3 +13,29 @@ test('login issues a secure cookie and limits repeated failed attempts',async()=
 test('draft news is private and stale content updates are rejected',async()=>{const site={announcement:'Hello',announcementMy:'',photos:[],news:[{id:crypto.randomUUID(),title:'Draft',body:'Not public',date:'2026-10-11',published:false},{id:crypto.randomUUID(),title:'Published',body:'Public story',date:'2026-10-11',published:true}]};const save=await run(content,{method:'PUT',headers,body:{content:site,version:null}});assert.equal(save.statusCode,200);const publicResult=await run(content,{});assert.equal(publicResult.body.content.news.length,1);assert.equal(publicResult.body.content.news[0].title,'Published');assert.equal(publicResult.body.version,undefined);assert.equal((await run(content,{method:'PUT',headers,body:{content:site,version:null}})).statusCode,409);});
 test('enquiries persist without SMTP, retries do not duplicate, and inbox status updates persist',async()=>{const token=c.token({type:'enquiry',nonce:crypto.randomBytes(24).toString('hex'),issued:Date.now()-3000,exp:Date.now()+3600000});const body={token,name:'Test Parent',email:'test@example.com',kind:'Book a school visit',date:'2099-01-01',message:'Test visit request',website:''};const result=await run(enquiry,{method:'POST',headers,body});assert.equal(result.statusCode,200);assert.equal((await run(enquiry,{method:'POST',headers,body})).body.reference,result.body.reference);assert.equal([...records.keys()].filter(p=>p.startsWith('enquiries/')).length,1);const list=await run(inbox,{headers});const item=list.body.items[0];assert.equal(item.emailStatus,'not-configured');const update=await run(inbox,{method:'PATCH',headers,body:{id:item.id,createdKey:item.createdKey,version:item.version,status:'confirmed',notes:'Test confirmation'}});assert.equal(update.statusCode,200);assert.equal(update.body.item.status,'confirmed');assert.equal((await run(inbox,{method:'PATCH',headers,body:{id:item.id,createdKey:item.createdKey,version:item.version,status:'closed',notes:''}})).statusCode,409);});
 test('invalid visit dates and spam fields are rejected',async()=>{for(const extra of [{date:'2026-99-99'},{date:'2020-01-01'},{website:'spam'}]){const token=c.token({type:'enquiry',nonce:crypto.randomBytes(24).toString('hex'),issued:Date.now()-3000,exp:Date.now()+3600000});const result=await run(enquiry,{method:'POST',headers,body:{token,name:'Test',email:'test@example.com',kind:'Book a school visit',date:'2099-01-01',message:'Testing validation',...extra}});assert.equal(result.statusCode,400);}});
+test('health requires staff access and reports missing email credentials',async()=>{
+ const health=require('../api/health');assert.equal((await run(health,{})).statusCode,401);assert.equal((await run(health,{headers})).body.emailConfigured,false);
+});
+test('media uploads reject unsafe/oversized images and accept re-encoded WebP photos',async()=>{
+ const media=require('../api/media');
+ assert.equal((await run(media,{method:'POST',body:{image:'abc'}})).statusCode,401);
+ assert.equal((await run(media,{method:'POST',headers,body:{image:Buffer.from('<svg>not a photo</svg>').toString('base64')}})).statusCode,400);
+ assert.equal((await run(media,{method:'POST',headers,body:{image:Buffer.alloc(2500001).toString('base64')}})).statusCode,413);
+ const buffer=await require('sharp')({create:{width:20,height:20,channels:3,background:'blue'}}).png().toBuffer();
+ const upload=await run(media,{method:'POST',headers,body:{image:buffer.toString('base64')}});assert.equal(upload.statusCode,200);assert.ok(c.UUID.test(upload.body.id));
+ const image=records.get(`media/${upload.body.id}.webp`);assert.equal((await require('sharp')(image.text).metadata()).format,'webp');
+ assert.equal((await run(media,{query:{id:upload.body.id}})).statusCode,404);
+ assert.equal((await run(media,{query:{id:'../private'}})).statusCode,404);
+});
+test('email notification uses the school inbox and visitor Reply-To, and SMTP failure does not lose enquiries',async()=>{
+ const nodemailer=require('nodemailer'),original=nodemailer.createTransport;const keys=['SMTP_HOST','SMTP_PORT','SMTP_USER','SMTP_PASS','MAIL_FROM','MAIL_TO'];const before=Object.fromEntries(keys.map(key=>[key,process.env[key]]));let sent=[];
+ Object.assign(process.env,{SMTP_HOST:'smtp.gmail.com',SMTP_PORT:'465',SMTP_USER:'sender@example.com',SMTP_PASS:'test-only',MAIL_FROM:'sender@example.com',MAIL_TO:'guruinternationalschool.aca@gmail.com'});
+ try{
+  nodemailer.createTransport=()=>({sendMail:async message=>{sent.push(message);return {accepted:['guruinternationalschool.aca@gmail.com']};},close(){}});
+  const submit=async()=>{const token=c.token({type:'enquiry',nonce:crypto.randomBytes(24).toString('hex'),issued:Date.now()-3000,exp:Date.now()+3600000});return run(enquiry,{method:'POST',headers,body:{token,name:'Test parent',email:'parent@example.com',phone:'091234567',kind:'General enquiry',message:'Please contact me.',website:''}});};
+  const accepted=await submit();assert.equal(accepted.statusCode,200);assert.equal(sent[0].to,'guruinternationalschool.aca@gmail.com');assert.equal(sent[0].replyTo.address,'parent@example.com');assert.ok(sent[0].text.includes('091234567'));assert.ok(sent[0].html.includes('Please contact me.'));
+  const first=await run(inbox,{headers});assert.equal(first.body.items.find(item=>item.id===accepted.body.reference).emailStatus,'accepted');
+  nodemailer.createTransport=()=>({sendMail:async()=>{throw Error('SMTP unavailable');},close(){}});
+  const failed=await submit();assert.equal(failed.statusCode,200);const second=await run(inbox,{headers});assert.equal(second.body.items.find(item=>item.id===failed.body.reference).emailStatus,'failed');
+ }finally{nodemailer.createTransport=original;for(const key of keys){if(before[key]===undefined)delete process.env[key];else process.env[key]=before[key];}}
+});

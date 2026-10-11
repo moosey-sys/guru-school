@@ -4,7 +4,7 @@ import pymupdf
 from PIL import Image, ImageOps
 import io
 root=Path(__file__).resolve().parents[2]
-out=root/'guru-school/dist/assets'
+out=root/'guru-school/public/assets'
 pdf=pymupdf.open(root/'Guru  School profile (Update).. (2).pdf')
 assets={'hero':(21,6),'discovery':(21,3),'sports':(21,2),'classroom':(12,3),'primary':(12,5),'playground':(13,2),'outdoor':(13,4),'library':(13,5),'campus':(1,3),'principal':(10,1),'founder':(8,1),'chairman':(7,1),'ceo':(6,6),'operations':(6,8),'map':(11,0)}
 for name,(page,index) in assets.items():

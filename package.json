@@ -3,14 +3,35 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "dev": "node --env-file=.env --env-file=.env.local scripts/dev-server.js",
-    "check": "node scripts/build-pages.mjs && node scripts/check.mjs && node security-check.mjs",
-    "test": "node --test tests/*.test.js",
-    "build": "node scripts/build-pages.mjs"
+    "dev": "node scripts/start-dev.mjs",
+    "dev:web": "vite --host localhost --strictPort",
+    "dev:api": "node --env-file=.env --env-file=.env.local scripts/dev-server.js",
+    "build": "vite build && vite build --ssr src/entry-server.jsx --outDir .build-server && node scripts/prerender.mjs && node security-check.mjs",
+    "check": "node scripts/check.mjs",
+    "test:api": "node --test tests/*.test.js",
+    "test:ui": "vitest run",
+    "test": "npm run test:api && npm run test:ui",
+    "preview": "vite preview --host localhost"
   },
   "dependencies": {
     "@vercel/blob": "^2.8.1",
     "nodemailer": "^10.1.0",
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0",
     "sharp": "^0.35.5"
+  },
+  "devDependencies": {
+    "@testing-library/jest-dom": "^7.0.1",
+    "@testing-library/react": "^16.3.3",
+    "@testing-library/user-event": "^14.6.7",
+    "@vitejs/plugin-react": "^6.1.2",
+    "jsdom": "^30.1.2",
+    "parse5": "^8.0.1",
+    "prettier": "^3.9.10",
+    "vite": "^8.3.4",
+    "vitest": "^5.0.3"
+  },
+  "engines": {
+    "node": "24.x"
   }
 }
