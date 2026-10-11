@@ -1,4 +1,7 @@
 export default {
+  Events: "ကျောင်းပွဲများ",
+  Graduation: "ဘွဲ့နှင်းသဘင်",
+  Trips: "လေ့လာရေးခရီးများ",
   Updated: "နောက်ဆုံးပြန်ရယူချိန်",
   "Myanmar time": "မြန်မာစံတော်ချိန်",
   "Updating visitor activity…": "ဝင်ရောက်မှုများ ပြန်ရယူနေသည်…",

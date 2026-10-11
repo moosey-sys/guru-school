@@ -25,11 +25,17 @@ export function Gallery({ photos = [], hiddenGallery = [], openPhoto }) {
       })),
   ];
   const matching = cards.filter(
-    (photo) => category === "all" || photo.category === category,
+    (photo) =>
+      category === "all" ||
+      photo.category === category ||
+      (category === "events" && photo.category === "graduation"),
   );
   const shown = expanded ? matching.length : Math.min(8, matching.length);
   const filters = {
     all: "All photos",
+    events: "Events",
+    graduation: "Graduation",
+    trips: "Trips",
     campus: "Campus",
     learning: "Learning",
     life: "Student life",

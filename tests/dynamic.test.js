@@ -68,3 +68,10 @@ test('deleting enquiries requires staff, CSRF and current version and frees stor
  assert.equal(records.has(path),false);
  assert.equal((await run(inbox,{method:'DELETE',headers,body})).statusCode,404);
 });
+test('gallery uploads support events, graduation and trips and retain their categories',async()=>{
+ const current=await run(content,{headers});const photos=[];
+ for(const category of ['events','graduation','trips']){const id=crypto.randomUUID();await c.write(`media/${id}.json`,{id});photos.push({id,caption:`Test ${category}`,captionMy:'',category,published:true});}
+ const result=await run(content,{method:'PUT',headers,body:{content:{...current.body.content,photos},version:current.body.version}});
+ assert.equal(result.statusCode,200);
+ assert.deepEqual((await run(content,{})).body.content.photos.map(photo=>photo.category),['events','graduation','trips']);
+});

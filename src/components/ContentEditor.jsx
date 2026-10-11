@@ -2,6 +2,9 @@ import { usePreferences } from "../preferences";
 import React from "react";
 import { galleryPhotos } from "../content/gallery";
 export const categories = {
+  events: "Events",
+  graduation: "Graduation",
+  trips: "Trips",
   campus: "Campus",
   learning: "Learning",
   "student-life": "Student life",

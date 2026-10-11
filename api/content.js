@@ -1,6 +1,6 @@
 const c=require('../lib/core');
 const galleryImages=new Set(require('../lib/gallery.json').map(photo=>photo.image));
-const categories=['campus','learning','student-life','community','information'];
+const categories=['events','graduation','trips','campus','learning','student-life','community','information'];
 function text(value,max,required=false){if(typeof value!=='string'||value.length>max||(required&&!value.trim()))throw Object.assign(new Error('Please check content length and required fields.'),{status:400});return value.trim();}
 function bilingual(item,key,max,required=false){return {[key]:text(item[key],max,required),[`${key}My`]:text(item[`${key}My`]||'',max)};}
 module.exports=c.wrap(async(req,res)=>{

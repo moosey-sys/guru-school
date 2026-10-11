@@ -61,12 +61,10 @@ describe("React public website", () => {
     setup("/gallery");
     await screen.findByText("School announcement");
     expect(screen.getByText("Showing 8 of 50 photos.")).toBeInTheDocument();
-    fireEvent.click(
-      screen.getByRole("button", { name: "Student life", exact: true }),
-    );
-    expect(screen.getByText("Showing 8 of 28 photos.")).toBeInTheDocument();
+    fireEvent.click(screen.getByRole("button", { name: "Trips", exact: true }));
+    expect(screen.getByText("Showing 8 of 12 photos.")).toBeInTheDocument();
     fireEvent.click(screen.getByRole("button", { name: "Show all photos" }));
-    expect(screen.getByText("Showing 28 of 28 photos.")).toBeInTheDocument();
+    expect(screen.getByText("Showing 12 of 12 photos.")).toBeInTheDocument();
     fireEvent.click(
       screen.getAllByRole("button", {
         name: /School trip — exploring together/,
@@ -292,4 +290,21 @@ it("excludes hidden existing photos from gallery counts, filters and image viewe
       'img[src="/assets/gallery-update-6222095624409125895.webp"]',
     ),
   ).toBeNull();
+});
+it("separates graduation and trips and includes graduation in school events", async () => {
+  setup("/gallery");
+  await screen.findByText("School announcement");
+  fireEvent.click(
+    screen.getByRole("button", { name: "Graduation", exact: true }),
+  );
+  expect(screen.getByText("Showing 8 of 10 photos.")).toBeInTheDocument();
+  expect(
+    screen.queryByRole("button", { name: /School trip — exploring together/ }),
+  ).not.toBeInTheDocument();
+  fireEvent.click(screen.getByRole("button", { name: "Events", exact: true }));
+  expect(screen.getByText("Showing 8 of 10 photos.")).toBeInTheDocument();
+  fireEvent.click(
+    screen.getByRole("button", { name: "Student life", exact: true }),
+  );
+  expect(screen.getByText("Showing 6 of 6 photos.")).toBeInTheDocument();
 });
