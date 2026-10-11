@@ -48,3 +48,10 @@ test('news images validate storage references and become accessible only when pu
  site.news[0].published=true;assert.equal((await run(content,{method:'PUT',headers,body:{content:site,version:save.body.version}})).statusCode,200);
  const original=c.get;let accessed=false;c.get=async()=>{accessed=true;return null;};try{await run(media,{query:{id:imageId}});assert.ok(accessed);}finally{c.get=original;}
 });
+
+test('existing gallery visibility persists and rejects unknown or duplicate photo names',async()=>{
+ const image=require('../lib/gallery.json')[0].image;const current=await run(content,{headers});const site={...current.body.content,hiddenGallery:[image]};
+ const saved=await run(content,{method:'PUT',headers,body:{content:site,version:current.body.version}});assert.equal(saved.statusCode,200);assert.deepEqual((await run(content,{})).body.content.hiddenGallery,[image]);
+ for(const hiddenGallery of [['../private'],[image,image]])assert.equal((await run(content,{method:'PUT',headers,body:{content:{...site,hiddenGallery},version:saved.body.version}})).statusCode,400);
+ const restored=await run(content,{method:'PUT',headers,body:{content:{...site,hiddenGallery:[]},version:saved.body.version}});assert.equal(restored.statusCode,200);assert.deepEqual(restored.body.content.hiddenGallery,[]);
+});

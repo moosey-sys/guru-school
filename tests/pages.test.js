@@ -15,7 +15,7 @@ test('separate public pages resolve their navigation and local assets',()=>{
  }
  assert.ok(!fs.readFileSync('dist/index.html','utf8').includes('id="enquiry-form"'));
  assert.ok(fs.readFileSync('dist/contact.html','utf8').includes('id="enquiry-form"'));
- assert.ok(fs.readFileSync('src/content/gallery.js','utf8').includes('gallery-update-6222095624409125917.webp'));
+ assert.ok(fs.readFileSync('lib/gallery.json','utf8').includes('gallery-update-6222095624409125917.webp'));
  assert.ok(fs.existsSync('dist/assets/gallery-update-6222095624409125917.webp'));
  assert.ok(fs.readFileSync('dist/index.html','utf8').includes('id="root"'));
  assert.ok(!fs.readFileSync('dist/index.html','utf8').includes('src="app.js'));

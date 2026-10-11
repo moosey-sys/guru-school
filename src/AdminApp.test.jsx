@@ -316,3 +316,45 @@ it("removes an uploaded photo from published content without deleting its stored
     ),
   ).toBe(false);
 });
+
+it("hides and restores existing gallery photos without uploading or deleting images", async () => {
+  const fetch = setup();
+  await screen.findByText("Signed in as staff");
+  await waitFor(() =>
+    expect(document.querySelector("#announcement")).toHaveValue(
+      "School announcement",
+    ),
+  );
+  fireEvent.click(screen.getByRole("button", { name: "Gallery", exact: true }));
+  fireEvent.click(
+    screen.getByRole("button", {
+      name: "Hide School trip — exploring together",
+      exact: true,
+    }),
+  );
+  await screen.findByText(
+    "Photo hidden from the website. You can show it again here.",
+  );
+  const saved = fetch.mock.calls
+    .filter(
+      ([url, options]) => url === "/api/content" && options.method === "PUT",
+    )
+    .at(-1)[1];
+  expect(JSON.parse(saved.body).content.hiddenGallery).toEqual([
+    "gallery-update-6222095624409125895.webp",
+  ]);
+  fireEvent.click(
+    screen.getByRole("button", {
+      name: "Show School trip — exploring together",
+      exact: true,
+    }),
+  );
+  await screen.findByText("Photo is visible on the website.");
+  const restored = fetch.mock.calls
+    .filter(
+      ([url, options]) => url === "/api/content" && options.method === "PUT",
+    )
+    .at(-1)[1];
+  expect(JSON.parse(restored.body).content.hiddenGallery).toEqual([]);
+  expect(fetch.mock.calls.some(([url]) => url === "/api/media")).toBe(false);
+});

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { galleryPhotos } from "../content/gallery";
 import { usePreferences } from "../preferences";
-export function Gallery({ photos = [], openPhoto }) {
+export function Gallery({ photos = [], hiddenGallery = [], openPhoto }) {
   const { language, t } = usePreferences();
   const [category, setCategory] = useState("all");
   const [expanded, setExpanded] = useState(false);
@@ -16,11 +16,13 @@ export function Gallery({ photos = [], openPhoto }) {
     }));
   const cards = [
     ...uploaded,
-    ...galleryPhotos.map((photo) => ({
-      ...photo,
-      image: "/assets/" + photo.image,
-      caption: t(photo.caption),
-    })),
+    ...galleryPhotos
+      .filter((photo) => !hiddenGallery.includes(photo.image))
+      .map((photo) => ({
+        ...photo,
+        image: "/assets/" + photo.image,
+        caption: t(photo.caption),
+      })),
   ];
   const matching = cards.filter(
     (photo) => category === "all" || photo.category === category,

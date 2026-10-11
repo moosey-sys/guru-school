@@ -414,7 +414,11 @@ export default function PublicApp({ path = "/" }) {
               <p className="large-copy">{t(page.description)}</p>
             </section>
             {page.slug === "gallery" ? (
-              <Gallery photos={content?.photos} openPhoto={setPhoto} />
+              <Gallery
+                photos={content?.photos}
+                hiddenGallery={content?.hiddenGallery}
+                openPhoto={setPhoto}
+              />
             ) : page.slug === "news" ? (
               <News content={content} />
             ) : (

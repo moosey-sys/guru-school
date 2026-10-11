@@ -256,3 +256,40 @@ it("offers email or telephone contact when the enquiry service is unavailable", 
   ).toBeInTheDocument();
   expect(screen.getByRole("button", { name: "Send message ↗︎" })).toBeDisabled();
 });
+
+it("excludes hidden existing photos from gallery counts, filters and image viewer", async () => {
+  vi.stubGlobal(
+    "fetch",
+    vi.fn((url) =>
+      Promise.resolve({
+        ok: true,
+        json: async () =>
+          url === "/api/content"
+            ? {
+                content: {
+                  ...content,
+                  hiddenGallery: ["gallery-update-6222095624409125895.webp"],
+                },
+              }
+            : { ok: true },
+      }),
+    ),
+  );
+  render(
+    <PreferencesProvider>
+      <PublicApp path="/gallery" />
+    </PreferencesProvider>,
+  );
+  await screen.findByText("Showing 8 of 49 photos.");
+  fireEvent.click(screen.getByRole("button", { name: "Show all photos" }));
+  expect(
+    screen.queryByRole("button", {
+      name: "School trip — exploring together ↗︎",
+    }),
+  ).not.toBeInTheDocument();
+  expect(
+    document.querySelector(
+      'img[src="/assets/gallery-update-6222095624409125895.webp"]',
+    ),
+  ).toBeNull();
+});

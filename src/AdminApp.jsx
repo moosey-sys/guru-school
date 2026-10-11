@@ -415,6 +415,22 @@ export default function AdminApp() {
                   content={content}
                   setContent={setContent}
                   upload={upload}
+                  toggleExisting={(image, hidden) =>
+                    work(async () => {
+                      const hiddenGallery = content.hiddenGallery || [];
+                      await saveSite({
+                        ...content,
+                        hiddenGallery: hidden
+                          ? hiddenGallery.filter((value) => value !== image)
+                          : [...hiddenGallery, image],
+                      });
+                      setStatus(
+                        hidden
+                          ? "Photo is visible on the website."
+                          : "Photo hidden from the website. You can show it again here.",
+                      );
+                    })
+                  }
                   busy={busy}
                   savePhoto={(item) =>
                     work(async () => {

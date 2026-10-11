@@ -1,4 +1,5 @@
 import React from "react";
+import { galleryPhotos } from "../content/gallery";
 export const categories = {
   campus: "Campus",
   learning: "Learning",
@@ -229,6 +230,7 @@ export function PhotosEditor({
   upload,
   savePhoto,
   removePhoto,
+  toggleExisting,
   busy,
 }) {
   const change = (id, key, value) =>
@@ -293,6 +295,48 @@ export function PhotosEditor({
           Upload photo ↗
         </button>
       </form>
+      <section className="existing-gallery">
+        <div className="section-heading">
+          <div>
+            <h3>Existing website photos</h3>
+            <p>
+              Hide a photo to remove it from the gallery. You can show it again
+              at any time.
+            </p>
+          </div>
+          <span>
+            {galleryPhotos.length - (content.hiddenGallery || []).length} of{" "}
+            {galleryPhotos.length} visible
+          </span>
+        </div>
+        <div className="existing-photo-grid">
+          {galleryPhotos.map((photo) => {
+            const hidden = (content.hiddenGallery || []).includes(photo.image);
+            return (
+              <article className="card existing-photo" key={photo.image}>
+                <img
+                  src={`/assets/${photo.image}`}
+                  alt={photo.caption}
+                  loading="lazy"
+                />
+                <div>
+                  <span className="badge">{hidden ? "Hidden" : "Visible"}</span>
+                  <h4>{photo.caption}</h4>
+                  <button
+                    type="button"
+                    disabled={busy}
+                    aria-label={`${hidden ? "Show" : "Hide"} ${photo.caption}`}
+                    onClick={() => toggleExisting(photo.image, hidden)}
+                  >
+                    {hidden ? "Show on website" : "Hide from website"}
+                  </button>
+                </div>
+              </article>
+            );
+          })}
+        </div>
+      </section>
+      {content.photos.length > 0 && <h3>Uploaded photos</h3>}
       <div id="photos-editor">
         {content.photos.map((item) => (
           <article key={item.id} className="card photo-editor">
