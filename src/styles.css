@@ -2907,7 +2907,7 @@ html[data-theme="dark"] .footer-motto:hover, html[data-theme="dark"] .footer-mot
     transform-origin: center;
   }
   main img:not(.portrait-crop-source):hover,
-  .chairman-crop.profile-motion:hover {
+  .chairman-crop.profile-motion:hover::before {
     animation: school-photo-float 2.6s ease-in-out infinite;
     filter: brightness(1.04);
   }
@@ -2939,8 +2939,16 @@ html[data-theme="dark"] .footer-motto:hover, html[data-theme="dark"] .footer-mot
 }
 
 @media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
-  .chairman-crop.profile-motion {
+  .chairman-crop.profile-motion::before {
     transition: transform 300ms ease, filter 300ms ease;
     transform-origin: center;
   }
+}
+
+.team-grid .chairman-crop.profile-motion { background-image: none; }
+.chairman-crop.profile-motion::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: url('/assets/chairman.webp') center 23% / 205% auto no-repeat;
 }
