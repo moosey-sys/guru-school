@@ -133,6 +133,11 @@ export function About() {
               "Established in January 2025, our school brings families and educators together around one belief: every child deserves the chance to discover their potential.",
             )}
           </p>
+          <p>
+            {t(
+              "At Guru, curiosity and character belong together. We want children to feel confident asking questions, trying again and treating others with care — while staying connected to their local community.",
+            )}
+          </p>
           <a className="text-link" href="/about#values">
             {t("Discover what guides us ↗︎")}
           </a>
@@ -229,6 +234,11 @@ export function Programmes() {
               <strong>{t("Age 4")}</strong>
             </li>
           </ul>
+          <p>
+            {t(
+              "The early years are a time to build friendships, discover through play and grow comfortable expressing ideas. Ask our team how the classroom routine supports your child’s first steps into school.",
+            )}
+          </p>
           <p className="curriculum">{t("Early Year Foundation Stage")}</p>
           <a href="/contact#visit" className="text-link">
             {t("Talk about early years ↗︎")}
@@ -260,6 +270,11 @@ export function Programmes() {
               <strong>{t("Age 7")}</strong>
             </li>
           </ul>
+          <p>
+            {t(
+              "Reading, writing and number skills open the door to new discoveries. This stage connects those foundations with curiosity, creativity and the confidence to share ideas.",
+            )}
+          </p>
           <p className="curriculum">{t("Key Stage 1")}</p>
           <a href="/contact#visit" className="text-link">
             {t("Explore their next step ↗︎")}
@@ -287,6 +302,11 @@ export function Programmes() {
               <strong>{t("Ages 10 / 11")}</strong>
             </li>
           </ul>
+          <p>
+            {t(
+              "As children grow, learning becomes a chance to explain their thinking, solve problems and take greater responsibility. Talk with us about the next step from your child’s current school year.",
+            )}
+          </p>
           <p className="curriculum">{t("Key Stage 2")}</p>
           <a href="/contact#visit" className="text-link">
             {t("Discover upper primary ↗︎")}
@@ -298,6 +318,11 @@ export function Programmes() {
         <p>
           {t(
             "Cambridge Primary curriculum alongside Myanmar curriculum integration, with literacy, numeracy, science, arts, technology, and life skills.",
+          )}
+        </p>
+        <p>
+          {t(
+            "A broad education gives children more ways to discover what interests them. International learning and Myanmar studies connect new knowledge with the language, culture and community around them.",
           )}
         </p>
       </div>
@@ -361,6 +386,11 @@ export function Life() {
             <p>
               {t(
                 "STEAM, arts, languages, and sports bring new ways to explore beyond everyday lessons.",
+              )}
+            </p>
+            <p>
+              {t(
+                "Creating, moving and exploring together give children opportunities to practise teamwork, express themselves and discover new interests. Explore our gallery for moments from school life, celebrations and trips.",
               )}
             </p>
           </div>
@@ -703,6 +733,39 @@ export function Community() {
             )}
           </p>
         </details>
+        <details>
+          <summary>
+            {t("How do I choose the right programme?")}
+            <span>{t("+")}</span>
+          </summary>
+          <p>
+            {t(
+              "The age ranges are a starting guide. Share your child’s age, previous learning experience and interests with our team so you can discuss a suitable pathway. Ask about current places, entry requirements and fees before making a decision.",
+            )}
+          </p>
+        </details>
+        <details>
+          <summary>
+            {t("What should I ask during a school visit?")}
+            <span>{t("+")}</span>
+          </summary>
+          <p>
+            {t(
+              "Bring questions about the daily routine, language learning, how teachers share progress and how children settle into school. Seeing the learning spaces and speaking with our team can help you decide whether Guru feels right for your family.",
+            )}
+          </p>
+        </details>
+        <details>
+          <summary>
+            {t("How can we encourage learning at home?")}
+            <span>{t("+")}</span>
+          </summary>
+          <p>
+            {t(
+              "Small moments matter: read together, talk about the day, count everyday objects and make time for play. Encourage questions and celebrate effort. At parent consultations, ask your child’s teacher for ideas suited to their current learning.",
+            )}
+          </p>
+        </details>
       </div>
     </section>
   );
@@ -727,6 +790,11 @@ export function Contact() {
             <br />
             {t(
               "Speak with our team to arrange a visit and explore the right programme for your child.",
+            )}
+          </p>
+          <p>
+            {t(
+              "Tell us your child’s age, current school year and what matters most to your family. We can discuss programme options, current availability and a suitable visit time. Please wait for the school to confirm your visit.",
             )}
           </p>
         </div>

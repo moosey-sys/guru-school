@@ -1,5 +1,6 @@
 export default {
-  "Guru students performing together at a school celebration": "ကျောင်းပွဲတွင် အတူတကွ ဖျော်ဖြေနေသော Guru ကျောင်းသားများ",
+  "Guru students performing together at a school celebration":
+    "ကျောင်းပွဲတွင် အတူတကွ ဖျော်ဖြေနေသော Guru ကျောင်းသားများ",
   "A BRIGHTER NEXT CHAPTER": "ပိုမိုတောက်ပသော အနာဂတ်ဆီသို့",
   "Let’s grow together.": "အတူတကွ တိုးတက်ကြပါစို့။",
   "Come meet our team and discover a place for your child to thrive.":
@@ -499,4 +500,30 @@ export default {
   "Contact us — Guru International School":
     "ဆက်သွယ်ရန် — Guru နိုင်ငံတကာကျောင်း",
   "Explore Contact us ↗︎": "ဆက်သွယ်ရန် ကို လေ့လာရန် ↗︎",
+  "At Guru, curiosity and character belong together. We want children to feel confident asking questions, trying again and treating others with care — while staying connected to their local community.":
+    "Guru တွင် စူးစမ်းလိုစိတ်နှင့် ကောင်းမွန်သော အကျင့်စာရိတ္တကို အတူတကွ တန်ဖိုးထားပါသည်။ ကလေးများ မေးခွန်းမေးရဲခြင်း၊ ထပ်မံကြိုးစားခြင်းနှင့် အခြားသူများကို ဂရုစိုက်ခြင်းတို့တွင် ယုံကြည်မှုရှိလာပြီး မိမိတို့၏ ပတ်ဝန်းကျင်နှင့်လည်း ဆက်နွှယ်နေစေရန် ရည်ရွယ်ပါသည်။",
+  "The early years are a time to build friendships, discover through play and grow comfortable expressing ideas. Ask our team how the classroom routine supports your child’s first steps into school.":
+    "ငယ်ရွယ်စဉ်ကာလသည် သူငယ်ချင်းများဖွဲ့ခြင်း၊ ကစားရင်း စူးစမ်းလေ့လာခြင်းနှင့် မိမိစိတ်ကူးများကို ယုံကြည်စွာ ပြောဆိုနိုင်လာခြင်းတို့အတွက် အရေးပါပါသည်။ သင့်ကလေး၏ ကျောင်းစတက်သည့် အတွေ့အကြုံကို နေ့စဉ်အတန်းအစီအစဉ်က မည်သို့ အထောက်အကူပြုမည်ကို ကျွန်ုပ်တို့အဖွဲ့နှင့် ဆွေးနွေးနိုင်ပါသည်။",
+  "Reading, writing and number skills open the door to new discoveries. This stage connects those foundations with curiosity, creativity and the confidence to share ideas.":
+    "စာဖတ်ခြင်း၊ စာရေးခြင်းနှင့် ကိန်းဂဏန်းဆိုင်ရာ ကျွမ်းကျင်မှုများသည် အသစ်အဆန်းများကို ရှာဖွေလေ့လာရန် အခြေခံဖြစ်ပါသည်။ ဤအဆင့်တွင် ထိုအခြေခံများကို စူးစမ်းလိုစိတ်၊ ဖန်တီးနိုင်စွမ်းနှင့် စိတ်ကူးများကို ယုံကြည်စွာ မျှဝေနိုင်မှုတို့နှင့် ချိတ်ဆက်ပေးပါသည်။",
+  "As children grow, learning becomes a chance to explain their thinking, solve problems and take greater responsibility. Talk with us about the next step from your child’s current school year.":
+    "ကလေးများ ကြီးပြင်းလာသည်နှင့်အမျှ သင်ယူခြင်းသည် မိမိအတွေးအမြင်ကို ရှင်းပြခြင်း၊ ပြဿနာများကို ဖြေရှင်းခြင်းနှင့် ပိုမိုတာဝန်ယူခြင်းတို့အတွက် အခွင့်အရေးဖြစ်လာပါသည်။ သင့်ကလေး၏ လက်ရှိအတန်းမှ နောက်တစ်ဆင့်တက်လှမ်းရန် ကျွန်ုပ်တို့နှင့် ဆွေးနွေးပါ။",
+  "A broad education gives children more ways to discover what interests them. International learning and Myanmar studies connect new knowledge with the language, culture and community around them.":
+    "ဘာသာရပ်စုံလင်သော ပညာရေးသည် ကလေးများ မိမိစိတ်ဝင်စားရာကို ရှာဖွေတွေ့ရှိရန် အခွင့်အလမ်းများ ပေးပါသည်။ နိုင်ငံတကာသင်ယူမှုနှင့် မြန်မာသင်ရိုးတို့သည် အသိပညာသစ်များကို မိမိတို့၏ ဘာသာစကား၊ ယဉ်ကျေးမှုနှင့် ပတ်ဝန်းကျင်တို့နှင့် ချိတ်ဆက်ပေးပါသည်။",
+  "Creating, moving and exploring together give children opportunities to practise teamwork, express themselves and discover new interests. Explore our gallery for moments from school life, celebrations and trips.":
+    "အတူတကွ ဖန်တီးခြင်း၊ လှုပ်ရှားခြင်းနှင့် စူးစမ်းခြင်းတို့သည် ကလေးများ အဖွဲ့လိုက်ပူးပေါင်းလုပ်ဆောင်ရန်၊ မိမိကိုယ်ကို ဖော်ပြရန်နှင့် ဝါသနာသစ်များ ရှာဖွေရန် အခွင့်အရေးများ ပေးပါသည်။ ကျောင်းတွင်းနေ့စဉ်ဘဝ၊ အခမ်းအနားများနှင့် ခရီးစဉ်များမှ အမှတ်တရများကို ဓာတ်ပုံကဏ္ဍတွင် ကြည့်ရှုနိုင်ပါသည်။",
+  "Tell us your child’s age, current school year and what matters most to your family. We can discuss programme options, current availability and a suitable visit time. Please wait for the school to confirm your visit.":
+    "သင့်ကလေး၏ အသက်၊ လက်ရှိအတန်းနှင့် သင့်မိသားစုအတွက် အရေးအကြီးဆုံးအချက်များကို ပြောပြပါ။ ပညာရေးအစီအစဉ်များ၊ လက်ရှိလက်ခံနိုင်မှုနှင့် သင့်လျော်သော ကျောင်းလည်ပတ်ချိန်တို့ကို ဆွေးနွေးနိုင်ပါသည်။ ကျောင်းသို့ မလာရောက်မီ ကျောင်းဘက်မှ အတည်ပြုချက်ကို စောင့်ဆိုင်းပေးပါ။",
+  "How do I choose the right programme?":
+    "သင့်လျော်သော ပညာရေးအစီအစဉ်ကို မည်သို့ ရွေးချယ်ရမည်နည်း။",
+  "The age ranges are a starting guide. Share your child’s age, previous learning experience and interests with our team so you can discuss a suitable pathway. Ask about current places, entry requirements and fees before making a decision.":
+    "ဖော်ပြထားသော အသက်အပိုင်းအခြားများသည် အခြေခံလမ်းညွှန်ဖြစ်ပါသည်။ သင့်ကလေး၏ အသက်၊ ယခင်သင်ယူမှုအတွေ့အကြုံနှင့် စိတ်ဝင်စားမှုများကို ကျွန်ုပ်တို့အဖွဲ့နှင့် မျှဝေ၍ သင့်လျော်သော အစီအစဉ်ကို ဆွေးနွေးပါ။ ဆုံးဖြတ်ချက်မချမီ လက်ရှိလက်ခံနိုင်မှု၊ ဝင်ခွင့်လိုအပ်ချက်များနှင့် ကျောင်းလခတို့ကို မေးမြန်းပါ။",
+  "What should I ask during a school visit?":
+    "ကျောင်းသို့ လာရောက်လည်ပတ်ချိန်တွင် ဘာတွေ မေးမြန်းသင့်သနည်း။",
+  "Bring questions about the daily routine, language learning, how teachers share progress and how children settle into school. Seeing the learning spaces and speaking with our team can help you decide whether Guru feels right for your family.":
+    "နေ့စဉ်အစီအစဉ်၊ ဘာသာစကားသင်ယူမှု၊ ဆရာများက သင်ယူတိုးတက်မှုကို မည်သို့ မျှဝေကြောင်းနှင့် ကလေးများ ကျောင်းနှင့် အကျွမ်းဝင်လာစေရန် မည်သို့ ပံ့ပိုးကြောင်းတို့ကို မေးမြန်းပါ။ သင်ယူရာနေရာများကို ကြည့်ရှုပြီး ကျွန်ုပ်တို့အဖွဲ့နှင့် ဆွေးနွေးခြင်းက Guru သည် သင့်မိသားစုအတွက် သင့်လျော်မှုရှိမရှိ ဆုံးဖြတ်ရန် အထောက်အကူပြုနိုင်ပါသည်။",
+  "How can we encourage learning at home?":
+    "အိမ်တွင် သင်ယူလိုစိတ်ကို မည်သို့ အားပေးနိုင်မည်နည်း။",
+  "Small moments matter: read together, talk about the day, count everyday objects and make time for play. Encourage questions and celebrate effort. At parent consultations, ask your child’s teacher for ideas suited to their current learning.":
+    "အချိန်တိုလေးများလည်း အရေးပါပါသည်။ အတူစာဖတ်ခြင်း၊ တစ်နေ့တာအကြောင်း ပြောဆိုခြင်း၊ နေ့စဉ်သုံးပစ္စည်းများကို ရေတွက်ခြင်းနှင့် ကစားရန် အချိန်ပေးခြင်းတို့ကို လုပ်ဆောင်နိုင်ပါသည်။ မေးခွန်းမေးခြင်းကို အားပေးပြီး ကြိုးစားအားထုတ်မှုကို အသိအမှတ်ပြုပါ။ မိဘဆွေးနွေးပွဲတွင် သင့်ကလေး၏ လက်ရှိသင်ယူမှုနှင့် ကိုက်ညီသော အကြံပြုချက်များကို ဆရာထံမှ မေးမြန်းနိုင်ပါသည်။",
 };
