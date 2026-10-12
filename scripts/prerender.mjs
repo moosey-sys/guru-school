@@ -1,4 +1,4 @@
-import { readFileSync, writeFileSync } from "node:fs";
+import { readFileSync, writeFileSync, rmSync } from "node:fs";
 import { render, pages } from "../.build-server/entry-server.mjs";
 const template = readFileSync("dist/index.html", "utf8");
 const escape = (value) =>
@@ -35,3 +35,9 @@ for (const page of [
 console.log(
   "Pre-rendered 10 React public pages for fast loading and search engines.",
 );
+
+// The server bundle is only needed while generating the public HTML.
+rmSync(new URL("../.build-server/", import.meta.url), {
+  recursive: true,
+  force: true,
+});

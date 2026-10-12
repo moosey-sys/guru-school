@@ -15,3 +15,6 @@ node_modules/
 /dist/
 /.build-server/
 /coverage/
+
+# Retained original photo sources; deployed copies live in public/assets.
+/source-photos/

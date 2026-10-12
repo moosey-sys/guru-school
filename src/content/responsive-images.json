@@ -121,8 +121,5 @@
   },
   "/assets/outdoor.webp": {
     "srcSet": "/assets/responsive-outdoor-400.webp 400w"
-  },
-  "/assets/sports.webp": {
-    "srcSet": "/assets/responsive-sports-400.webp 400w, /assets/responsive-sports-800.webp 800w"
   }
 }
