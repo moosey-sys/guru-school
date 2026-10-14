@@ -9,3 +9,13 @@ async function run(handler,req){const res={statusCode:200,headers:{},setHeader(k
 const headers={origin:'https://guru-school.vercel.app','content-type':'application/json','user-agent':'Mozilla/5.0'};
 test('tracking deduplicates reloads and uses anonymous secure cookies',async()=>{const initial=await run(traffic,{method:'POST',headers,body:{path:'/'}});assert.equal(initial.statusCode,204);assert.equal(initial.headers['Set-Cookie'].length,2);assert.ok(initial.headers['Set-Cookie'].every(value=>value.includes('Secure; HttpOnly; SameSite=Lax')));const cookie=initial.headers['Set-Cookie'].map(value=>value.split(';')[0]).join('; ');assert.equal((await run(traffic,{method:'POST',headers:{...headers,cookie},body:{path:'/'}})).statusCode,204);assert.equal([...records.keys()].filter(p=>p.startsWith('analytics/visits/')).length,1);});
 test('tracking excludes staff, Do Not Track and known bots; analytics require staff login',async()=>{const before=records.size;for(const extra of [{dnt:'1'},{'sec-gpc':'1'},{'user-agent':'Googlebot'},{cookie:`__Host-guru=${c.token({type:'staff',id:'test',exp:Date.now()+10000})}`}])assert.equal((await run(traffic,{method:'POST',headers:{...headers,...extra},body:{path:'/'}})).statusCode,204);assert.equal(records.size,before);assert.equal((await run(analytics,{})).statusCode,401);assert.equal((await run(traffic,{method:'POST',headers:{...headers,origin:'https://attacker.example'},body:{path:'/'}})).statusCode,403);assert.equal((await run(traffic,{method:'POST',headers,body:{path:'/admin'}})).statusCode,400);});
+
+test('new production domains can track visits and foreign origins remain blocked',async()=>{
+ for(const origin of ['https://guru-school.org','https://www.guru-school.org']){
+  assert.equal(c.originOK({headers:{origin}}),true);
+  const result=await run(traffic,{method:'POST',headers:{...headers,origin},body:{path:'/'}});
+  assert.equal(result.statusCode,204);assert.equal(result.headers['Set-Cookie'].length,2);
+ }
+ for(const origin of ['https://guru-school.org.attacker.example','http://www.guru-school.org','https://attacker.example'])assert.equal(c.originOK({headers:{origin}}),false);
+ assert.equal((await run(traffic,{method:'GET',headers})).statusCode,405);
+});

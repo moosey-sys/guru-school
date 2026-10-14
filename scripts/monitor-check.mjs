@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-const base = "https://guru-school.vercel.app";
+const base = "https://www.guru-school.org";
 for (const path of [
   "/",
   "/about",

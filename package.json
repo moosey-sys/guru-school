@@ -14,7 +14,7 @@
     "preview": "vite preview --host localhost",
     "monitor:check": "node scripts/monitor-check.mjs",
     "prepare:images": "node scripts/prepare-responsive.mjs",
-    "audit:mobile": "lighthouse https://guru-school.vercel.app/ --chrome-flags=\"--headless\" --only-categories=performance,accessibility,best-practices,seo --output=html --output-path=/tmp/guru-mobile-audit.html"
+    "audit:mobile": "lighthouse https://www.guru-school.org/ --chrome-flags=\"--headless\" --only-categories=performance,accessibility,best-practices,seo --output=html --output-path=/tmp/guru-mobile-audit.html"
   },
   "dependencies": {
     "@vercel/blob": "^2.8.1",
