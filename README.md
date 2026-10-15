@@ -111,3 +111,9 @@ Unique supplied originals are retained locally in `source-photos/`, excluded fro
 ### Production domain — guru-school.org
 
 The primary production website is `https://www.guru-school.org`. The server's exact-origin allowlist includes both HTTPS `guru-school.org` and `www.guru-school.org`, alongside the existing Vercel and school-domain aliases. Traffic, enquiries, diagnostics and authenticated writes share this origin validation. Direct browser navigation to `/api/traffic` uses GET and correctly returns 405; the website submits POST requests to record visits. Health checks and the mobile audit command now target the primary domain. Requests rejected before this fix were not recorded and cannot be automatically backfilled.
+
+### Search-engine discovery
+
+Each public page is pre-rendered with its own description, a canonical URL on `https://www.guru-school.org`, and Open Graph/Twitter preview metadata. Builds generate `/sitemap.xml` for ten public pages and `/robots.txt` advertising the sitemap. Public content/media endpoints remain crawlable for page rendering; other API paths and the admin area are discouraged from crawling. Admin HTML and response headers explicitly use noindex. These are indexing hints, not access controls or a promise of search ranking.
+
+To complete Google submission, use the owner's [Search Console](https://search.google.com/search-console): verify the site if needed, submit `https://www.guru-school.org/sitemap.xml` under Sitemaps, inspect `https://www.guru-school.org/`, and choose Request indexing. This account-level submission has not been completed by the code deployment. Google decides whether and when to index pages; a sitemap does not guarantee inclusion. See [Google's submission guidance](https://developers.google.com/search/docs/crawling-indexing/sitemaps/build-sitemap).

@@ -33,11 +33,12 @@ function walk(dir) {
 const files = walk(root);
 for (const file of files) {
   assert(
-    /\.(html|css|js|webp|png|jpg|jpeg|svg|ico|woff2?)$/i.test(file),
+    /\.(html|css|js|webp|png|jpg|jpeg|svg|ico|woff2?)$/i.test(file) ||
+      ["robots.txt", "sitemap.xml"].includes(path.relative(root, file)),
     `Unexpected public file: ${file}`,
   );
   assert(!path.basename(file).startsWith("."), `Hidden public file: ${file}`);
-  if (!/\.(html|css|js|svg)$/.test(file)) continue;
+  if (!/\.(html|css|js|svg|xml|txt)$/.test(file)) continue;
   const text = readFileSync(file, "utf8");
   for (const [key, value] of secrets)
     assert(!text.includes(value), `Configured ${key} leaked into ${file}`);

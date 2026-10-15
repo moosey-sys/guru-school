@@ -1,4 +1,6 @@
 export default {
+  "Guru International School — San Chaung, Yangon":
+    "Guru နိုင်ငံတကာကျောင်း — စမ်းချောင်း၊ ရန်ကုန်",
   "Guru students performing together at a school celebration":
     "ကျောင်းပွဲတွင် အတူတကွ ဖျော်ဖြေနေသော Guru ကျောင်းသားများ",
   "A BRIGHTER NEXT CHAPTER": "ပိုမိုတောက်ပသော အနာဂတ်ဆီသို့",

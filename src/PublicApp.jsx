@@ -1,3 +1,4 @@
+import { pageTitle } from "./content/seo.mjs";
 import { ResponsiveImage } from "./components/ResponsiveImage";
 import React, { useEffect, useRef, useState } from "react";
 import { usePreferences } from "./preferences";
@@ -24,7 +25,10 @@ export function SiteHeader({ page, announcement }) {
   const menuButton = useRef(null);
   useEffect(() => {
     const escape = (event) => {
-      if (event.key === "Escape" && open) { setOpen(false); menuButton.current?.focus(); }
+      if (event.key === "Escape" && open) {
+        setOpen(false);
+        menuButton.current?.focus();
+      }
     };
     document.addEventListener("keydown", escape);
     return () => document.removeEventListener("keydown", escape);
@@ -372,7 +376,7 @@ export default function PublicApp({ path = "/" }) {
   useSchoolMotion(ref);
   useVisitorTracking();
   useEffect(() => {
-    document.title = t(`${page.label} — Guru International School`);
+    document.title = t(pageTitle(page));
     document.querySelector('meta[name="description"]').content = t(
       page.description,
     );

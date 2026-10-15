@@ -48,3 +48,19 @@ assert.ok(
   ),
 );
 console.log("Public availability, headers and private access checks passed.");
+
+const robotsResponse = await fetch(base + "/robots.txt", {
+  signal: AbortSignal.timeout(20000),
+});
+assert.equal(robotsResponse.status, 200);
+assert.ok(
+  (await robotsResponse.text()).includes(`Sitemap: ${base}/sitemap.xml`),
+);
+const sitemapResponse = await fetch(base + "/sitemap.xml", {
+  signal: AbortSignal.timeout(20000),
+});
+assert.equal(sitemapResponse.status, 200);
+const sitemap = await sitemapResponse.text();
+assert.equal([...sitemap.matchAll(/<loc>/g)].length, 10);
+assert.ok(!sitemap.includes("/admin"));
+console.log("Search sitemap and robots discovery checks passed.");
