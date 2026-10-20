@@ -819,7 +819,10 @@ export function Contact() {
           <EnquiryForm />
         </div>
         <div className="visit-contact-links">
-          <a className="text-link" href="mailto:mooseythaw03@gmail.com">
+          <a
+            className="text-link"
+            href="mailto:guruinternationalschool.aca@gmail.com"
+          >
             {t("Prefer email? Write to our team ↗︎")}
           </a>
           <a className="text-link" href="tel:+959404466882">
@@ -870,8 +873,8 @@ export function Contact() {
         <div className="contact-lines">
           <a href="tel:+959404466882">{t("09 40 44 66 882")}</a>
           <a href="tel:+959404466883">{t("09 40 44 66 883")}</a>
-          <a href="mailto:mooseythaw03@gmail.com">
-            {t("mooseythaw03@gmail.com")}
+          <a href="mailto:guruinternationalschool.aca@gmail.com">
+            {t("guruinternationalschool.aca@gmail.com")}
           </a>
         </div>
       </div>
