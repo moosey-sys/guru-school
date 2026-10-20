@@ -28,3 +28,6 @@ gallery-p12-4.webp
 
 source-photos
 dist
+
+# GitHub documentation screenshots are not deployed.
+/docs/
